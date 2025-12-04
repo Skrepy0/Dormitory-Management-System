@@ -1,0 +1,15 @@
+{
+    "user": [
+        {
+            "dormitory": {
+                "bed_number": "4",
+                "building_number": "1",
+                "room_number": "4"
+            },
+            "email": "123@qq.com",
+            "id": "10",
+            "name": "123",
+            "password": 10676640704186402002
+        }
+    ]
+}
