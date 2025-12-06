@@ -25,4 +25,6 @@ add_executable(hnu_dms main.cpp
         source/menu/Menu.cpp
         source/menu/MenuHelper.cpp
         source/menu/Option.cpp
+        source/data/StayLog.cpp
+        header/data/StayLog.h
 )
