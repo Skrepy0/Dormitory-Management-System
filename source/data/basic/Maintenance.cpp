@@ -1,6 +1,6 @@
 ﻿#include "../../../header/data/basic/Maintenance.h"
 static const std::string null = "maintenance.null";
-Maintenance::Maintenance(){}
+
 
 Maintenance::Maintenance(Time reportTime, Time repairTime, std::string sponsor, std::string description, std::string repairer, bool state, std::string valuation,std::string id)
 	:reportTime(reportTime), repairTime(repairTime), sponsor(sponsor), description(description), repairer(repairer), state(state), valuation(valuation),id(id) {

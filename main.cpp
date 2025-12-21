@@ -6,9 +6,9 @@
 #include"./header/data/Accommodations.h"
 #include"./header/data/BuildingData.h"
 #include"./header/data/UserData.h"
+#include "header/data/info/Message.h"
 
 int main() {
-    UserData user("123","10","123456","123@qq.com","1","4","4");
-    std::cout << user.getData() << std::endl;
-    user.writeToFile();
+    Message message(Text::of("@a1231456"));
+    message.printContent();
 }

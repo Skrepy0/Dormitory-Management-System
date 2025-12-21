@@ -3,10 +3,10 @@
 class Message {
 private:
 	Text text;
-	//...
+	std::string target; //代替要访问的内容
 public:
-	Message(Text text);// 为了语言选择功能，使用Text
-	//...
+	Message(Text text);
+	void printContent();   //负责打印出不同颜色的字体；
 };
 
 /*
@@ -77,3 +77,5 @@ public:
 //	std::cout << "恢复正常颜色" << std::endl;
 //}
 // 格式代码部分相同
+
+//我们主要是用printContent(传入要打印的文本)，来打印出我们想要的不同字体的颜色
