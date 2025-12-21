@@ -20,8 +20,6 @@ add_executable(hnu_dms main.cpp
         source/menu/operation/OperationMenu.cpp
         source/menu/operation/UserOperationMenu.cpp
         source/menu/registry/UserRegistryMenu.cpp
-        source/menu/widget/Select.cpp
-        source/menu/AbstractMenu.cpp
         source/menu/Menu.cpp
         source/menu/MenuHelper.cpp
         source/menu/Option.cpp
