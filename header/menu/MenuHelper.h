@@ -3,9 +3,7 @@
 #include"Menu.h"
 
 class MenuHelper {// 工具类
-private:
-	MenuHelper() {};
+	MenuHelper() {};// 防止实例化对象
 public:
-	static std::vector<Menu> menuList;
 	static void clearScreen();// 清屏函数
 };

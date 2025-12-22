@@ -1,8 +1,8 @@
 ﻿{
-  "test.test": "test",
-  "test.test01": "test text one",
-  "test.test02": "test text two",
-  "test.test03": "test text three",
-  "test.test04": "test text four",
-  "test.test05": "test text five"
+  "menu.option.operation.administrator.addDormitory": "Add Dormitory",
+  "test.title": "1+1=?\n\n",
+  "test.option.1": "A.0@r\n",
+  "test.option.2": "B.1@r\n",
+  "test.option.3": "C.3@r\n",
+  "test.option.4": "D.2@r\n"
 }
