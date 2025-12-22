@@ -4,8 +4,14 @@ class Message {
 private:
 	Text text;
 	//...
+	void printZHCN() {// 不乱码
+	}
+
 public:
-	Message(Text text);// 为了语言选择功能，使用Text
+	Message(Text text); // 为了语言选择功能，使用Text
+	void printContent() {
+
+	}
 	//...
 };
 
