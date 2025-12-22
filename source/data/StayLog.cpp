@@ -78,8 +78,7 @@ StayLog::StayLog(std::string type, Time time, std::string id, std::string name,n
     writeToFile();
 }
 
-StayLog::StayLog(nlohmann::json data) {
-
+StayLog::StayLog(nlohmann::json data) : data(data) {
 }
 
 nlohmann::json StayLog::getData() {
