@@ -97,7 +97,7 @@ void Menu::updateOptions() {
     for (int i = 0;i<(int)optionStatusList.size();i++) {
         if (optionStatusList[i].second) {// 如果被选中，将第一个空格替换成>
             std::string newContent = optionList[i].getContent().getContent();
-            std::string front = "@c>@"+optionList[i].getColorCode();
+            std::string front = "$c>$"+optionList[i].getColorCode();
             front.append(newContent);
             optionStatusList[i].first.setContent(front);
         }
