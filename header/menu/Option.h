@@ -7,9 +7,10 @@ class Option {
 private:
 	Text content;// 选项内容
 	std::string colorCode;// 被选中时的颜色的代码
-	Func selectedFunction{};// 执行的函数指针
+	Func selectedFunction;// 执行的函数指针
 public:
 	Option();
+	~Option() = default;
 	explicit Option(const Text& content,std::string colorCode = "", Func selectedFunction = nullptr);
 	Text getContent();// 获取选项内容
 	std::string getColorCode();// 获取颜色代码

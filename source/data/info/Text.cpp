@@ -175,7 +175,6 @@ std::string Text::getContent() {
         init();
         translate();
     }
-
     return this->content;
 }
 

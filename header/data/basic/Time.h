@@ -11,6 +11,7 @@ private:
 	int minute;  // 分
 	int second;	 // 秒
 public:
+	Time()=default;
 	// 储存格式参见DormitoryData.json
 	Time(int year, int month, int day, int hour, int minute, int second);
 	nlohmann::json getTime();// 储存为json（object）返回
