@@ -22,6 +22,7 @@ public:
 	bool setDormitories(nlohmann::json dormitories);// 传参是json列表,返回是否设置成功
 	bool addDormitory(Dormitory dormitory);// 添加宿舍
 	bool addDormitories(nlohmann::json dormitoriesList);// 添加宿舍(批量添加)
+	// 这里不提供删除方法了:(
 
 	nlohmann::json getBuildingData();
 	std::string getBuildingName();
