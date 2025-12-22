@@ -2,44 +2,66 @@
 #include<unordered_map>
 #ifdef _WIN32
 #include <windows.h>
-void enableWindowsAnsiSupport() {
+
+void enableWindowsAnsiSupport()
+{
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
     DWORD mode = 0;
     GetConsoleMode(hOut, &mode);
     SetConsoleMode(hOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);
 }
 #endif
-Message::Message(Text text):text(text)
+Text Message::getText() const
 {
-    Text t("@c红 @a绿 @d浅紫色 @b天蓝色@r");
-    this->target = t.getContent();
+    return text;
 }
 
-const std::unordered_map<char,std::string> COLOR_MAP = {
-     {'c',"\033[31m"}, //@c -> 红色
-    {'a', "\033[32m"},  // @a → 绿色
-    {'d',"\033[35m"}, //@d -> 紫色（浅紫）
-    {'b',"\033[34m"}, //@b -> 蓝色（天蓝）
-    {'r',"\033[0m"} //@r -> 恢复默认
-};
+void Message::setText(Text text)
+{
+    this->text = text;
+    this->target = text.getContent();
+}
+
+Message::Message(Text text) : text(text)
+{
+    this->target = text.getContent();
+}
+
+
 void Message::printContent()
 {
+    SetConsoleOutputCP(CP_UTF8);
 #ifdef _WIN32
     enableWindowsAnsiSupport();
 #endif
-    for (size_t i = 0; i < target.size(); ) {
-        if (static_cast<unsigned char>(target[i]) == static_cast<unsigned char>('@')  && (i + 1) < target.size()) {
+    for (int i = 0; i < target.size();)
+    {
+        if (target[i] == '\\' && (i + 1) < target.size() && target[i + 1] == '$')
+        {
+            std::cout << '$'; // 转义后只输出$
+            i += 2; // 跳过\和$两个字符
+        }
+        // 2. 处理原有的$+颜色码逻辑（如$r/$g等）
+        else if (target[i] == '$' && (i + 1) < target.size())
+        {
             char colorCode = target[i + 1];
             auto it = COLOR_MAP.find(colorCode);
-
-            if (it != COLOR_MAP.end()) {
-                std::cout << it->second;
+            if (it != COLOR_MAP.end())
+            {
+                std::cout << it->second; // 输出颜色控制符
             }
-            i += 2;
-        } else {
+            else
+            {
+                // 非合法颜色码：原样输出$+后续字符（比如$x）
+                std::cout << target[i] << target[i + 1];
+            }
+            i += 2; // 跳过$和颜色码
+        }
+        // 3. 普通字符（包括单独的\、单独的$、其他字符）
+        else
+        {
             std::cout << target[i];
             i++;
         }
     }
-    std::cout << COLOR_MAP.at('r') << std::endl;
 }
