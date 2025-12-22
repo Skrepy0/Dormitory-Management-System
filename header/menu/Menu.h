@@ -2,16 +2,57 @@
 #include<iostream>
 #include<vector>
 #include "Option.h"
+
 class Menu {
+private:
+    static std::string getSpaces(int count);
+
 protected:
-	std::vector<Option> optionList;
-	void addSelfToMenuList() const;// 将自身添加到菜单列表中
+    std::vector<Option> optionList; // 选项列表
+    std::vector<std::pair<Option, bool> > optionStatusList; // 选项状态列表
+    Text title; // 标题
+    const int OPTION_INDENT_SPACES = 3; // 选项前空格数
+    bool isRunning;
+    int pointer; // 当前>指向的选项的索引
+    int lastPointer; // 上一次选择的选项的索引
+    void init(); // 菜单初始化函数
+    void monitorKeyEvent(); // 监视输入
+    void updatePointer(int direction); // 选择器上下移动与选项颜色更新
 public:
-	virtual ~Menu() = default;
-	Menu();
-	explicit Menu(std::vector<Option> optionList);
-	virtual void init() ;// 菜单初始化函数
-	virtual void display() ;// 菜单显示函数(循环)
-	virtual void remountToParentMenu() ;// 返回父菜单
-	virtual void mountToChildMenu() ;// 进入子菜单
+    std::vector<Option> getOptionList(); // 获取选项列表
+
+    Text getTitle(); // 获取标题
+
+    void setOptionList(std::vector<Option> &optionList); // 设置选项列表
+    void setTitle(Text &title); // 设置标题
+
+    Menu(Text title, std::vector<Option> optionList);
+
+    virtual ~Menu() = default;
+
+    void updateOptions();
+
+    void mainLoop();// 主循环
+
+    void updateMenu(); // 菜单更新显示函数
+
+    virtual void onSelection(); // 选定后
 };
+
+// 子类写法
+// class UserRegistryMenu:public Menu {
+// public:
+//     UserRegistryMenu(Text title) : Menu(title, {
+//         Option(Text("test.option.1"), "a", nullptr),
+//         Option(Text("test.option.2"), "a", nullptr),
+//         Option(Text("test.option.3"), "a", nullptr),
+//         Option(Text("test.option.4"), "a", []()-> void {
+//
+//         })
+//     }) {
+//     }
+//
+//     void mainLoop() {
+//         Menu::mainLoop();
+//     }
+// };
