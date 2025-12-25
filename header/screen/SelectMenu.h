@@ -3,7 +3,7 @@
 #include<vector>
 #include "Option.h"
 
-class Menu {
+class SelectMenu {
 private:
     static std::string getSpaces(int count);
 
@@ -26,9 +26,9 @@ public:
     void setOptionList(std::vector<Option> &optionList); // 设置选项列表
     void setTitle(Text &title); // 设置标题
 
-    Menu(Text title, std::vector<Option> optionList);
+    SelectMenu(Text title, std::vector<Option> optionList);
 
-    virtual ~Menu() = default;
+    virtual ~SelectMenu() = default;
 
     void updateOptions();
 
@@ -40,9 +40,9 @@ public:
 };
 
 // 子类写法
-// class UserRegistryMenu:public Menu {
+// class UserRegistryMenu:public SelectMenu {
 // public:
-//     UserRegistryMenu(Text title) : Menu(title, {
+//     UserRegistryMenu(Text title) : SelectMenu(title, {
 //         Option(Text("test.option.1"), "a", nullptr),
 //         Option(Text("test.option.2"), "a", nullptr),
 //         Option(Text("test.option.3"), "a", nullptr),
@@ -53,6 +53,6 @@ public:
 //     }
 //
 //     void mainLoop() {
-//         Menu::mainLoop();
+//         SelectMenu::mainLoop();
 //     }
 // };

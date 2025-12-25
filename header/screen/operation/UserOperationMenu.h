@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include"OperationMenu.h"
+#include "OperationMenu.h"
 class UserOperationMenu:OperationMenu {
 
 };

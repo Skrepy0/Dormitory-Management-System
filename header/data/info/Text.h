@@ -41,7 +41,7 @@ public:
 
 /*  使用参考：
 	Text t("test.test");// 以后写Text的内容时务必写路径，路径（理论上内容随便写）书写要符合规范，
-	// 如 用户操作界面/设置/语言设置 处 在写”语言设置“ 的路径时,可以为"menu.operation.option.language_setting"
+	// 如 用户操作界面/设置/语言设置 处 在写”语言设置“ 的路径时,可以为"screen.operation.option.language_setting"
 	// 这样写有层次感~~
 	//注意： 写一个文本时，将路径和内容写在“资源文件/lang/”的两个json文件里面~~
 

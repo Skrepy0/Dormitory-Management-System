@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "../../header/menu/Option.h"
+#include "../../header/screen/Option.h"
 #include"../../header/data/info/Text.h"
 #include<iostream>
 typedef void (*Func)();

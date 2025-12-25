@@ -1,17 +1,17 @@
 ﻿#include<iostream>
 #include <utility>
-#include"../../header/menu/Menu.h"
+#include"../../header/screen/SelectMenu.h"
 #include <conio.h>
 
 #include "../../header/data/info/Message.h"
 
-std::string Menu::getSpaces(int count) {
+std::string SelectMenu::getSpaces(int count) {
     std::string res;
     while (count--)res+=" ";
     return res;
 }
 
-void Menu::monitorKeyEvent() {
+void SelectMenu::monitorKeyEvent() {
     int key = _getch();
     switch (key)
     {
@@ -32,7 +32,7 @@ void Menu::monitorKeyEvent() {
     }
 }
 
-void Menu::updatePointer(int direction) {
+void SelectMenu::updatePointer(int direction) {
     lastPointer = pointer;
     int index = pointer + direction;
     if (index < 0) {
@@ -46,19 +46,19 @@ void Menu::updatePointer(int direction) {
     }
 }
 
-std::vector<Option> Menu::getOptionList() {
+std::vector<Option> SelectMenu::getOptionList() {
     return this->optionList;
 }
 
-Text Menu::getTitle() {
+Text SelectMenu::getTitle() {
     return this->title;
 }
 
-void Menu::setTitle(Text &title) {
+void SelectMenu::setTitle(Text &title) {
     this->title = std::move(title);
 }
 
-void Menu::setOptionList(std::vector<Option> &optionList) {
+void SelectMenu::setOptionList(std::vector<Option> &optionList) {
     this->optionList = std::move(optionList);
     // 更新optionStatusList
     if (!optionList.empty()) {
@@ -69,11 +69,11 @@ void Menu::setOptionList(std::vector<Option> &optionList) {
     }
 }
 
-Menu::Menu(Text title, std::vector<Option> optionList) : title(title), optionList(std::move(optionList)) {
-    Menu::init();
+SelectMenu::SelectMenu(Text title, std::vector<Option> optionList) : title(title), optionList(std::move(optionList)) {
+    SelectMenu::init();
 }
 
-void Menu::init() {
+void SelectMenu::init() {
     this->isRunning = true;
     this->pointer = 0;
     this->lastPointer = 0;
@@ -89,7 +89,7 @@ void Menu::init() {
     }
 }
 
-void Menu::updateOptions() {
+void SelectMenu::updateOptions() {
     if (pointer != lastPointer) {
         optionStatusList[pointer].second = true;
         optionStatusList[lastPointer].second = false;
@@ -111,16 +111,16 @@ void Menu::updateOptions() {
     }
 }
 
-void Menu::mainLoop() {
+void SelectMenu::mainLoop() {
     while (isRunning) {
-        Menu::updateMenu();
-        Menu::monitorKeyEvent();
+        SelectMenu::updateMenu();
+        SelectMenu::monitorKeyEvent();
         system("cls");
     }
 }
 
 
-void Menu::updateMenu() {
+void SelectMenu::updateMenu() {
     // 绘制标题
     Message titleMessage(this->title.getContent());
     titleMessage.printContent();
@@ -132,7 +132,7 @@ void Menu::updateMenu() {
     }
 }
 
-void Menu::onSelection() {// 选中后运行的函数
+void SelectMenu::onSelection() {// 选中后运行的函数
     void (*func)();
     func = optionList[pointer].getSelectedFunction();
     func();
