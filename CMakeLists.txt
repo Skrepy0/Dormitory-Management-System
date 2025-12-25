@@ -13,16 +13,14 @@ add_executable(hnu_dms main.cpp
         source/data/Accommodations.cpp
         source/data/BuildingData.cpp
         source/data/UserData.cpp
-        source/menu/login/AdministratorLogInMenu.cpp
-        source/menu/login/LogInMenu.cpp
-        source/menu/login/UserLogInMenu.cpp
-        source/menu/operation/AdministratorOperationMenu.cpp
-        source/menu/operation/OperationMenu.cpp
-        source/menu/operation/UserOperationMenu.cpp
-        source/menu/registry/UserRegistryMenu.cpp
-        source/menu/Menu.cpp
-        source/menu/MenuHelper.cpp
-        source/menu/Option.cpp
+        source/screen/login/AdministratorLogInMenu.cpp
+        source/screen/login/UserLogInMenu.cpp
+        source/screen/operation/AdministratorOperationMenu.cpp
+        source/screen/operation/UserOperationMenu.cpp
+        source/screen/registry/UserRegistryMenu.cpp
+        source/screen/SelectMenu.cpp
+        source/screen/MenuHelper.cpp
+        source/screen/Option.cpp
         source/data/StayLog.cpp
         header/data/StayLog.h
 )

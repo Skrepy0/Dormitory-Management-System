@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include<iostream>
-#include"Menu.h"
+#include"SelectMenu.h"
 
 class MenuHelper {// 工具类
 	MenuHelper() {};// 防止实例化对象

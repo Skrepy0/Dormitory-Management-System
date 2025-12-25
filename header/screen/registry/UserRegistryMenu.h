@@ -1,8 +1,8 @@
 ﻿#pragma once
-#include"../Menu.h"
-class UserRegistryMenu:public Menu {
+#include"../SelectMenu.h"
+class UserRegistryMenu:public SelectMenu {
 public:
-    UserRegistryMenu(Text title) : Menu(title, {
+    UserRegistryMenu(Text title) : SelectMenu(title, {
         Option(Text("test.option.1"), "a", nullptr),
         Option(Text("test.option.2"), "b", nullptr),
         Option(Text("test.option.3"), "c", nullptr),
@@ -13,6 +13,6 @@ public:
     }
 
     void mainLoop() {
-        Menu::mainLoop();
+        SelectMenu::mainLoop();
     }
 };
