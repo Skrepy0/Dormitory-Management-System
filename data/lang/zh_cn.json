@@ -1,8 +1,7 @@
 ﻿{
-  "menu.option.operation.administrator.addDormitory": "添加宿舍",
-  "test.title": "1+1=?@r\n\n",
-  "test.option.1": "A.0@r\n",
-  "test.option.2": "B.1@r\n",
-  "test.option.3": "C.3@r\n",
-  "test.option.4": "D.2@r\n"
+  "operation.user.title": "\t$y$l学生操作页面\n\n$r",
+  "operation.user.change_password": "\uD83D\uDD10更改密码\n$r",
+  "operation.user.apply_for_repairs": "\uD83E\uDE79报修申请\n$r",
+  "operation.user.dormitory_info": "\uD83D\uDCC4宿舍信息\n$r",
+  "operation.user.application": "\uD83D\uDD16退、住宿申请\n$r"
 }

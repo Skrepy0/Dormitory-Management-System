@@ -1,5 +1,8 @@
 ﻿#pragma once
-#include "OperationMenu.h"
-class UserOperationMenu:OperationMenu {
+#include "../SelectMenu.h"
 
+class UserOperationMenu:SelectMenu {
+public:
+    UserOperationMenu();
+    void loop();
 };

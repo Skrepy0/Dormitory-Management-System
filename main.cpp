@@ -9,9 +9,11 @@
 #include "header/screen/SelectMenu.h"
 #include <windows.h>
 
+#include "header/screen/operation/UserOperationMenu.h"
+
 
 int main() {
-    Message message(Text::of("123"));
-    message.printContent();
-    system("pause");
+
+    UserOperationMenu user_operation_menu;
+    user_operation_menu.loop();
 }
