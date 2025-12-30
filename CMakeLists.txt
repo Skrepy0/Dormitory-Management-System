@@ -17,10 +17,17 @@ add_executable(hnu_dms main.cpp
         source/screen/login/UserLogInMenu.cpp
         source/screen/operation/AdministratorOperationMenu.cpp
         source/screen/operation/UserOperationMenu.cpp
+        source/screen/operation/AdministratorOptions.cpp
+        source/screen/operation/UserOptions.cpp
         source/screen/registry/UserRegistryMenu.cpp
         source/screen/SelectMenu.cpp
         source/screen/MenuHelper.cpp
         source/screen/Option.cpp
+        source/screen/Options.cpp
         source/data/StayLog.cpp
         header/data/StayLog.h
+        header/screen/operation/AdministratorOptions.h
+        header/screen/operation/UserOptions.h
+        source/screen/operation/AdministratorOptions.cpp
+        source/screen/operation/UserOptions.cpp
 )
