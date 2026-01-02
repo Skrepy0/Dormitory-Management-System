@@ -8,13 +8,14 @@
 #include "header/data/info/Message.h"
 #include "header/screen/SelectMenu.h"
 #include <windows.h>
-#include"./header/screen/Options.h"
+#include"./header/screen/InputMenu.h"
+#include"./header/screen/operation/operations/UserApplication.h"
+#include"./header/screen/operation/operations/ChangePassword.h"
+
 
 
 int main() {
-    Message message(Text::of("\n✅ "));
-    message.printContent();
-    BaseOptions b;
-    b.showTitle("$c宿舍管理系统$r");
+     ChangePassword t;
+     t.changePassword("password");
     system("pause");
 }
