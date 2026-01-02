@@ -4,5 +4,34 @@
   "test.option.1": "A.0@r\n",
   "test.option.2": "B.1@r\n",
   "test.option.3": "C.3@r\n",
-  "test.option.4": "D.2@r\n"
+  "test.option.4": "D.2@r\n",
+  "screen.InputMenu.showTitle": "$w====$r",
+  "screen.InputMenu.showTitle.end": "$w-------------------------$r",
+  "screen.InputMenu.showSuccess": "✅ ",
+  "screen.InputMenu.showError": "❌ ",
+  "screen.InputMenu.pause": "$m\\n按任意键继续...$r",
+  "screen.InputMenu.getNonEmptyInput": "$c输入不能为空，请重新输入！$r",
+  "screen.InputMenu.getDigitInput.!isAllDigit": "$c输入必须为纯数字，请重新输入$r",
+  "screen.InputMenu.getDigitInput.lenValid.left": "\"输入长度必须在\"",
+  "screen.InputMenu.getDigitInput.lenValid.right": "位之间！",
+  "screen.InputMenu.confirmOperation.choice": "$a(Y/N)：$r",
+  "screen.InputMenu.confirmOperation.error": "$c输入无效，请输入Y/N$r",
+  "screen.operation.operations.UserApplication.DormApplyReason.Input": "\"请输入申请理由（最多50字）：",
+  "screen.operation.operations.UserApplication.DormApplyReason.Input.error": "理由长度不能超过50字！",
+  "screen.operation.operations.UserApplication.getRepairContentInput": "请描述报修设施及问题：",
+  "screen.operation.operations.UserApplication.getRepairAndApplyInfo.repair_content": "报修内容： ",
+  "screen.operation.operations.UserApplication.getRepairAndApplyInfo.application_reason": "申请理由： ",
+  "screen.operation.operations.UserChangePassword.original_password.Input.": "请输入原密码：",
+  "screen.operation.operations.UserChangePassword.original_password.Input.error": "原密码错误！",
+  "screen.operation.operations.UserChangePassword.new_password.Input": "请输入新密码：",
+  "screen.operation.operations.UserChangePassword.new_password.empty": "新密码不能为空！",
+  "screen.operation.operations.UserChangePassword.new_password.Input.again": "请再次输入新密码：",
+  "screen.operation.operations.UserChangePassword.new_password.difference": "两次输入的新密码不一致！",
+  "screen.operation.operations.UserChangePassword.new_password.confirmation": "确定要修改密码吗？",
+  "screen.operation.operations.UserChangePassword.new_password.success": "密码修改成功！" ,
+  "screen.operation.operations.UserChangePassword.new_password.fail": "原密码验证失败次数过多，退出密码修改",
+  "password": "202508010613"
 }
+
+
+

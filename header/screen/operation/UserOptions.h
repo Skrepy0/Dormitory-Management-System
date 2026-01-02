@@ -1,10 +1,10 @@
 #pragma once
-#include "../Options.h"
+#include "../InputMenu.h"
 #include <string>
 
 // 学生专属输入输出类（继承BaseOptions）
 
-class StudentOptions : public BaseOptions
+class StudentOptions : public InputMenu
 {
 public:
     // 学生菜单显示（专属）

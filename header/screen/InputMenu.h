@@ -3,7 +3,7 @@
 #include"../../header/data/info/Text.h"
 #include<iostream>
 #include<limits>
-class BaseOptions{
+class InputMenu{
 private:
 Text text;
 public:    //输出类：
@@ -19,7 +19,6 @@ public:    //输出类：
           std::string getDigitInput(const std::string& prompt,int minlen = 0,int maxlen = 0);//获取纯数字输入（如学号）
           std::string getNonEmptyInput(const std::string& prompt);//获取非空字符串输入（如姓名，学号）
           bool isAllDigit(const std::string& str);
-          std::string getPasswordInput(const std::string& prompt);//获取密码输入
 
           bool confirmOperation(const std::string& prompt);//确认操作
 

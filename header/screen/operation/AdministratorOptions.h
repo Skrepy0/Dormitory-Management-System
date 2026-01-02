@@ -1,9 +1,9 @@
 #pragma once
-#include "../Options.h"
+#include "../InputMenu.h"
 #include <string>
 
 // 管理员专属输入输出类（继承BaseOptions）
-class AdminOptions : public BaseOptions
+class AdminOptions : public InputMenu
 {
 public:
     // 管理员菜单显示（专属）
