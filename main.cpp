@@ -8,12 +8,16 @@
 #include "header/data/info/Message.h"
 #include "header/screen/SelectMenu.h"
 #include <windows.h>
+#include"./header/screen/InputMenu.h"
+#include"./header/screen/operation/operations/UserApplication.h"
+#include"./header/screen/operation/operations/ChangePassword.h"
+#include"./header/screen/operation/operations/UserMaintenance.h"
 
-#include "header/screen/login/LoginSelectMenu.h"
-#include "header/screen/operation/UserOperationMenu.h"
+
 
 int main() {
-
-    LoginSelectMenu user_operation_menu;
-    user_operation_menu.loop();
+    UserMaintenance t;
+    t.getCurrentTime();
+    t.submitRepair();
+    system("pause");
 }
