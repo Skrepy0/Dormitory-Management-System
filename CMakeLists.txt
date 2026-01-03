@@ -22,5 +22,9 @@ add_executable(hnu_dms main.cpp
         source/screen/MenuHelper.cpp
         source/screen/Option.cpp
         source/data/StayLog.cpp
-        header/data/StayLog.h
+        source/screen/operation/operations/SelectLanguage.cpp
+        header/screen/operation/operations/SelectLanguage.h
+        source/screen/login/LoginSelectMenu.cpp
+        header/screen/login/LoginSelectMenu.h
+        source/screen/operation/operations/administrator/AdminAuditSubMenu.cpp
 )

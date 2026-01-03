@@ -1,5 +1,13 @@
 ﻿#pragma once
-#include "../OperationMenu.h"
-class AdministratorOperationMenu :public OperationMenu{
+#include "../SelectMenu.h"
 
+class AdministratorOperationMenu :public SelectMenu{
+private:
+    void static jumpSelectLanguageMenu();
+    void static jumpAuditMenu();
+public:
+    AdministratorOperationMenu();
+    void loop();
 };
+
+
