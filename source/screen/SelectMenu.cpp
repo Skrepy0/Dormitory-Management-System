@@ -13,8 +13,7 @@ std::string SelectMenu::getSpaces(int count) {
 
 void SelectMenu::monitorKeyEvent() {
     int key = _getch();
-    switch (key)
-    {
+    switch (key) {
         case 72: // 上箭头
             updatePointer(-1);
             break;
