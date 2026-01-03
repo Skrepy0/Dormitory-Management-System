@@ -9,15 +9,23 @@
 #include "header/screen/SelectMenu.h"
 #include <windows.h>
 #include"./header/screen/InputMenu.h"
-#include"./header/screen/operation/operations/UserApplication.h"
+#include "header/screen/operation/operations/user/UserApplication.h"
 #include"./header/screen/operation/operations/ChangePassword.h"
-#include"./header/screen/operation/operations/UserMaintenance.h"
+#include "header/screen/operation/operations/user/UserMaintenance.h"
 
 
 
 int main() {
-    UserMaintenance t;
-    t.getCurrentTime();
-    t.submitRepair();
+    Message(Text::of("$mred$r\n")).printContent();
+    Message(Text::of("$kred$r\n")).printContent();
+    Message(Text::of("$Ared$r\n")).printContent();
+    Message(Text::of("$Bred$r\n")).printContent();
+    Message(Text::of("$Cred$r\n")).printContent();
+    Message(Text::of("$Dred$r\n")).printContent();
+    Message(Text::of("$Fred$r\n")).printContent();
+    Message(Text::of("$Gred$r\n")).printContent();
+    Message(Text::of("$Hred$r\n")).printContent();
+    Message(Text::of("$Ired$r\n")).printContent();
     system("pause");
+
 }
