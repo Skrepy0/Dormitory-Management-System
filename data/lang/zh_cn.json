@@ -43,8 +43,8 @@
   "test.option.2": "B.1@r\n",
   "test.option.3": "C.3@r\n",
   "test.option.4": "D.2@r\n",
-  "screen.InputMenu.showTitle": "$w====$r",
-  "screen.InputMenu.showTitle.end": "$w-------------------------$r",
+  "screen.InputMenu.showTitle": "$B====$r",
+  "screen.InputMenu.showTitle.end": "$F-------------------------$r",
   "screen.InputMenu.showSuccess": "✅ ",
   "screen.InputMenu.showError": "❌ ",
   "screen.InputMenu.pause": "$m\\n按任意键继续...$r",
@@ -68,5 +68,12 @@
   "screen.operation.operations.UserChangePassword.new_password.confirmation": "确定要修改密码吗？",
   "screen.operation.operations.UserChangePassword.new_password.success": "密码修改成功！" ,
   "screen.operation.operations.UserChangePassword.new_password.fail": "原密码验证失败次数过多，退出密码修改",
-  "password": "202508010613"
+  "screen.operation.operations.UserMaintenance.title": " $q宿舍报修提交 $r",
+  "screen.operation.operations.UserMaintenance.sponsor": "$t请输入报修人（姓名）：$r",
+  "screen.operation.operations.UserMaintenance.repair.content": "$b请输入报修内容描述：$r",
+  "screen.operation.operations.UserMaintenance.time_format.error": "$c时间格式解析失败$r",
+  "screen.operation.operations.UserMaintenance.repair_time.error": "$c维修时间初始化失败$r",
+  "screen.operation.operations.UserMaintenance.repair.confirmation": "$A您是否确认报修$r",
+  "screen.operation.operations.UserMaintenance.repair.success": "$k报修成功$r",
+  "screen.operation.operations.UserMaintenance.repair.error": "$m报修失败$r"
 }
