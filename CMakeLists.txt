@@ -33,4 +33,6 @@ add_executable(hnu_dms main.cpp
         source/screen/operation/operations/UserApplication.cpp
         header/screen/operation/operations/ChangePassword.h
         source/screen/operation/operations/ChangePassword.cpp
+        header/screen/operation/operations/UserMaintenance.h
+        source/screen/operation/operations/UserMaintenance.cpp
 )

@@ -11,11 +11,13 @@
 #include"./header/screen/InputMenu.h"
 #include"./header/screen/operation/operations/UserApplication.h"
 #include"./header/screen/operation/operations/ChangePassword.h"
+#include"./header/screen/operation/operations/UserMaintenance.h"
 
 
 
 int main() {
-     ChangePassword t;
-     t.changePassword("password");
+    UserMaintenance t;
+    t.getCurrentTime();
+    t.submitRepair();
     system("pause");
 }

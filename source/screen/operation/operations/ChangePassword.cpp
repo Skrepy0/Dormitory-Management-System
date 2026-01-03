@@ -12,8 +12,7 @@ std::string ChangePassword::changePassword(const std::string& Password)
     // 原密码不匹配：调用父类showError显示错误提示
     if (oldPwd != currentPassword)
     {
-        Text errorText("screen.operation.operations.UserChangePassword.original_password.Input.error");
-        showError(errorText.getContent()); // 复用InputMenu的showError方法
+        showError("screen.operation.operations.UserChangePassword.original_password.Input.error"); // 复用InputMenu的showError方法
         return currentPassword; // 验证失败，返回原密码
     }
 
@@ -28,8 +27,7 @@ std::string ChangePassword::changePassword(const std::string& Password)
             break; // 新密码非空则跳出循环
         }
         // 新密码为空：显示错误提示
-        Text emptyText("screen.operation.operations.UserChangePassword.new_password.empty");
-        showError(emptyText.getContent());
+        showError("screen.operation.operations.UserChangePassword.new_password.empty");
     }
 
 
@@ -40,8 +38,7 @@ std::string ChangePassword::changePassword(const std::string& Password)
     // 两次输入不一致：显示错误提示
     if (newPwd != confirmPwd)
     {
-        Text diffText("screen.operation.operations.UserChangePassword.new_password.difference");
-        showError(diffText.getContent());
+        showError("screen.operation.operations.UserChangePassword.new_password.difference");
         return currentPassword;
     }
 
@@ -52,8 +49,7 @@ std::string ChangePassword::changePassword(const std::string& Password)
     if (isConfirm)
     {
         // 修改成功：调用父类showSuccess显示成功提示
-        Text successText("screen.operation.operations.UserChangePassword.new_password.success");
-        showSuccess(successText.getContent());
+        showSuccess("screen.operation.operations.UserChangePassword.new_password.success");
         return newPwd; // 返回新密码（后续可更新到学生信息中）
     }
     else
