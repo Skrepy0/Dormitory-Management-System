@@ -6,6 +6,8 @@
 
 class LoginSelectMenu : public SelectMenu{
 private:
+    static void jumpSelectLanguageMenu();
+
     static void jumpAdminOperationMenu();
 public:
     LoginSelectMenu();

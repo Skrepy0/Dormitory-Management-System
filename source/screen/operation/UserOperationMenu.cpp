@@ -13,7 +13,7 @@ UserOperationMenu::UserOperationMenu() :SelectMenu(Text("operation.user.title"),
       Option(Text("operation.user.option.dormitory_info"),"p"),
       Option(Text("operation.user.option.application"),"y"),
       Option(Text("operation.user.option.language"),"g",jumpSelectLanguageMenu),
-      Option(Text("operation.user.option.exit"),"p"),
+      Option(Text("operation.user.option.exit"),"p",exitSystem),
 },"a",7){
 }
 

@@ -5,7 +5,14 @@
 #include "../../../header/screen/login/LoginSelectMenu.h"
 
 #include "../../../header/screen/operation/AdministratorOperationMenu.h"
+#include "../../../header/screen/operation/operations/SelectLanguage.h"
 
+void LoginSelectMenu::jumpSelectLanguageMenu(){
+    system("cls");
+    SelectLanguage selectLanguage;
+    selectLanguage.loop();
+    hideCursor();
+}
 void LoginSelectMenu::jumpAdminOperationMenu() {
     system("cls");
     AdministratorOperationMenu menu;
@@ -15,7 +22,8 @@ void LoginSelectMenu::jumpAdminOperationMenu() {
 
 LoginSelectMenu::LoginSelectMenu():SelectMenu(Text("login.title"),{
                                                   Option(Text("login.option.user"),"a"),
-                                                  Option(Text("login.option.administrator"),"p",jumpAdminOperationMenu)
+                                                  Option(Text("login.option.administrator"),"p",jumpAdminOperationMenu),
+                                                  Option(Text("login.option.set_language"),"A",jumpSelectLanguageMenu),
                                               },"y",10) {
 }
 

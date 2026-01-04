@@ -23,7 +23,7 @@ AdministratorOperationMenu::AdministratorOperationMenu():SelectMenu(Text("operat
     Option(Text("operation.administrator.option.student_info"),"p"),
     Option(Text("operation.administrator.option.change_password"),"g"),
     Option(Text("operation.administrator.option.language"),"d",jumpSelectLanguageMenu),
-    Option(Text("operation.administrator.option.exit"),"c")
+    Option(Text("operation.administrator.option.exit"),"c",exitSystem)
                                                                     },"d",8) {
 }
 

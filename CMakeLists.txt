@@ -36,4 +36,5 @@ add_executable(hnu_dms main.cpp
         source/screen/operation/operations/administrator/AdminAuditSubMenu.cpp
         source/screen/operation/operations/user/UserMaintenance.cpp
         source/screen/operation/AdministratorOperationMenu.cpp
+        source/screen/operation/UserOperationMenu.cpp
 )
