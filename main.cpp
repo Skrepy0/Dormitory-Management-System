@@ -16,8 +16,7 @@
 
 
 int main() {
-    UserMaintenance t;
-    t.getCurrentTime();
-    t.submitRepair();
+   UserApplication t;
+    t.getDormApplyReason();
     system("pause");
 }
