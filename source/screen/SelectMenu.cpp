@@ -2,7 +2,7 @@
 #include <utility>
 #include"../../header/screen/SelectMenu.h"
 #include <conio.h>
-
+#include <windows.h>
 #include "../../header/data/info/Message.h"
 
 std::string SelectMenu::getSpaces(int count) {
@@ -13,8 +13,7 @@ std::string SelectMenu::getSpaces(int count) {
 
 void SelectMenu::monitorKeyEvent() {
     int key = _getch();
-    switch (key)
-    {
+    switch (key) {
         case 72: // 上箭头
             updatePointer(-1);
             break;
@@ -69,7 +68,7 @@ void SelectMenu::setOptionList(std::vector<Option> &optionList) {
     }
 }
 
-SelectMenu::SelectMenu(Text title, std::vector<Option> optionList) : title(title), optionList(std::move(optionList)) {
+SelectMenu::SelectMenu(const Text& title, std::vector<Option> optionList,std::string pointerColorCode,int optionIndentSpaces) : title(title), optionList(std::move(optionList)),optionIndentSpaces(optionIndentSpaces),pointerColorCode(std::move(pointerColorCode)) {
     SelectMenu::init();
 }
 
@@ -97,7 +96,7 @@ void SelectMenu::updateOptions() {
     for (int i = 0;i<(int)optionStatusList.size();i++) {
         if (optionStatusList[i].second) {// 如果被选中，将第一个空格替换成>
             std::string newContent = optionList[i].getContent().getContent();
-            std::string front = "$c>$"+optionList[i].getColorCode();
+            std::string front = "$"+pointerColorCode+">$"+optionList[i].getColorCode();
             front.append(newContent);
             optionStatusList[i].first.setContent(front);
         }
@@ -112,11 +111,13 @@ void SelectMenu::updateOptions() {
 }
 
 void SelectMenu::mainLoop() {
+    hideCursor();
     while (isRunning) {
         SelectMenu::updateMenu();
         SelectMenu::monitorKeyEvent();
         system("cls");
     }
+    showCursor();
 }
 
 
@@ -127,11 +128,24 @@ void SelectMenu::updateMenu() {
     // 更新选项
     updateOptions();
     for (auto option: optionStatusList) {
-        Message optionMessage(getSpaces(OPTION_INDENT_SPACES)+option.first.getContent().getContent());
+        Message optionMessage(getSpaces(optionIndentSpaces)+option.first.getContent().getContent());
         optionMessage.printContent();
     }
 }
-
+void SelectMenu::hideCursor() {
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO info;
+    info.dwSize = 100;
+    info.bVisible = FALSE;
+    SetConsoleCursorInfo(consoleHandle, &info);
+}
+void SelectMenu::showCursor() {
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO info;
+    info.dwSize = 100;
+    info.bVisible = TRUE;
+    SetConsoleCursorInfo(consoleHandle, &info);
+}
 void SelectMenu::onSelection() {// 选中后运行的函数
     void (*func)();
     func = optionList[pointer].getSelectedFunction();

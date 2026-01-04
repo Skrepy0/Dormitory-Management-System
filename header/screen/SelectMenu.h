@@ -11,13 +11,17 @@ protected:
     std::vector<Option> optionList; // 选项列表
     std::vector<std::pair<Option, bool> > optionStatusList; // 选项状态列表
     Text title; // 标题
-    const int OPTION_INDENT_SPACES = 3; // 选项前空格数
+    int optionIndentSpaces; // 选项前空格数
+    std::string pointerColorCode;
     bool isRunning;
     int pointer; // 当前>指向的选项的索引
     int lastPointer; // 上一次选择的选项的索引
     void init(); // 菜单初始化函数
     void monitorKeyEvent(); // 监视输入
     void updatePointer(int direction); // 选择器上下移动与选项颜色更新
+    void static hideCursor();// 隐藏光标
+    void static showCursor();// 显示光标
+
 public:
     std::vector<Option> getOptionList(); // 获取选项列表
 
@@ -26,7 +30,7 @@ public:
     void setOptionList(std::vector<Option> &optionList); // 设置选项列表
     void setTitle(Text &title); // 设置标题
 
-    SelectMenu(Text title, std::vector<Option> optionList);
+    SelectMenu(const Text& title, std::vector<Option> optionList, std::string pointerColorCode="p",int optionIndentSpaces = 6);
 
     virtual ~SelectMenu() = default;
 
