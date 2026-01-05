@@ -9,14 +9,15 @@
 #include "header/screen/SelectMenu.h"
 #include <windows.h>
 #include"./header/screen/InputMenu.h"
-#include"./header/screen/operation/operations/UserApplication.h"
+#include"./header/screen/operation/operations/user/UserApplication.h"
 #include"./header/screen/operation/operations/ChangePassword.h"
-#include"./header/screen/operation/operations/UserMaintenance.h"
+#include"./header/screen/operation/operations/user/UserMaintenance.h"
+#include"./header/screen/operation/operations/Logout.h"
 
 
 
 int main() {
-   UserApplication t;
-    t.getDormApplyReason();
+    ChangePassword t;
+    t.changePassword("password");
     system("pause");
 }
