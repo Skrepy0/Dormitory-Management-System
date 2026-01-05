@@ -1,21 +1,17 @@
 #include "../../../../header/screen/operation/operations/Logout.h"
 #ifdef _WIN32
 #else
+#include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>
-#include <fcntl.h>
 #endif
 
-int Logout::getSingleKeyNonBlock()
-{
+int Logout::getSingleKeyNonBlock() {
 #ifdef _WIN32
 
-    if (_kbhit())
-    {
+    if (_kbhit()) {
         return _getch();
-    }
-    else
-    {
+    } else {
         return -1;
     }
 #else
@@ -42,8 +38,7 @@ int Logout::getSingleKeyNonBlock()
 }
 
 
-bool Logout::checkEscKey()
-{
+bool Logout::checkEscKey() {
     int key = getSingleKeyNonBlock();
     return (key == 27);
 }

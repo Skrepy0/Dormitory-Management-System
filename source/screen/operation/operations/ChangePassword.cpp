@@ -1,16 +1,14 @@
 #include "../../../../header/screen/operation/operations/ChangePassword.h"
-#include "../../../../header/screen/operation/operations/Logout.h"
 #include "../../../../header/data/info/Message.h"
 #include "../../../../header/data/info/Text.h"
+#include "../../../../header/screen/operation/operations/Logout.h"
 
-std::string ChangePassword::changePassword(const std::string& password)
-{
+std::string ChangePassword::changePassword(const std::string &password) {
     std::string currentPassword;
     Text t(password);
     currentPassword = t.getContent();
 
-    if (Logout::checkEscKey())
-    {
+    if (Logout::checkEscKey()) {
         clearScreen();
         return currentPassword;
     }
@@ -19,77 +17,63 @@ std::string ChangePassword::changePassword(const std::string& password)
     int count = 1;
 
 
-    while (!change)
-    {
-        if (Logout::checkEscKey())
-        {
+    while (!change) {
+        if (Logout::checkEscKey()) {
             clearScreen();
             return currentPassword;
         }
 
 
-        if (oldPwd != currentPassword)
-        {
+        if (oldPwd != currentPassword) {
             showError("screen.operation.operations.UserChangePassword.original_password.Input.error");
-            if (Logout::checkEscKey())
-            {
+            if (Logout::checkEscKey()) {
                 clearScreen();
                 return currentPassword;
             }
 
             oldPwd = getNonEmptyInput("screen.operation.operations.UserChangePassword.Password.Input.again");
             count++;
-        }
-        else
-        {
+        } else {
             change = true;
         }
-        if (count > 5)
-        {
+        if (count > 5) {
             showError("screen.operation.operations.UserChangePassword.Password.Input.again.error");
-            clearScreen(); // 失败后也清空界面
+            // clearScreen(); // 失败后也清空界面
             return currentPassword;
         }
     }
     std::string newPwd;
     std::string confirmPwd;
     // 外层循环：直到两次密码输入一致
-    while (true)
-    {
+    while (true) {
         // 检查ESC（保留原逻辑）
-        if (Logout::checkEscKey())
-        {
+        if (Logout::checkEscKey()) {
             clearScreen();
             return currentPassword;
         }
 
-        while (true)
-        {
-            if (Logout::checkEscKey())
-            {
+        while (true) {
+            if (Logout::checkEscKey()) {
                 clearScreen();
                 return currentPassword;
             }
 
             newPwd = getNonEmptyInput("screen.operation.operations.UserChangePassword.new_password.Input");
-            if (!newPwd.empty())
-            {
+            if (!newPwd.empty()) {
                 break;
             }
 
             showError("screen.operation.operations.UserChangePassword.new_password.empty");
             std::cout << std::endl;
 
-            if (Logout::checkEscKey())
-            {
+            if (Logout::checkEscKey()) {
                 clearScreen();
                 return currentPassword;
             }
         }
 
 
-        if (Logout::checkEscKey())
-        {
+        if (Logout::checkEscKey()) {
             clearScreen();
             return currentPassword;
         }
@@ -98,18 +82,14 @@ std::string ChangePassword::changePassword(const std::string& password)
         confirmPwd = getNonEmptyInput("screen.operation.operations.UserChangePassword.new_password.Input.again");
 
 
-        if (Logout::checkEscKey())
-        {
+        if (Logout::checkEscKey()) {
             clearScreen();
             return currentPassword;
         }
 
-        if (newPwd == confirmPwd)
-        {
+        if (newPwd == confirmPwd) {
             break;
-        }
-        else
-        {
+        } else {
             showError("screen.operation.operations.UserChangePassword.new_password.difference");
         }
     }

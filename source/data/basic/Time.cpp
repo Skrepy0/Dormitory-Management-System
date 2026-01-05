@@ -2,16 +2,14 @@
 #include <chrono>
 #include <ctime>
 
-Time::Time(int year, int month, int day, int hour, int minute, int second)
-    : year(year), month(month), day(day), hour(hour), minute(minute), second(second)
-{
-    if (year < 0 || month < 0 || day < 0 || hour < 0 || minute < 0 || second < 0 || month > 12 || day > 31 || hour > 24
-        || minute > 60 || second > 60)
-        throw std::invalid_argument("Invalid time value"); //只有当输出的参数合理时才会继续执行下面的代码，否则抛出异常
+Time::Time(int year, int month, int day, int hour, int minute, int second) :
+    year(year), month(month), day(day), hour(hour), minute(minute), second(second) {
+    if (year < 0 || month < 0 || day < 0 || hour < 0 || minute < 0 || second < 0 || month > 12 || day > 31 ||
+        hour > 24 || minute > 60 || second > 60)
+        throw std::invalid_argument("Invalid time value"); // 只有当输出的参数合理时才会继续执行下面的代码，否则抛出异常
 }
 
-nlohmann::json Time::getTime()
-{
+nlohmann::json Time::getTime() {
     nlohmann::json data;
     data["year"] = year;
     data["month"] = month;
@@ -22,14 +20,13 @@ nlohmann::json Time::getTime()
     return data;
 }
 
-Time Time::getCurrentTime()
-{
+Time Time::getCurrentTime() {
     auto currentSystemTime = std::chrono::system_clock::now();
 
 
     std::time_t timeStamp = std::chrono::system_clock::to_time_t(currentSystemTime);
 
-    std::tm* localTimeInfo = std::localtime(&timeStamp);
+    std::tm *localTimeInfo = std::localtime(&timeStamp);
 
 
     int year = localTimeInfo->tm_year + 1900; // 年份 = 1900 + tm_year
