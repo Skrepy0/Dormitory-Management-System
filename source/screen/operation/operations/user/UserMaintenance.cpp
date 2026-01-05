@@ -4,7 +4,6 @@
 #include <ctime>
 #include <iomanip>
 #include "../../../../../header/data/basic/Time.h"
-#include "../../../../../header/data/info/Message.h"
 #include "../../../../../header/data/info/Text.h"
 
 std::string UserMaintenance::getCurrentTime() {

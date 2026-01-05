@@ -5,6 +5,7 @@ class UserOperationMenu : SelectMenu {
 private:
     void static jumpSelectLanguageMenu();
     void static jumpMaintenanceMenu();
+    void static changePassword();
 
 public:
     UserOperationMenu();

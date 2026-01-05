@@ -41,4 +41,6 @@ add_executable(hnu_dms main.cpp
         header/screen/operation/operations/administrator/DormitoryManageMenu.h
         source/screen/operation/operations/user/UserMaintenanceSelectMenu.cpp
         header/screen/operation/operations/user/UserMaintenanceSelectMenu.h
+        source/screen/operation/operations/administrator/StudentInfoManageMenu.cpp
+        header/screen/operation/operations/administrator/StudentInfoManageMenu.h
 )

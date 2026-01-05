@@ -1,5 +1,6 @@
 ﻿#include "../../../header/screen/operation/UserOperationMenu.h"
 
+#include "../../../header/screen/operation/operations/ChangePassword.h"
 #include "../../../header/screen/operation/operations/SelectLanguage.h"
 #include "../../../header/screen/operation/operations/user/UserMaintenanceSelectMenu.h"
 
@@ -17,10 +18,19 @@ void UserOperationMenu::jumpMaintenanceMenu() {
     hideCursor();
 }
 
+void UserOperationMenu::changePassword() {
+    system("cls");
+    showCursor();
+    ChangePassword screen;
+    screen.changePassword("123456");
+    hideCursor();
+    system("pause>nul");
+}
+
 UserOperationMenu::UserOperationMenu() :
     SelectMenu(Text("operation.user.title"),
                {
-                       Option(Text("operation.user.option.change_password"), "a"),
+                       Option(Text("operation.user.option.change_password"), "a", changePassword),
                        Option(Text("operation.user.option.apply_for_repairs"), "d", jumpMaintenanceMenu),
                        Option(Text("operation.user.option.dormitory_info"), "p"),
                        Option(Text("operation.user.option.application"), "y"),

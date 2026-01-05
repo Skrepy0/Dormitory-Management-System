@@ -5,6 +5,9 @@
 #include "../../../SelectMenu.h"
 
 class UserMaintenanceSelectMenu : public SelectMenu {
+private:
+    static void jumpAddMaintenanceMenu();
+
 public:
     UserMaintenanceSelectMenu();
     void loop();
