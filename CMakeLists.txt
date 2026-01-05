@@ -42,4 +42,11 @@ add_executable(hnu_dms main.cpp
         source/screen/operation/operations/Logout.cpp
         header/screen/login/LoginScreen.h
         source/screen/login/LoginScreen.cpp
+        source/screen/operation/UserOperationMenu.cpp
+        source/screen/operation/operations/administrator/DormitoryManageMenu.cpp
+        header/screen/operation/operations/administrator/DormitoryManageMenu.h
+        source/screen/operation/operations/user/UserMaintenanceSelectMenu.cpp
+        header/screen/operation/operations/user/UserMaintenanceSelectMenu.h
+        source/screen/operation/operations/administrator/StudentInfoManageMenu.cpp
+        header/screen/operation/operations/administrator/StudentInfoManageMenu.h
 )

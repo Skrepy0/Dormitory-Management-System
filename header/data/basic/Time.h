@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include <iostream>
-#include<stdexcept>
+#include <stdexcept>
 #include "../../../source/data/library/json.hpp"
 
 class Time

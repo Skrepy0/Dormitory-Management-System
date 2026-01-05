@@ -1,4 +1,2 @@
 ﻿#include "../../header/screen/MenuHelper.h"
-inline void MenuHelper::clearScreen() {
-	system("cls");
-}
+inline void MenuHelper::clearScreen() { system("cls"); }

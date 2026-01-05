@@ -4,12 +4,14 @@
 
 #include "../../../../header/screen/operation/operations/SelectLanguage.h"
 
-SelectLanguage::SelectLanguage():SelectMenu(Text("operation.select_language.title"),{
-    Option(Text("operation.select_language.option.en_us"),"y"),
-    Option(Text("operation.select_language.option.zh_cn"),"p")
-},"a",5) {
-}
+void setLanguageZHCN() { Text::setLanguage("zh_cn"); }
 
-void SelectLanguage::loop() {
-    SelectMenu::mainLoop();
-}
+void setLanguageENUS() { Text::setLanguage("en_us"); }
+
+SelectLanguage::SelectLanguage() :
+    SelectMenu(Text("operation.select_language.title"),
+               {Option(Text("operation.select_language.option.en_us"), "y", setLanguageENUS),
+                Option(Text("operation.select_language.option.zh_cn"), "p", setLanguageZHCN)},
+               "a", 6) {}
+
+void SelectLanguage::loop() { SelectMenu::mainLoop(); }

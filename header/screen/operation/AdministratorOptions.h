@@ -1,10 +1,9 @@
 #pragma once
-#include "../InputMenu.h"
 #include <string>
+#include "../InputMenu.h"
 
 // 管理员专属输入输出类（继承BaseOptions）
-class AdminOptions : public InputMenu
-{
+class AdminOptions : public InputMenu {
 public:
     // 管理员菜单显示（专属）
     void showAdminMainMenu();
@@ -17,9 +16,9 @@ public:
     std::string getAuditOpinionInput(); // 获取审核意见
 
     // 管理员专属输出（信息展示）
-    void showDormList(const std::string& building, const std::string& freeCount, const std::string& totalCount);
-    void showStudentApplyList(const std::string& id, const std::string& name, const std::string& applyType);
-    void showAuditResult(const std::string& id, const std::string& applyType, const std::string& result);
+    void showDormList(const std::string &building, const std::string &freeCount, const std::string &totalCount);
+    void showStudentApplyList(const std::string &id, const std::string &name, const std::string &applyType);
+    void showAuditResult(const std::string &id, const std::string &applyType, const std::string &result);
 };
 /*这个应用和学生的基本一样,都是那三类，我也是只有再展示的函数中加入了换行
  *其他换行要是后面需要再加，应为这个和message不一样，这个我写完了基本以上就定型了

@@ -1,13 +1,15 @@
-﻿#include<iostream>
-#include <utility>
-#include"../../header/screen/SelectMenu.h"
+﻿#include "../../header/screen/SelectMenu.h"
 #include <conio.h>
+#include <cstdlib> // 添加 exit 函数头文件
+#include <iostream>
+#include <utility>
 #include <windows.h>
 #include "../../header/data/info/Message.h"
 
 std::string SelectMenu::getSpaces(int count) {
     std::string res;
-    while (count--)res+=" ";
+    while (count--)
+        res += " ";
     return res;
 }
 
@@ -22,6 +24,8 @@ void SelectMenu::monitorKeyEvent() {
             break;
         case 13: // 回车键
             onSelection();
+            system("cls");
+            updateMenu();
             break;
         case 27: // ESC键
             this->isRunning = false;
@@ -36,102 +40,100 @@ void SelectMenu::updatePointer(int direction) {
     int index = pointer + direction;
     if (index < 0) {
         pointer = optionList.size() - 1;
-    }
-    else if (index >= optionList.size()) {
+    } else if (index >= optionList.size()) {
         pointer = 0;
-    }
-    else {
+    } else {
         pointer = index;
     }
 }
 
-std::vector<Option> SelectMenu::getOptionList() {
-    return this->optionList;
-}
+std::vector<Option> SelectMenu::getOptionList() { return this->optionList; }
 
-Text SelectMenu::getTitle() {
-    return this->title;
-}
+Text SelectMenu::getTitle() { return this->title; }
 
-void SelectMenu::setTitle(Text &title) {
-    this->title = std::move(title);
-}
+void SelectMenu::setTitle(Text &title) { this->title = std::move(title); }
 
-void SelectMenu::setOptionList(std::vector<Option> &optionList) {
-    this->optionList = std::move(optionList);
-    // 更新optionStatusList
-    if (!optionList.empty()) {
-        for (auto option: optionList) {
-            optionStatusList.push_back(std::make_pair(option, false));
-        }
-        optionStatusList[0].second = true;
-    }
-}
+void SelectMenu::setOptionList(std::vector<Option> &optionList) { this->optionList = std::move(optionList); }
 
-SelectMenu::SelectMenu(const Text& title, std::vector<Option> optionList,std::string pointerColorCode,int optionIndentSpaces) : title(title), optionList(std::move(optionList)),optionIndentSpaces(optionIndentSpaces),pointerColorCode(std::move(pointerColorCode)) {
-    SelectMenu::init();
+SelectMenu::SelectMenu(const Text &title, std::vector<Option> optionList, std::string pointerColorCode,
+                       int optionIndentSpaces, int titleLine) :
+    title(title), optionList(std::move(optionList)), titleLine(titleLine), optionIndentSpaces(optionIndentSpaces),
+    pointerColorCode(std::move(pointerColorCode)) {
+    init();
 }
 
 void SelectMenu::init() {
     this->isRunning = true;
     this->pointer = 0;
     this->lastPointer = 0;
-
-    // 初始化optionStatusList
-    if (!optionList.empty()) {
-        for (auto & i : optionList) {
-            Text text = Text::of(getSpaces(1)+i.getContent().getContent());
-            Option option(text,i.getColorCode(),i.getSelectedFunction());
-            optionStatusList.emplace_back(option, false);
-        }
-        optionStatusList[0].second = true;
-    }
-}
-
-void SelectMenu::updateOptions() {
-    if (pointer != lastPointer) {
-        optionStatusList[pointer].second = true;
-        optionStatusList[lastPointer].second = false;
-    }
-    for (int i = 0;i<(int)optionStatusList.size();i++) {
-        if (optionStatusList[i].second) {// 如果被选中，将第一个空格替换成>
-            std::string newContent = optionList[i].getContent().getContent();
-            std::string front = "$"+pointerColorCode+">$"+optionList[i].getColorCode();
-            front.append(newContent);
-            optionStatusList[i].first.setContent(front);
-        }
-    }
-    if (pointer != lastPointer) {
-        // 将上一个选择的选项恢复正常
-        std::string newContent = optionList[lastPointer].getContent().getContent();
-        newContent = getSpaces(1) + newContent;
-        optionStatusList[lastPointer].first.setContent(newContent);
-        lastPointer = pointer;
-    }
 }
 
 void SelectMenu::mainLoop() {
     hideCursor();
+    updateMenu();
     while (isRunning) {
-        SelectMenu::updateMenu();
-        SelectMenu::monitorKeyEvent();
-        system("cls");
+        monitorKeyEvent();
+        if (lastPointer != pointer) {
+            updateOptionLine(lastPointer);
+            updateOptionLine(pointer);
+            lastPointer = pointer;
+        }
     }
     showCursor();
 }
+void SelectMenu::updateOptionLine(int index) {
+    if (index < 0 || index >= optionList.size())
+        return;
 
+    // 定位到选项行
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD position;
+    position.X = static_cast<SHORT>(optionIndentSpaces);
+    position.Y = static_cast<SHORT>(titleLine + index); // 假设标题占2行
 
+    SetConsoleCursorPosition(hConsole, position);
+
+    Option option = optionList[index];
+    std::string optionText = option.getContent().getContent();
+    std::string displayContent;
+    if (index == pointer) {
+        displayContent = "$" + pointerColorCode + ">" + "$" + option.getColorCode() + optionText;
+    } else {
+        displayContent = " " + optionText;
+    }
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(hConsole, &csbi);
+    int consoleWidth = csbi.dwSize.X;
+    int clearWidth = consoleWidth - optionIndentSpaces;
+    DWORD written;
+    std::string clearStr;
+    clearStr.reserve(clearWidth + displayContent.size());
+    clearStr.append(clearWidth, ' ');
+    SetConsoleCursorPosition(hConsole, position);
+    WriteConsoleA(hConsole, clearStr.c_str(), clearStr.size(), &written, NULL);
+    SetConsoleCursorPosition(hConsole, position);
+    Message(Text::of(displayContent)).printContent();
+}
 void SelectMenu::updateMenu() {
-    // 绘制标题
     Message titleMessage(this->title.getContent());
     titleMessage.printContent();
-    // 更新选项
-    updateOptions();
-    for (auto option: optionStatusList) {
-        Message optionMessage(getSpaces(optionIndentSpaces)+option.first.getContent().getContent());
+
+    for (int i = 0; i < optionList.size(); i++) {
+        Option option = optionList[i];
+        std::string displayContent;
+        std::string optionText = option.getContent().getContent();
+
+        if (i == pointer) {
+            displayContent = "$" + pointerColorCode + ">" + "$" + option.getColorCode() + optionText;
+        } else {
+            displayContent = " " + optionText;
+        }
+
+        Message optionMessage(getSpaces(optionIndentSpaces) + displayContent);
         optionMessage.printContent();
     }
 }
+
 void SelectMenu::hideCursor() {
     HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO info;
@@ -139,6 +141,7 @@ void SelectMenu::hideCursor() {
     info.bVisible = FALSE;
     SetConsoleCursorInfo(consoleHandle, &info);
 }
+
 void SelectMenu::showCursor() {
     HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO info;
@@ -146,8 +149,14 @@ void SelectMenu::showCursor() {
     info.bVisible = TRUE;
     SetConsoleCursorInfo(consoleHandle, &info);
 }
-void SelectMenu::onSelection() {// 选中后运行的函数
+
+void SelectMenu::onSelection() {
     void (*func)();
     func = optionList[pointer].getSelectedFunction();
-    func();
+    if (func != nullptr) {
+        func();
+    }
 }
+
+// 退出系统
+void SelectMenu::exitSystem() { exit(0); }
