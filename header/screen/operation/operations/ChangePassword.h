@@ -3,5 +3,5 @@
 class ChangePassword : public InputMenu
 {
     public:
-    std::string changePassword(const std::string& Password);
+    std::string changePassword(const std::string& password);
 };

@@ -1,61 +1,116 @@
 #include "../../../../header/screen/operation/operations/ChangePassword.h"
-#include"../../../../header/data/info/Message.h"
-#include"../../../../header/data/info/Text.h"
+#include "../../../../header/screen/operation/operations/Logout.h"
+#include "../../../../header/data/info/Message.h"
+#include "../../../../header/data/info/Text.h"
 
-std::string ChangePassword::changePassword(const std::string& Password)
+std::string ChangePassword::changePassword(const std::string& password)
 {
     std::string currentPassword;
-    Text t(Password);
+    Text t(password);
     currentPassword = t.getContent();
-    std::string oldPwd = getNonEmptyInput("screen.operation.operations.UserChangePassword.original_password.Input.");
 
-    // 原密码不匹配：调用父类showError显示错误提示
-    if (oldPwd != currentPassword)
+    if (Logout::checkEscKey())
     {
-        showError("screen.operation.operations.UserChangePassword.original_password.Input.error"); // 复用InputMenu的showError方法
-        return currentPassword; // 验证失败，返回原密码
+        clearScreen();
+        return currentPassword;
     }
+    std::string oldPwd = getNonEmptyInput("screen.operation.operations.UserChangePassword.original_password.Input.");
+    bool change = false;
+    int count = 1;
 
 
-    // ========== 2. 输入新密码（非空校验） ==========
+    while (!change)
+    {
+        if (Logout::checkEscKey())
+        {
+            clearScreen();
+            return currentPassword;
+        }
+
+
+        if (oldPwd != currentPassword)
+        {
+            showError("screen.operation.operations.UserChangePassword.original_password.Input.error");
+            if (Logout::checkEscKey())
+            {
+                clearScreen();
+                return currentPassword;
+            }
+
+            oldPwd = getNonEmptyInput("screen.operation.operations.UserChangePassword.Password.Input.again");
+            count++;
+        }
+        else
+        {
+            change = true;
+        }
+        if (count > 5)
+        {
+            showError("screen.operation.operations.UserChangePassword.Password.Input.again.error");
+            clearScreen(); // 失败后也清空界面
+            return currentPassword;
+        }
+    }
     std::string newPwd;
+    std::string confirmPwd;
+    // 外层循环：直到两次密码输入一致
     while (true)
     {
-        newPwd = getNonEmptyInput("screen.operation.operations.UserChangePassword.new_password.Input");
-        if (!newPwd.empty())
+        // 检查ESC（保留原逻辑）
+        if (Logout::checkEscKey())
         {
-            break; // 新密码非空则跳出循环
+            clearScreen();
+            return currentPassword;
         }
-        // 新密码为空：显示错误提示
-        showError("screen.operation.operations.UserChangePassword.new_password.empty");
-    }
+
+        while (true)
+        {
+            if (Logout::checkEscKey())
+            {
+                clearScreen();
+                return currentPassword;
+            }
+
+            newPwd = getNonEmptyInput("screen.operation.operations.UserChangePassword.new_password.Input");
+            if (!newPwd.empty())
+            {
+                break;
+            }
+
+            showError("screen.operation.operations.UserChangePassword.new_password.empty");
+            std::cout << std::endl;
+
+            if (Logout::checkEscKey())
+            {
+                clearScreen();
+                return currentPassword;
+            }
+        }
 
 
-    // ========== 3. 二次确认新密码 ==========
-    std::string confirmPwd =
-        getNonEmptyInput("screen.operation.operations.UserChangePassword.new_password.Input.again");
-
-    // 两次输入不一致：显示错误提示
-    if (newPwd != confirmPwd)
-    {
-        showError("screen.operation.operations.UserChangePassword.new_password.difference");
-        return currentPassword;
-    }
+        if (Logout::checkEscKey())
+        {
+            clearScreen();
+            return currentPassword;
+        }
 
 
-    // ========== 4. 最终确认是否修改 ==========
-    // 调用父类confirmOperation获取用户确认（Y/N）
-    bool isConfirm = confirmOperation("screen.operation.operations.UserChangePassword.new_password.confirmation");
-    if (isConfirm)
-    {
-        // 修改成功：调用父类showSuccess显示成功提示
-        showSuccess("screen.operation.operations.UserChangePassword.new_password.success");
-        return newPwd; // 返回新密码（后续可更新到学生信息中）
-    }
-    else
-    {
-        // 取消修改：显示提示
-        showContent("screen.operation.operations.UserChangePassword.new_password.fail");
-        return currentPassword;
+        confirmPwd = getNonEmptyInput("screen.operation.operations.UserChangePassword.new_password.Input.again");
+
+
+        if (Logout::checkEscKey())
+        {
+            clearScreen();
+            return currentPassword;
+        }
+
+        if (newPwd == confirmPwd)
+        {
+            break;
+        }
+        else
+        {
+            showError("screen.operation.operations.UserChangePassword.new_password.difference");
+        }
     }
 }
