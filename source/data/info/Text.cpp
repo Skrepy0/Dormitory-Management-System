@@ -1,15 +1,15 @@
 ﻿#include "../../../header/data/info/Text.h"
+#include <cstring>
+#include <direct.h>
 #include <fstream>
 #include <iostream>
-#include <direct.h>
-#include <cstring>
 #include "../../../header/data/Accommodations.h"
 
 // 使用项目内固定的资源目录（相对于项目根目录/工作目录）
 namespace {
     std::string LAN_PATH;
     std::string FILE_PATH;
-}
+} // namespace
 
 void Text::init() {
     char cwd[1024];
@@ -41,9 +41,7 @@ void Text::init() {
     }
 }
 
-void Text::setContent(std::string content) {
-    this->content = content;
-}
+void Text::setContent(std::string content) { this->content = content; }
 
 void Text::setLanguage(std::string lang) {
     if (!writeLanguageToFile(lang)) {
@@ -51,9 +49,7 @@ void Text::setLanguage(std::string lang) {
     }
 }
 
-void Text::addColorCode(std::string colorCode) {
-    content = colorCode + content;
-}
+void Text::addColorCode(std::string colorCode) { content = colorCode + content; }
 
 Text Text::operator+(Text other) {
     Text result;
@@ -88,9 +84,7 @@ void Text::eraseChar(int begin, int end) {
     content = res;
 }
 
-void Text::replaceChar(int index, char c) {
-    content[index] = c;
-}
+void Text::replaceChar(int index, char c) { content[index] = c; }
 
 void Text::translate() {
     auto data = readFromJson();
@@ -146,9 +140,7 @@ nlohmann::json Text::readFromJson() {
     return langData;
 }
 
-Text::Text() {
-    init();
-}
+Text::Text() { init(); }
 
 Text::Text(std::string path) {
     init();
@@ -166,9 +158,7 @@ Text Text::of(std::string text) {
     return t;
 }
 
-std::string Text::getPath() {
-    return this->path;
-}
+std::string Text::getPath() { return this->path; }
 
 std::string Text::getContent() {
     if (!path.empty()) {
