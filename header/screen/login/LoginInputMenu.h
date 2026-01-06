@@ -4,7 +4,7 @@
 #include "../../data/info/Text.h"
 #include "../../screen/operation/operations/Logout.h"
 #include "../InputMenu.h"
-class LoginScreen : public InputMenu {
+class LoginInputMenu : public InputMenu {
 public:
     bool login(std::string &key, std::string &prompt);
 

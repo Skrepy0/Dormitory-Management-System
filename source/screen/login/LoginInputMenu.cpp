@@ -1,6 +1,6 @@
-#include "../../../header/screen/Login/LoginScreen.h"
+#include "../../../header/screen/Login/LoginInputMenu.h"
 
-bool LoginScreen::login(std::string &key, std::string &prompt) {
+bool LoginInputMenu::login(std::string &key, std::string &prompt) {
     const int maxRetry = 3;
     int retryCount = 0;
 
@@ -10,7 +10,7 @@ bool LoginScreen::login(std::string &key, std::string &prompt) {
             showContent("screen.login.LoginScreen.login.cancel");
             return false;
         }
-        std::string id = getDigitInput(prompt, 12, 12 // 假设学号是8位，限制长度8-8
+        std::string id = getDigitInput(prompt, 12,12 // 假设学号是8位，限制长度8-8
         );
 
 

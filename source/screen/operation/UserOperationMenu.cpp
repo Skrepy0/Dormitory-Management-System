@@ -22,7 +22,7 @@ void UserOperationMenu::changePassword() {
     system("cls");
     showCursor();
     ChangePassword screen;
-    screen.changePassword("123456");
+    screen.changePassword();
     hideCursor();
     system("pause>nul");
 }

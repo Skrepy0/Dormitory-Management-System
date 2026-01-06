@@ -25,28 +25,34 @@ void UserMaintenance::submitRepair() {
     sponsor = getNonEmptyInput("screen.operation.operations.UserMaintenance.sponsor");
     description = getNonEmptyInput("screen.operation.operations.UserMaintenance.repair.content");
     bool isConfirm = confirmOperation("screen.operation.operations.UserMaintenance.repair.confirmation");
-    if (isConfirm)
+    if (isConfirm) {
         showSuccess("screen.operation.operations.UserMaintenance.repair.success");
-    else
+        pause();
+    } else {
         showError("screen.operation.operations.UserMaintenance.repair.error");
+        pause();
+    }
 
     std::string currentTimeStr = getCurrentTime();
     int year, month, day, hour, minute, second;
 
     if (sscanf(currentTimeStr.c_str(), "%d-%d-%d %d:%d:%d", &year, &month, &day, &hour, &minute, &second) != 6) {
         showError("screen.operation.operations.UserMaintenance.time_format.error");
+        pause();
         return;
     }
     try {
         reportTime = Time(year, month, day, hour, minute, second);
     } catch (const std::invalid_argument &e) {
         showError("screen.operation.operations.UserMaintenance.repair_time.error");
+        pause();
         return;
 
         try {
             repairTime = Time(2000, 1, 1, 0, 0, 0); // 初始化为合法默认值（后续由管理员修改）
         } catch (const std::invalid_argument &e) {
-            showError("screen.operation.operations.UserMaintenance.repair_time.error"); // 去掉message:前缀
+            showError("screen.operation.operations.UserMaintenance.repair_time.error");
+            pause();
             return;
         }
 
