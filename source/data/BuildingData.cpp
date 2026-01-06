@@ -4,6 +4,16 @@ BuildingData::BuildingData(std::string building_name, std::string building_locat
                            std::string dormitories_count, std::string bed_count) :
     building_name(building_name), building_location(building_location), building_number(building_number),
     dormitories_count(dormitories_count), bed_count(bed_count) {}
+
+BuildingData::BuildingData(const nlohmann::json &building) {
+    building_name = building["building_name"];
+    building_location = building["building_location"];
+    building_number = building["building_number"];
+    dormitories_count = building["dormitories_count"];
+    bed_count = building["bed_count"];
+    dormitories = building["dormitories"];
+}
+
 bool BuildingData::setDormitories(nlohmann::json dormitories) {
     if (!dormitories.is_array())
         return false;
@@ -32,6 +42,7 @@ nlohmann::json BuildingData::getBuildingData() {
     data["dormitories_count"] = dormitories_count;
     data["bed_count"] = bed_count;
     data["dormitories"] = dormitories;
+    data["building_name"] = building_name;
     return data;
 }
 

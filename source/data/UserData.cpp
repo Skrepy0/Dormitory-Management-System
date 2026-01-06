@@ -3,22 +3,32 @@
 #include <fstream>
 #include <iostream>
 #include "../../header/data/BuildingData.h"
+#include "../../header/data/HashHelper.h"
 namespace {
     std::string FILE_PATH;
-}
+    void initFilePath() {
+        char cwd[1024];
+        if (_getcwd(cwd, sizeof(cwd)) != nullptr) {
+            std::string frontPath = cwd;
+            frontPath.erase(frontPath.size() - 17, 18);
+            // 获取当前工作目录成功
+            FILE_PATH = frontPath + "data\\data\\UserData.json";
+        } else {
+            std::cout << "Error: Could not get current working directory" << std::endl;
+        }
+    }
+} // namespace
+
 
 void UserData::init() {
-
-    FILE_PATH = R"(..\data\data\UserData.json)";
-
-
+    initFilePath();
     data = UserData::readJson();
 }
 
 void UserData::addToData() {
     nlohmann::json newData;
     newData["name"] = name;
-    newData["password"] = getHash(password);
+    newData["password"] = HashHelper::getHash(password);
     newData["email"] = email;
     newData["id"] = id;
 
@@ -47,12 +57,6 @@ bool UserData::compareDormitory(nlohmann::json dormitory_1, nlohmann::json dormi
     if (dormitory_1["building_number"] != dormitory_2["building_number"])
         return false;
     return true;
-}
-
-size_t UserData::getHash(std::string str) {
-    std::hash<std::string> hasher;
-    size_t hash_value = hasher(str);
-    return hash_value;
 }
 
 void UserData::addFromJson(nlohmann::json userData) {
@@ -87,6 +91,7 @@ void UserData::setData(nlohmann::json userData) {
 }
 
 nlohmann::json UserData::readJson() {
+    initFilePath();
     std::ifstream in_file(FILE_PATH);
 
     nlohmann::json newData = nlohmann::json::parse(in_file);

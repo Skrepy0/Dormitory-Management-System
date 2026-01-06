@@ -5,6 +5,8 @@
 #include <cctype>
 #include <iostream>
 #include <string>
+#include <windows.h>
+
 #include "../../header/data/info/Message.h"
 #include "../../header/data/info/Text.h"
 
@@ -80,6 +82,7 @@ void InputMenu::pause() {
 
 
 std::string InputMenu::getNonEmptyInput(const std::string &prompt) {
+    SetConsoleCP(CP_UTF8);
     std::string input;
     while (true) {
         showPrompt(prompt);
@@ -104,6 +107,7 @@ bool InputMenu::isAllDigit(const std::string &str) {
 }
 
 std::string InputMenu::getDigitInput(const std::string &prompt, int minLen, int maxLen) {
+    SetConsoleCP(CP_UTF8);
     std::string input;
     while (true) {
         input = getNonEmptyInput(prompt);

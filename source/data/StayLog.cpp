@@ -2,32 +2,10 @@
 
 #include <chrono>
 #include <fstream>
-#include <sstream>
+#include <utility>
 
 namespace {
     std::string FILE_PATH;
-}
-
-std::string getCurrentTimestamp() {
-    auto now = std::chrono::system_clock::now();
-    auto time = std::chrono::system_clock::to_time_t(now);
-    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
-
-    std::stringstream ss;
-    ss << std::put_time(std::localtime(&time), "%Y%m%d%H%M%S");
-    ss << std::setfill('0') << std::setw(3) << ms.count();
-
-    return ss.str();
-}
-
-// 简单哈希函数（将字符串转换为哈希值）
-std::string simpleHashString(const std::string &input) {
-    std::hash<std::string> hash_fn;
-    size_t hash = hash_fn(input);
-
-    std::stringstream ss;
-    ss << std::hex << hash;
-    return ss.str();
 }
 
 void StayLog::init() {
@@ -38,7 +16,7 @@ void StayLog::init() {
 }
 
 void StayLog::addToData() {
-    recordId = getHash();
+    recordId = HashHelper::getHashFromCurrentTime();
     if (type == "check-in") {
         nlohmann::json checkInData;
         checkInData["time"] = time.getTime();
@@ -60,18 +38,17 @@ void StayLog::addToData() {
     data["check-out"] = checkOutRecords;
 }
 
-std::string StayLog::getHash() { return simpleHashString(getCurrentTimestamp()); }
-
 StayLog::StayLog() { init(); }
 
 
 StayLog::StayLog(std::string type, Time time, std::string id, std::string name, nlohmann::json dormitoryData) :
-    type(type), time(time), id(id), name(name), dormitoryData(dormitoryData) {
+    type(std::move(type)), time(time), id(std::move(id)), name(std::move(name)),
+    dormitoryData(std::move(dormitoryData)) {
     init();
     writeToFile();
 }
 
-StayLog::StayLog(nlohmann::json data) : data(data) {}
+StayLog::StayLog(nlohmann::json data) : data(std::move(data)) {}
 
 nlohmann::json StayLog::getData() { return data; }
 
@@ -116,11 +93,11 @@ void StayLog::setName(std::string name) { this->name = name; }
 void StayLog::setDormitoryData(nlohmann::json dormitoryData) { this->dormitoryData = dormitoryData; }
 
 void StayLog::addCheckInRecords(nlohmann::json checkInRecord) {
-    checkInRecord["hash"] = getHash();
+    checkInRecord["hash"] = HashHelper::getHashFromCurrentTime();
     checkInRecords.push_back(checkInRecord);
 }
 
 void StayLog::addCheckOutRecords(nlohmann::json checkOutRecord) {
-    checkOutRecord["hash"] = getHash();
+    checkOutRecord["hash"] = HashHelper::getHashFromCurrentTime();
     checkOutRecords.push_back(checkOutRecord);
 }

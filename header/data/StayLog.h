@@ -1,12 +1,12 @@
 #pragma once
+#include "../../header/data/HashHelper.h"
 #include "../../source/data/library/json.hpp"
 #include "basic/Time.h"
-
 class StayLog {
     // 住、退宿记录
     nlohmann::json data; // 总数据
     std::string type; // 形式 "check-in" or "check-out"
-    Time time; // 办理时间
+    Time time{}; // 办理时间
     std::string id; // 申请人id
     std::string name; // 处理人名字
     nlohmann::json dormitoryData; // 申请人的宿舍详细信息
@@ -17,14 +17,12 @@ class StayLog {
 
     void addToData();
 
-    static std::string getHash();
-
 public:
     StayLog();
 
     StayLog(std::string type, Time time, std::string id, std::string name, nlohmann::json dormitoryData);
 
-    StayLog(nlohmann::json data);
+    explicit StayLog(nlohmann::json data);
 
     nlohmann::json getData();
 

@@ -59,32 +59,6 @@ class ProgressBar {
     }
 }
 
-// 简单进度条（无时间估计）
-class SimpleProgressBar {
-    constructor(total, barLength = 30) {
-        this.total = total;
-        this.current = 0;
-        this.barLength = barLength;
-    }
-
-    update(current) {
-        this.current = current;
-        const progress = this.current / this.total;
-        const filledLength = Math.floor(progress * this.barLength);
-        const bar = '='.repeat(filledLength) + ' '.repeat(this.barLength - filledLength);
-        const percentage = Math.floor(progress * 100);
-
-        process.stdout.clearLine();
-        process.stdout.cursorTo(0);
-        process.stdout.write(`[${bar}] ${percentage}% (${current}/${total})`);
-    }
-
-    finish() {
-        this.update(this.total);
-        process.stdout.write('\n');
-    }
-}
-
 async function formatCppFiles() {
     console.log('\x1b[36m🚀 开始格式化 C++ 文件...\x1b[0m');
     console.log('\x1b[90m📁 工作目录:', process.cwd(), '\x1b[0m');
@@ -162,9 +136,6 @@ async function formatCppFiles() {
                 await new Promise(resolve => setTimeout(resolve, 10));
             }
         }
-
-        // 完成进度条
-        progressBar.finish();
 
         console.log('\n\x1b[36m📋 格式化结果:\x1b[0m');
         console.log(`  \x1b[32m✅ 成功: ${successFiles.length} 个文件\x1b[0m`);

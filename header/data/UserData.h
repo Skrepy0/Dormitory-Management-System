@@ -14,7 +14,6 @@ private:
     void init();
     void addToData();
     static bool compareDormitory(nlohmann::json dormitory_1, nlohmann::json dormitory_2);
-    size_t getHash(std::string str);
 
 public:
     UserData();

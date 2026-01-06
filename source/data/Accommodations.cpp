@@ -8,21 +8,25 @@
 
 namespace {
     std::string FILE_PATH;
-}
+
+    void initFilePath() {
+        FILE_PATH = R"(..\data\data\DormitoryData.json)";
+        // 确保目录存在（避免文件写入失败）
+        std::string dir = R"(..\data\data)";
+        _mkdir(dir.c_str()); // Windows下创建目录，Linux用mkdir
+    }
+} // namespace
 
 // 静态成员初始化
 std::unordered_map<std::string, long long> Accommodations::locationIndexMap;
 std::unordered_map<std::string, long long> Accommodations::nameIndexMap;
 std::unordered_map<std::string, long long> Accommodations::numberIndexMap;
 
-void Accommodations::init() {
-    FILE_PATH = R"(..\data\data\DormitoryData.json)";
-    // 确保目录存在（避免文件写入失败）
-    std::string dir = R"(..\data\data)";
-    _mkdir(dir.c_str()); // Windows下创建目录，Linux用mkdir
-}
+
+void Accommodations::init() { initFilePath(); }
 
 nlohmann::json Accommodations::readFromJson() {
+    initFilePath();
     std::ifstream in_file(FILE_PATH);
     nlohmann::json newData;
     if (in_file.is_open()) {
@@ -47,10 +51,14 @@ nlohmann::json Accommodations::readFromJson() {
 bool Accommodations::writeInFile() { return writeInFile(this->data); }
 
 bool Accommodations::writeInFile(nlohmann::json data) {
-    std::ofstream out_file(FILE_PATH);
+    // 确保JSON库正确处理UTF-8
+    std::ofstream out_file(FILE_PATH, std::ios::binary);
     if (!out_file.is_open()) {
         return false;
     }
+
+    // 默认情况下，nlohmann::json应该已经处理了UTF-8
+    // 只需确保以二进制模式写入，避免编码转换
     out_file << data.dump(4);
     out_file.close();
     buildIndexMaps();

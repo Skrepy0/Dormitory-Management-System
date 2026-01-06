@@ -18,5 +18,5 @@ public:
     std::string getFloor();
     std::string getRoomNumber();
     int getVacant_bed();
-    nlohmann::json getMaintencensList();
+    nlohmann::json getMaintenancesList();
 };

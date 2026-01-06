@@ -1,27 +1,68 @@
 {
-  "dormitory_building": [
-    {
-      "bed_count": "123",
-      "building_location": "loa",
-      "building_number": "001",
-      "dormitories": [
+    "dormitory_building": [
         {
-          "floor": "3",
-          "maintenances": {
-            "description": "des",
-            "id": "0x123f5d",
-            "repair_time": null,
-            "repairer": "lis",
-            "report_time": null,
-            "sponsor": "asda",
-            "state": true,
-            "valuation": "good"
-          },
-          "room_number": "312",
-          "vacant_bed": 0
+            "bed_count": "123",
+            "building_location": "loa",
+            "building_name": "nam",
+            "building_number": "1",
+            "dormitories": [
+                {
+                    "floor": "3",
+                    "maintenances": [
+                        {
+                            "description": "123",
+                            "id": "7cc09967ced759fb",
+                            "repair_time": {
+                                "day": 1,
+                                "hour": 0,
+                                "minute": 53,
+                                "month": 0,
+                                "second": 0,
+                                "year": 0
+                            },
+                            "repairer": "",
+                            "report_time": {
+                                "day": 6,
+                                "hour": 23,
+                                "minute": 4,
+                                "month": 1,
+                                "second": 50,
+                                "year": 2026
+                            },
+                            "sponsor": "123",
+                            "state": false,
+                            "valuation": ""
+                        },
+                        {
+                            "description": "空调坏了",
+                            "id": "c040618e64691d64",
+                            "repair_time": {
+                                "day": 1,
+                                "hour": 0,
+                                "minute": 53,
+                                "month": 0,
+                                "second": 0,
+                                "year": 0
+                            },
+                            "repairer": "",
+                            "report_time": {
+                                "day": 6,
+                                "hour": 23,
+                                "minute": 8,
+                                "month": 1,
+                                "second": 52,
+                                "year": 2026
+                            },
+                            "sponsor": "刘兴康",
+                            "state": false,
+                            "valuation": ""
+                        }
+                    ],
+                    "room_number": "312",
+                    "vacant_bed": 0
+                }
+            ],
+            "dormitories_count": "114514"
         }
-      ],
-      "dormitories_count": "114514"
-    }
-  ]
+    ]
 }
