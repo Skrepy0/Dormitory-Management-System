@@ -1,7 +1,7 @@
 ﻿#include "../../header/data/UserData.h"
+#include <direct.h>
 #include <fstream>
 #include <iostream>
-#include <direct.h>
 #include "../../header/data/BuildingData.h"
 namespace {
     std::string FILE_PATH;
@@ -18,7 +18,7 @@ void UserData::init() {
 void UserData::addToData() {
     nlohmann::json newData;
     newData["name"] = name;
-    newData["password"] = getHash(password); 
+    newData["password"] = getHash(password);
     newData["email"] = email;
     newData["id"] = id;
 
@@ -39,16 +39,17 @@ void UserData::addToData() {
     writeToFile();
 }
 
-bool UserData::compareDormitory(nlohmann::json dormitory_1, nlohmann::json dormitory_2)
-{
-    if (dormitory_1["room_number"] != dormitory_2["room_number"])return false;
-    if (dormitory_1["bed_number"] != dormitory_2["bed_number"])return false;
-    if (dormitory_1["building_number"] != dormitory_2["building_number"])return false;
+bool UserData::compareDormitory(nlohmann::json dormitory_1, nlohmann::json dormitory_2) {
+    if (dormitory_1["room_number"] != dormitory_2["room_number"])
+        return false;
+    if (dormitory_1["bed_number"] != dormitory_2["bed_number"])
+        return false;
+    if (dormitory_1["building_number"] != dormitory_2["building_number"])
+        return false;
     return true;
 }
 
-size_t UserData::getHash(std::string str)
-{
+size_t UserData::getHash(std::string str) {
     std::hash<std::string> hasher;
     size_t hash_value = hasher(str);
     return hash_value;
@@ -75,15 +76,12 @@ void UserData::addFromJson(nlohmann::json userData) {
     out_file.close();
 }
 
-nlohmann::json UserData::getData() {
-    return data;
-}
+nlohmann::json UserData::getData() { return data; }
 
 void UserData::setData(nlohmann::json userData) {
     if (!userData.is_null()) {
         data = userData;
-    }
-    else {
+    } else {
         std::cerr << "Warning: Attempting to set null data, operation ignored." << std::endl;
     }
 }
@@ -105,17 +103,18 @@ long long UserData::findUserByName(std::string name) {
     nlohmann::json allData = UserData::readJson();
     auto array = allData["user"];
     for (long long i = 0; i < array.size(); ++i) {
-        if ((std::string)array[i]["name"] == name)return i;
+        if ((std::string) array[i]["name"] == name)
+            return i;
     }
     return -1;
 }
 
-long long UserData::findUserById(std::string id)
-{
+long long UserData::findUserById(std::string id) {
     nlohmann::json allData = UserData::readJson();
     auto array = allData["user"];
     for (long long i = 0; i < array.size(); ++i) {
-        if ((std::string)array[i]["id"] == id)return i;
+        if ((std::string) array[i]["id"] == id)
+            return i;
     }
     return -1;
 }
@@ -125,7 +124,8 @@ long long UserData::findUserByDormitory(nlohmann::json dormitory) {
     auto array = allData["user"];
     for (long long i = 0; i < array.size(); ++i) {
 
-        if (compareDormitory(array[i]["dormitory"],dormitory))return i;
+        if (compareDormitory(array[i]["dormitory"], dormitory))
+            return i;
     }
     return -1;
 }
@@ -148,8 +148,7 @@ bool UserData::eraseUserById(std::string id) {
             return true;
         }
         return false;
-    }
-    catch (...) {
+    } catch (...) {
         return false;
     }
 }
@@ -173,14 +172,12 @@ bool UserData::eraseUserByDormitory(nlohmann::json dormitory) {
     return false;
 }
 
-UserData::UserData() {
-    init();
-}
+UserData::UserData() { init(); }
 
 UserData::UserData(std::string name, std::string id, std::string password, std::string email,
-    std::string building_number, std::string room_number, std::string bed_number) :
-    name(name), id(id),password(password), email(email),
-    building_number(building_number), room_number(room_number), bed_number(bed_number) {
+                   std::string building_number, std::string room_number, std::string bed_number) :
+    name(name), id(id), password(password), email(email), building_number(building_number), room_number(room_number),
+    bed_number(bed_number) {
     init();
     addToData();
     writeToFile();

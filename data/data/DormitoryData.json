@@ -1,27 +1,27 @@
 {
-    "dormitory_building": [
+  "dormitory_building": [
+    {
+      "bed_count": "123",
+      "building_location": "loa",
+      "building_number": "001",
+      "dormitories": [
         {
-            "bed_count": "123",
-            "building_location": "loa",
-            "building_number": "001",
-            "dormitories": [
-                {
-                    "floor": "3",
-                    "maintenances": {
-                        "description": "des",
-                        "id": "0x123f5d",
-                        "repair_time": null,
-                        "repairer": "lis",
-                        "report_time": null,
-                        "sponsor": "asda",
-                        "state": true,
-                        "valuation": "good"
-                    },
-                    "room_number": "312",
-                    "vacant_bed": 0
-                }
-            ],
-            "dormitories_count": "114514"
+          "floor": "3",
+          "maintenances": {
+            "description": "des",
+            "id": "0x123f5d",
+            "repair_time": null,
+            "repairer": "lis",
+            "report_time": null,
+            "sponsor": "asda",
+            "state": true,
+            "valuation": "good"
+          },
+          "room_number": "312",
+          "vacant_bed": 0
         }
-    ]
+      ],
+      "dormitories_count": "114514"
+    }
+  ]
 }

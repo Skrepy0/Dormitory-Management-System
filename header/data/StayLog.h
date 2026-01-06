@@ -1,6 +1,6 @@
 #pragma once
-#include "basic/Time.h"
 #include "../../source/data/library/json.hpp"
+#include "basic/Time.h"
 
 class StayLog {
     // 住、退宿记录
@@ -66,7 +66,6 @@ public:
     stayLog.writeToFile();
     std::cout << checkIn.dump(4) << std::endl;
  */
-
 
 // json格式：
 /*

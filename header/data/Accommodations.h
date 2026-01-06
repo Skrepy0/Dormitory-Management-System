@@ -1,8 +1,8 @@
 ﻿#pragma once
-#include<iostream>
-#include"../../source/data/library/json.hpp"
-#include"./BuildingData.h"
+#include <iostream>
 #include <unordered_map>
+#include "../../source/data/library/json.hpp"
+#include "./BuildingData.h"
 
 class Accommodations {
 private:
@@ -18,7 +18,8 @@ public:
     static long long findBuildingByNumber(std::string number); // 通过楼号查找宿舍楼，并返回索引
     static long long findBuildingByLocation(std::string location); // 通过位置信息查找宿舍楼，并返回索引
     bool eraseBuilding(long long index); // 删除宿舍楼
-    bool eraseBuilding(long long begin, long long end); // 删除宿舍楼（索引包前不包后）
+    bool eraseBuilding(long long begin,
+                       long long end); // 删除宿舍楼（索引包前不包后）
     bool clearBuildingList(); // 清空宿舍楼
     static nlohmann::json readFromJson(); // 读取DormitoryData.json里的所有数据
     bool writeInFile(); // 将当前信息写入DormitoryData.json(密码以哈西值的方式存储)
@@ -33,16 +34,18 @@ public:
 
 /*使用示例：
 *	ps:写代码时建议打开内联提示
-* 
+*
 *	1.添加：
-	BuildingData building("123", "loa", "001", "114514", "123");
-	building.addDormitory(Dormitory("3", "312", 0, Maintenance(Time(), Time(), "asda", "des", "lis", true, "good", "0x123f5d").getMaintenanceData()));
-	Accommodations acc;
-	acc.addBuildings(building);
-	acc.writeInFile();
-	---------------------------------------------------------------------------------------------
-	2.查找
-	Accommodations acc;
-	std::cout << acc.getBuildingJson(Accommodations::findBulidingByName("building_name"));
+        BuildingData building("123", "loa", "001", "114514", "123");
+        building.addDormitory(Dormitory("3", "312", 0, Maintenance(Time(),
+Time(), "asda", "des", "lis", true, "good", "0x123f5d").getMaintenanceData()));
+        Accommodations acc;
+        acc.addBuildings(building);
+        acc.writeInFile();
+        ---------------------------------------------------------------------------------------------
+        2.查找
+        Accommodations acc;
+        std::cout <<
+acc.getBuildingJson(Accommodations::findBulidingByName("building_name"));
 
 */

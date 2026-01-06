@@ -1,9 +1,8 @@
 #include "../../../header/screen/operation/UserOptions.h"
-#include"../../../header/data/info/Message.h"
-#include"../../../header/data/info/Text.h"
+#include "../../../header/data/info/Message.h"
+#include "../../../header/data/info/Text.h"
 // 显示学生主菜单
-void StudentOptions::showStudentMainMenu()
-{
+void StudentOptions::showStudentMainMenu() {
     showTitle("学生功能菜单");
     std::cout << std::endl;
     Message message(Text::of("1. 宿舍信息查询"));
@@ -27,8 +26,7 @@ void StudentOptions::showStudentMainMenu()
 }
 
 // 显示学生查询子菜单
-void StudentOptions::showStudentQuerySubMenu()
-{
+void StudentOptions::showStudentQuerySubMenu() {
     showTitle("宿舍信息查询");
     std::cout << std::endl;
     Message message(Text::of("1. 查看我的宿舍信息"));
@@ -49,8 +47,7 @@ void StudentOptions::showStudentQuerySubMenu()
 }
 
 // 显示学生申请子菜单
-void StudentOptions::showStudentApplySubMenu()
-{
+void StudentOptions::showStudentApplySubMenu() {
     showTitle("申请操作");
     std::cout << std::endl;
     Message message(Text::of("1. 提交退宿申请"));
@@ -71,33 +68,25 @@ void StudentOptions::showStudentApplySubMenu()
 }
 
 // 获取学号（专属校验：8位纯数字）
-std::string StudentOptions::getStudentIdInput()
-{
-    return getDigitInput("请输入您的学号：", 12, 12);
-}
+std::string StudentOptions::getStudentIdInput() { return getDigitInput("请输入您的学号：", 12, 12); }
 
 // 获取申请理由（非空+长度限制）
-std::string StudentOptions::getDormApplyReason()
-{
+std::string StudentOptions::getDormApplyReason() {
     std::string reason;
-    while (true)
-    {
+    while (true) {
         reason = getNonEmptyInput("请输入申请理由（最多50字）：");
-        if (reason.length() <= 50) return reason;
+        if (reason.length() <= 50)
+            return reason;
         showError("理由长度不能超过50字！");
     }
 }
 
 // 获取报修内容
-std::string StudentOptions::getRepairContentInput()
-{
-    return getNonEmptyInput("请描述报修设施及问题：");
-}
+std::string StudentOptions::getRepairContentInput() { return getNonEmptyInput("请描述报修设施及问题："); }
 
 // 展示学生宿舍信息（专属格式）
-void StudentOptions::showStudentDormInfo(const std::string& id, const std::string& dormNum,
-                                         const std::string& checkInTime)
-{
+void StudentOptions::showStudentDormInfo(const std::string &id, const std::string &dormNum,
+                                         const std::string &checkInTime) {
     showTitle("我的宿舍信息");
     Message message(Text::of("学号："));
     message.printContent();
@@ -113,9 +102,8 @@ void StudentOptions::showStudentDormInfo(const std::string& id, const std::strin
 }
 
 // 展示申请状态（专属格式）
-void StudentOptions::showApplyStatus(const std::string& applyType, const std::string& status,
-                                     const std::string& auditMsg)
-{
+void StudentOptions::showApplyStatus(const std::string &applyType, const std::string &status,
+                                     const std::string &auditMsg) {
     showTitle("申请状态查询");
     Message message(Text::of("申请类型："));
     message.printContent();

@@ -159,8 +159,12 @@
         }
 
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
         }
 
         .footer {
@@ -185,7 +189,7 @@
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             z-index: 1000;
             display: none;
         }
@@ -202,7 +206,8 @@
 <p class="subtitle">
     ANSI转义序列的便捷格式代码，适用于终端输出样式化
     <br>
-    借鉴于<a href="https://zh.minecraft.wiki/w/%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%BB%A3%E7%A0%81" target="_blank">格式化代码</a>
+    借鉴于<a href="https://zh.minecraft.wiki/w/%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%BB%A3%E7%A0%81"
+             target="_blank">格式化代码</a>
     左键代码以复制~
 </p>
 <div class="container">
@@ -230,7 +235,9 @@
             </tr>
             <tr>
                 <td><span class="code">$j</span></td>
-                <td><del>删除线</del></td>
+                <td>
+                    <del>删除线</del>
+                </td>
                 <td>\033[9m</td>
             </tr>
             <tr>
@@ -457,12 +464,12 @@
 
 <script>
     // 为表格行添加点击效果
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const tableRows = document.querySelectorAll('tbody tr');
         const copySuccess = document.getElementById('copySuccess');
 
         tableRows.forEach(row => {
-            row.addEventListener('click', function() {
+            row.addEventListener('click', function () {
                 // 获取代码
                 const codeElement = this.querySelector('.code');
                 if (codeElement) {

@@ -5,9 +5,10 @@
 #include "../../../header/screen/login/LoginSelectMenu.h"
 
 #include "../../../header/screen/operation/AdministratorOperationMenu.h"
+#include "../../../header/screen/operation/UserOperationMenu.h"
 #include "../../../header/screen/operation/operations/SelectLanguage.h"
 
-void LoginSelectMenu::jumpSelectLanguageMenu(){
+void LoginSelectMenu::jumpSelectLanguageMenu() {
     system("cls");
     SelectLanguage selectLanguage;
     selectLanguage.loop();
@@ -20,13 +21,20 @@ void LoginSelectMenu::jumpAdminOperationMenu() {
     hideCursor();
 }
 
-LoginSelectMenu::LoginSelectMenu():SelectMenu(Text("login.title"),{
-                                                  Option(Text("login.option.user"),"a"),
-                                                  Option(Text("login.option.administrator"),"p",jumpAdminOperationMenu),
-                                                  Option(Text("login.option.set_language"),"A",jumpSelectLanguageMenu),
-                                              },"y",10) {
+void LoginSelectMenu::jumpUserOperationMenu() {
+    system("cls");
+    UserOperationMenu menu;
+    menu.loop();
+    hideCursor();
 }
 
-void LoginSelectMenu::loop() {
-    SelectMenu::mainLoop();
-}
+LoginSelectMenu::LoginSelectMenu() :
+    SelectMenu(Text("login.title"),
+               {
+                       Option(Text("login.option.user"), "a", jumpUserOperationMenu),
+                       Option(Text("login.option.administrator"), "p", jumpAdminOperationMenu),
+                       Option(Text("login.option.set_language"), "A", jumpSelectLanguageMenu),
+               },
+               "y", 10) {}
+
+void LoginSelectMenu::loop() { SelectMenu::mainLoop(); }

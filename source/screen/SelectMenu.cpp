@@ -1,14 +1,15 @@
-﻿#include<iostream>
-#include <utility>
-#include"../../header/screen/SelectMenu.h"
+﻿#include "../../header/screen/SelectMenu.h"
 #include <conio.h>
+#include <cstdlib> // 添加 exit 函数头文件
+#include <iostream>
+#include <utility>
 #include <windows.h>
-#include <cstdlib>  // 添加 exit 函数头文件
 #include "../../header/data/info/Message.h"
 
 std::string SelectMenu::getSpaces(int count) {
     std::string res;
-    while (count--)res+=" ";
+    while (count--)
+        res += " ";
     return res;
 }
 
@@ -39,38 +40,25 @@ void SelectMenu::updatePointer(int direction) {
     int index = pointer + direction;
     if (index < 0) {
         pointer = optionList.size() - 1;
-    }
-    else if (index >= optionList.size()) {
+    } else if (index >= optionList.size()) {
         pointer = 0;
-    }
-    else {
+    } else {
         pointer = index;
     }
 }
 
-std::vector<Option> SelectMenu::getOptionList() {
-    return this->optionList;
-}
+std::vector<Option> SelectMenu::getOptionList() { return this->optionList; }
 
-Text SelectMenu::getTitle() {
-    return this->title;
-}
+Text SelectMenu::getTitle() { return this->title; }
 
-void SelectMenu::setTitle(Text &title) {
-    this->title = std::move(title);
-}
+void SelectMenu::setTitle(Text &title) { this->title = std::move(title); }
 
-void SelectMenu::setOptionList(std::vector<Option> &optionList) {
-    this->optionList = std::move(optionList);
-}
+void SelectMenu::setOptionList(std::vector<Option> &optionList) { this->optionList = std::move(optionList); }
 
-SelectMenu::SelectMenu(const Text& title, std::vector<Option> optionList,
-                       std::string pointerColorCode, int optionIndentSpaces, int titleLine)
-    : title(title),
-      optionList(std::move(optionList)),
-      titleLine(titleLine),
-      optionIndentSpaces(optionIndentSpaces),
-      pointerColorCode(std::move(pointerColorCode)) {
+SelectMenu::SelectMenu(const Text &title, std::vector<Option> optionList, std::string pointerColorCode,
+                       int optionIndentSpaces, int titleLine) :
+    title(title), optionList(std::move(optionList)), titleLine(titleLine), optionIndentSpaces(optionIndentSpaces),
+    pointerColorCode(std::move(pointerColorCode)) {
     init();
 }
 
@@ -94,7 +82,8 @@ void SelectMenu::mainLoop() {
     showCursor();
 }
 void SelectMenu::updateOptionLine(int index) {
-    if (index < 0 || index >= optionList.size()) return;
+    if (index < 0 || index >= optionList.size())
+        return;
 
     // 定位到选项行
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -108,9 +97,9 @@ void SelectMenu::updateOptionLine(int index) {
     std::string optionText = option.getContent().getContent();
     std::string displayContent;
     if (index == pointer) {
-        displayContent = "$" + pointerColorCode + ">" + "$" +option.getColorCode()+ optionText;
+        displayContent = "$" + pointerColorCode + ">" + "$" + option.getColorCode() + optionText;
     } else {
-        displayContent = " "  + optionText;
+        displayContent = " " + optionText;
     }
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(hConsole, &csbi);
@@ -135,9 +124,9 @@ void SelectMenu::updateMenu() {
         std::string optionText = option.getContent().getContent();
 
         if (i == pointer) {
-            displayContent = "$" + pointerColorCode + ">" + "$" +option.getColorCode()+ optionText;
+            displayContent = "$" + pointerColorCode + ">" + "$" + option.getColorCode() + optionText;
         } else {
-            displayContent = " "  + optionText;
+            displayContent = " " + optionText;
         }
 
         Message optionMessage(getSpaces(optionIndentSpaces) + displayContent);
@@ -170,6 +159,4 @@ void SelectMenu::onSelection() {
 }
 
 // 退出系统
-void SelectMenu::exitSystem() {
-    exit(0);
-}
+void SelectMenu::exitSystem() { exit(0); }

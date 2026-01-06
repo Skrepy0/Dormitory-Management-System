@@ -24,17 +24,16 @@ add_executable(hnu_dms main.cpp
         source/screen/operation/operations/user/UserApplication.cpp
         source/screen/InputMenu.cpp
         source/data/StayLog.cpp
-        source/screen/operation/AdministratorOptions.cpp
-        source/screen/operation/UserOptions.cpp
-        source/screen/operation/operations/user/UserApplication.cpp
         source/screen/operation/operations/ChangePassword.cpp
-        source/screen/operation/operations/SelectLanguage.cpp
-        source/screen/login/LoginSelectMenu.cpp
-        source/screen/operation/operations/administrator/AdminAuditSubMenu.cpp
+        source/screen/operation/operations/Logout.cpp
         source/screen/operation/operations/SelectLanguage.cpp
         source/screen/login/LoginSelectMenu.cpp
         source/screen/operation/operations/administrator/AdminAuditSubMenu.cpp
         source/screen/operation/operations/user/UserMaintenance.cpp
         source/screen/operation/AdministratorOperationMenu.cpp
+        source/screen/login/LoginScreen.cpp
         source/screen/operation/UserOperationMenu.cpp
+        source/screen/operation/operations/administrator/DormitoryManageMenu.cpp
+        source/screen/operation/operations/user/UserMaintenanceSelectMenu.cpp
+        source/screen/operation/operations/administrator/StudentInfoManageMenu.cpp
 )

@@ -4,7 +4,7 @@
 #pragma once
 #include "../../../SelectMenu.h"
 
-class AdminAuditSubMenu :public SelectMenu{
+class AdminAuditSubMenu : public SelectMenu {
 public:
     AdminAuditSubMenu();
     void loop();
