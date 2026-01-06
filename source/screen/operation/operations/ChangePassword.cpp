@@ -3,11 +3,13 @@
 #include "../../../../header/data/info/Text.h"
 #include "../../../../header/screen/operation/operations/Logout.h"
 
-std::string ChangePassword::changePassword(const std::string &password) {
-    std::string currentPassword;
-    Text t(password);
+std::string ChangePassword::getCurrentPassword(const std::string &input) {
+    Text t(input);
     currentPassword = t.getContent();
+    return currentPassword;
+}
 
+std::string ChangePassword::changePassword() {
     if (Logout::checkEscKey()) {
         clearScreen();
         return currentPassword;
@@ -38,15 +40,13 @@ std::string ChangePassword::changePassword(const std::string &password) {
         }
         if (count > 5) {
             showError("screen.operation.operations.UserChangePassword.Password.Input.again.error");
-            // clearScreen(); // 失败后也清空界面
+            pause();
             return currentPassword;
         }
     }
-    std::string newPwd;
+    std::string newPassword;
     std::string confirmPwd;
-    // 外层循环：直到两次密码输入一致
     while (true) {
-        // 检查ESC（保留原逻辑）
         if (Logout::checkEscKey()) {
             clearScreen();
             return currentPassword;
@@ -58,8 +58,8 @@ std::string ChangePassword::changePassword(const std::string &password) {
                 return currentPassword;
             }
 
-            newPwd = getNonEmptyInput("screen.operation.operations.UserChangePassword.new_password.Input");
-            if (!newPwd.empty()) {
+            newPassword = getNonEmptyInput("screen.operation.operations.UserChangePassword.new_password.Input");
+            if (!newPassword.empty()) {
                 break;
             }
 
@@ -87,8 +87,18 @@ std::string ChangePassword::changePassword(const std::string &password) {
             return currentPassword;
         }
 
-        if (newPwd == confirmPwd) {
-            break;
+        if (newPassword == confirmPwd) {
+            bool isConfirm = confirmOperation(
+                    "screen.operation.operations.UserChangePassword.new_password.confirmation");
+            if (isConfirm) {
+
+                showSuccess("screen.operation.operations.UserChangePassword.new_password.success");
+                pause();
+                return newPassword;
+            } else {
+                showError("screen.operation.operations.UserChangePassword.new_password.confirmation.fail");
+                std::cout << std::endl;
+            }
         } else {
             showError("screen.operation.operations.UserChangePassword.new_password.difference");
         }

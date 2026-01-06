@@ -14,12 +14,13 @@
 #include "header/data/info/Message.h"
 #include "header/screen/SelectMenu.h"
 #include "header/screen/login/LoginSelectMenu.h"
+#include "header/screen/login/UserLoginInputMenu.h"
 #include "header/screen/operation/operations/user/UserApplication.h"
 #include "header/screen/operation/operations/user/UserMaintenance.h"
 
 
 int main() {
-    LoginSelectMenu menu;
-    menu.loop();
+    UserLoginInputMenu menu;
+    menu.showUserLogin();
     return 0;
 }
