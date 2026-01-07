@@ -6,11 +6,12 @@
 #include "./header/data/UserData.h"
 #include "./header/data/info/Text.h"
 #include "./header/screen/InputMenu.h"
-#include "header/data/DataHelper.h"
 #include "./header/screen/operation/operations/ChangePassword.h"
 #include "./header/screen/operation/operations/Logout.h"
 #include "./header/screen/operation/operations/user/UserApplication.h"
 #include "./header/screen/operation/operations/user/UserMaintenance.h"
+#include "header/data/AdminData.h"
+#include "header/data/DataHelper.h"
 #include "header/data/StayLog.h"
 #include "header/data/info/Message.h"
 #include "header/screen/SelectMenu.h"
@@ -18,9 +19,8 @@
 #include "header/screen/operation/operations/user/UserApplication.h"
 #include "header/screen/operation/operations/user/UserMaintenance.h"
 
-
 int main() {
-    LoginSelectMenu menu;
-    menu.loop();
+    DataHelper::setAdminPassword("2", "1234");
+    system("pause");
     return 0;
 }

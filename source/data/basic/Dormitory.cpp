@@ -1,8 +1,6 @@
 ﻿#include "../../../header/data/basic/Dormitory.h"
 #include <iostream>
-
-Dormitory::Dormitory(std::string floor, std::string room_number, int vacant_bed, nlohmann::json maintenances) :
-    floor(floor), room_number(room_number), vacant_bed(vacant_bed), maintenances(maintenances) {}
+#include <utility>
 
 bool Dormitory::addMaintenances(Maintenance maintenance) {
     try {
@@ -14,10 +12,13 @@ bool Dormitory::addMaintenances(Maintenance maintenance) {
 }
 
 nlohmann::json Dormitory::getDormitoryData() {
+    data["building_number"] = building_number;
+    data["building_name"] = building_name;
     data["floor"] = floor;
     data["room_number"] = room_number;
     data["vacant_bed"] = vacant_bed;
     data["maintenances"] = maintenances;
+    data["total_bed"] = total_bed;
     return this->data;
 }
 
@@ -49,6 +50,17 @@ std::string Dormitory::getFloor() { return floor; }
 
 std::string Dormitory::getRoomNumber() { return room_number; }
 
-int Dormitory::getVacant_bed() { return vacant_bed; }
+int Dormitory::getVacantBed() const { return vacant_bed; }
 
 nlohmann::json Dormitory::getMaintenancesList() { return maintenances; }
+
+int Dormitory::getTotalBed() const { return total_bed; }
+
+std::string Dormitory::getBuildingNumber() const { return building_number; }
+
+void Dormitory::setBuildingNumber(const std::string &building_number) { this->building_number = building_number; }
+
+std::string Dormitory::getBuildingName() const { return building_name; }
+
+void Dormitory::setBuildingName(const std::string &building_name) { this->building_name = building_name; }
+void Dormitory::setTotalBed(int total) { this->total_bed = total; }

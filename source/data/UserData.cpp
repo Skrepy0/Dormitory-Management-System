@@ -2,6 +2,7 @@
 #include <direct.h>
 #include <fstream>
 #include <iostream>
+#include <utility>
 #include "../../header/data/BuildingData.h"
 #include "../../header/data/HashHelper.h"
 namespace {
@@ -33,10 +34,12 @@ void UserData::addToData() {
     newData["id"] = id;
 
     nlohmann::json dormitoryData;
-    dormitoryData["bed_number"] = bed_number;
-    dormitoryData["building_number"] = building_number;
-    dormitoryData["room_number"] = room_number;
-
+    dormitoryData["bed_number"] = dormitory.getTotalBed();
+    dormitoryData["building_number"] = dormitory.getBuildingNumber();
+    dormitoryData["room_number"] = dormitory.getRoomNumber();
+    dormitoryData["building_name"] = dormitory.getBuildingName();
+    dormitoryData["vacant_bed"] = dormitory.getVacantBed();
+    dormitoryData["floor"] = dormitory.getFloor();
     newData["dormitory"] = dormitoryData;
 
     // 确保user数组存在
@@ -177,12 +180,8 @@ bool UserData::eraseUserByDormitory(nlohmann::json dormitory) {
     return false;
 }
 
-UserData::UserData() { init(); }
-
-UserData::UserData(std::string name, std::string id, std::string password, std::string email,
-                   std::string building_number, std::string room_number, std::string bed_number) :
-    name(name), id(id), password(password), email(email), building_number(building_number), room_number(room_number),
-    bed_number(bed_number) {
+UserData::UserData(std::string name, std::string id, std::string password, std::string email, Dormitory dormitory) :
+    name(std::move(name)), id(std::move(id)), password(password), email(email), dormitory(std::move(dormitory)) {
     init();
     addToData();
     writeToFile();

@@ -20,8 +20,6 @@ protected:
     void init(); // 菜单初始化函数
     void monitorKeyEvent(); // 监视输入
     void updatePointer(int direction); // 选择器上下移动与选项颜色更新
-    void static hideCursor(); // 隐藏光标
-    void static showCursor(); // 显示光标
 
 public:
     std::vector<Option> getOptionList(); // 获取选项列表
@@ -44,4 +42,6 @@ public:
     virtual void onSelection(); // 选定后
 
     static void exitSystem(); // 退出系统
+    void static hideCursor(); // 隐藏光标
+    void static showCursor(); // 显示光标
 };
