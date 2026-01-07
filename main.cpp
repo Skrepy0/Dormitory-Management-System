@@ -14,14 +14,19 @@
 #include "header/data/StayLog.h"
 #include "header/data/info/Message.h"
 #include "header/screen/SelectMenu.h"
+#include "header/screen/Login/UserLogInInputMenu.h"
 #include "header/screen/login/LoginSelectMenu.h"
-#include "header/screen/login/UserLoginInputMenu.h"
+#include "header/screen/registry/UserRegisterInputMenu.h"
+#include "header/screen/login/AdministratorLoginInputMenu.h"
 #include "header/screen/operation/operations/user/UserApplication.h"
 #include "header/screen/operation/operations/user/UserMaintenance.h"
 
 
+
 int main() {
-    UserLoginInputMenu menu;
-    menu.showUserLogin();
+    UserMaintenance app;
+    app.submitValuation();
+
+
     return 0;
 }

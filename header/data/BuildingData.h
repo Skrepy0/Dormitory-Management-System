@@ -36,4 +36,5 @@ public:
     void setBuildingNumber(std::string number);
     void setDormitoriesCount(std::string count);
     void setBedCount(std::string count);
+    nlohmann::json readAllBuildings();
 };

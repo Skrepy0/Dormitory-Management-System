@@ -40,4 +40,12 @@ add_executable(hnu_dms main.cpp
         source/data/HashHelper.cpp
         header/data/HashHelper.h
         header/data/DataHelper.h
+        header/screen/registry/RegisterInputMenu.h
+        header/screen/registry/UserRegisterInputMenu.h
+        header/screen/registry/AdministratorRegisterInputMenu.h
+        source/screen/registry/RegisterInputMenu.cpp
+        source/screen/registry/UserRegisterInputMenu.cpp
+        source/screen/registry/AdministratorRegisterInputMenu.cpp
+        header/screen/operation/operations/administrator/AdminDormitoryManagement.h
+        source/screen/operation/operations/administrator/AdminDormitoryManagement.cpp
 )
