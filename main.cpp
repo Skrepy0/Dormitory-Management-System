@@ -20,7 +20,7 @@
 #include "header/screen/operation/operations/user/UserMaintenance.h"
 
 int main() {
-    DataHelper::setAdminPassword("2", "1234");
-    system("pause");
+    LoginSelectMenu loginSelectMenu;
+    loginSelectMenu.loop();
     return 0;
 }

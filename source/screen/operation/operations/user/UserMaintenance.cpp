@@ -29,7 +29,7 @@ void UserMaintenance::upLoadNewMaintenance() {
     Maintenance maintenance(reportTime, repairTime, sponsor, description, repairer, false, "",
                             HashHelper::getHashFromCurrentTime());
     // 读取用户数据并找到当前用户
-    nlohmann::json userData = DataHelper::getUser("123"); // TODO 换成user-id
+    nlohmann::json userData = DataHelper::getUser("202508010613"); // TODO 换成user-id
     // 根据宿舍号找到对应的建筑索引
     long long buildingIndex =
             Accommodations::findBuildingByNumber(DataHelper::getDormitory(userData)["building_number"]);
