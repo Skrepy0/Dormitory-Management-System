@@ -11,6 +11,7 @@
 
 // 引入各种数据结构类
 #include "../../../../../header/data/Accommodations.h"
+#include "../../../../../header/data/DataHelper.h"
 #include "../../../../../header/data/HashHelper.h"
 #include "../../../../../header/data/UserData.h"
 #include "../../../../../header/data/basic/Maintenance.h"
@@ -20,17 +21,19 @@
  * @brief 上报新的维修记录
  * 该方法创建一个新的维修记录，并将其保存到相应的宿舍房间数据中
  */
+void init() {
+    // TODO: 初始化操作
+}
 void UserMaintenance::upLoadNewMaintenance() {
     // 创建维修记录对象，包含报告时间、维修时间、发起人、描述等信息
     Maintenance maintenance(reportTime, repairTime, sponsor, description, repairer, false, "",
                             HashHelper::getHashFromCurrentTime());
     // 读取用户数据并找到当前用户
-    nlohmann::json userData = UserData::readJson()["user"][UserData::findUserById("123")];
+    nlohmann::json userData = DataHelper::getUser("123");// TODO 换成user-id
     // 根据宿舍号找到对应的建筑索引
-    long long buildingIndex = Accommodations::findBuildingByNumber(userData["dormitory"]["building_number"]);
+    long long buildingIndex = Accommodations::findBuildingByNumber(DataHelper::getDormitory(userData)["building_number"]);
     // 读取建筑数据并找到对应的宿舍房间
-    nlohmann::json buildingData =
-            Accommodations::readFromJson()["dormitory_building"][buildingIndex]; // TODO 换成user-id
+    nlohmann::json buildingData = DataHelper::getDormitoryBuildingList()[buildingIndex];
     // 遍历建筑中的所有房间，找到当前用户所在的房间
     for (auto &room: buildingData["dormitories"]) {
         if (room["room_number"] == userData["dormitory"]["room_number"]) {

@@ -38,4 +38,5 @@ add_executable(hnu_dms main.cpp
         source/screen/operation/operations/administrator/StudentInfoManageMenu.cpp
         source/data/HashHelper.cpp
         header/data/HashHelper.h
+        header/data/DataHelper.h
 )

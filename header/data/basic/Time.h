@@ -13,6 +13,7 @@ private:
     int minute; // 分
     int second; // 秒
 public:
+    static const std::string null;
     Time() = default;
     // 储存格式参见DormitoryData.json
     Time(int year, int month, int day, int hour, int minute, int second);

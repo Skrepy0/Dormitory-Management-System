@@ -10,30 +10,6 @@
                     "floor": "3",
                     "maintenances": [
                         {
-                            "description": "123",
-                            "id": "7cc09967ced759fb",
-                            "repair_time": {
-                                "day": 1,
-                                "hour": 0,
-                                "minute": 53,
-                                "month": 0,
-                                "second": 0,
-                                "year": 0
-                            },
-                            "repairer": "",
-                            "report_time": {
-                                "day": 6,
-                                "hour": 23,
-                                "minute": 4,
-                                "month": 1,
-                                "second": 50,
-                                "year": 2026
-                            },
-                            "sponsor": "123",
-                            "state": false,
-                            "valuation": ""
-                        },
-                        {
                             "description": "空调坏了",
                             "id": "c040618e64691d64",
                             "repair_time": {
@@ -54,6 +30,54 @@
                                 "year": 2026
                             },
                             "sponsor": "刘兴康",
+                            "state": false,
+                            "valuation": ""
+                        },
+                        {
+                            "description": "sdfsdf",
+                            "id": "985ea8cf47506204",
+                            "repair_time": {
+                                "day": 1,
+                                "hour": 0,
+                                "minute": 53,
+                                "month": 0,
+                                "second": 0,
+                                "year": 0
+                            },
+                            "repairer": "",
+                            "report_time": {
+                                "day": 6,
+                                "hour": 23,
+                                "minute": 36,
+                                "month": 1,
+                                "second": 19,
+                                "year": 2026
+                            },
+                            "sponsor": "刘兴康",
+                            "state": false,
+                            "valuation": ""
+                        },
+                        {
+                            "description": "这是这个",
+                            "id": "ad47d42ebb3adfd6",
+                            "repair_time": {
+                                "day": 1,
+                                "hour": 0,
+                                "minute": 53,
+                                "month": 0,
+                                "second": 0,
+                                "year": 0
+                            },
+                            "repairer": "",
+                            "report_time": {
+                                "day": 7,
+                                "hour": 10,
+                                "minute": 23,
+                                "month": 1,
+                                "second": 2,
+                                "year": 2026
+                            },
+                            "sponsor": "这是这个",
                             "state": false,
                             "valuation": ""
                         }

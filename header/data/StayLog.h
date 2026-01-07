@@ -6,7 +6,7 @@ class StayLog {
     // 住、退宿记录
     nlohmann::json data; // 总数据
     std::string type; // 形式 "check-in" or "check-out"
-    Time time{}; // 办理时间
+    Time time; // 办理时间
     std::string id; // 申请人id
     std::string name; // 处理人名字
     nlohmann::json dormitoryData; // 申请人的宿舍详细信息

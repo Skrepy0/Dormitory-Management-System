@@ -11,7 +11,6 @@ private:
     bool state; // 报修状态（默认false=未处理）
     std::string valuation; // 报修评价（初始为空）
     void upLoadNewMaintenance();
-
 public:
     static std::string getCurrentTime();
     void submitRepair();
