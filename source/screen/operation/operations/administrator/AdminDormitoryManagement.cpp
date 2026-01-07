@@ -3,16 +3,6 @@
 
 using json = nlohmann::json;
 
-BuildingData AdminDormitoryManagement::getBuildingByNumber(const std::string &buildingNumber) {
-    json allBuildings = BuildingData::readAllBuildings();
-    for (const auto &bJson: allBuildings["buildings"]) {
-        if (bJson["building_number"] == buildingNumber) {
-            return BuildingData(bJson);
-        }
-    }
-    return BuildingData();
-}
-
 void AdminDormitoryManagement::inputAddBuilding() {
     clearScreen();
     showTitle("operation.administrator.dormitory_manage.add_building.title");
