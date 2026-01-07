@@ -16,6 +16,7 @@ public:
     BuildingData();
     BuildingData(std::string building_name, std::string building_location, std::string building_number,
                  std::string dormitories_count, std::string bed_count);
+    BuildingData(const nlohmann::json &);
     bool setDormitories(nlohmann::json dormitories); // 传参是json列表,返回是否设置成功
     bool addDormitory(Dormitory dormitory); // 添加宿舍
     bool addDormitories(nlohmann::json dormitoriesList); // 添加宿舍(批量添加)

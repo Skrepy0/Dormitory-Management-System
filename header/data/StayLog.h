@@ -1,7 +1,7 @@
 #pragma once
+#include "../../header/data/HashHelper.h"
 #include "../../source/data/library/json.hpp"
 #include "basic/Time.h"
-
 class StayLog {
     // 住、退宿记录
     nlohmann::json data; // 总数据
@@ -17,14 +17,12 @@ class StayLog {
 
     void addToData();
 
-    static std::string getHash();
-
 public:
     StayLog();
 
     StayLog(std::string type, Time time, std::string id, std::string name, nlohmann::json dormitoryData);
 
-    StayLog(nlohmann::json data);
+    explicit StayLog(nlohmann::json data);
 
     nlohmann::json getData();
 

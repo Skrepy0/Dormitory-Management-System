@@ -51,4 +51,4 @@ std::string Dormitory::getRoomNumber() { return room_number; }
 
 int Dormitory::getVacant_bed() { return vacant_bed; }
 
-nlohmann::json Dormitory::getMaintencensList() { return maintenances; }
+nlohmann::json Dormitory::getMaintenancesList() { return maintenances; }

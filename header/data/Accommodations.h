@@ -18,8 +18,7 @@ public:
     static long long findBuildingByNumber(std::string number); // 通过楼号查找宿舍楼，并返回索引
     static long long findBuildingByLocation(std::string location); // 通过位置信息查找宿舍楼，并返回索引
     bool eraseBuilding(long long index); // 删除宿舍楼
-    bool eraseBuilding(long long begin,
-                       long long end); // 删除宿舍楼（索引包前不包后）
+    bool eraseBuilding(long long begin, long long end); // 删除宿舍楼（索引包前不包后）
     bool clearBuildingList(); // 清空宿舍楼
     static nlohmann::json readFromJson(); // 读取DormitoryData.json里的所有数据
     bool writeInFile(); // 将当前信息写入DormitoryData.json(密码以哈西值的方式存储)

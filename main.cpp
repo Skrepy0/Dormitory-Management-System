@@ -6,6 +6,7 @@
 #include "./header/data/UserData.h"
 #include "./header/data/info/Text.h"
 #include "./header/screen/InputMenu.h"
+#include "header/data/DataHelper.h"
 #include "./header/screen/operation/operations/ChangePassword.h"
 #include "./header/screen/operation/operations/Logout.h"
 #include "./header/screen/operation/operations/user/UserApplication.h"

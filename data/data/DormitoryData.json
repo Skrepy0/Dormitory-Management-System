@@ -1,27 +1,92 @@
 {
-  "dormitory_building": [
-    {
-      "bed_count": "123",
-      "building_location": "loa",
-      "building_number": "001",
-      "dormitories": [
+    "dormitory_building": [
         {
-          "floor": "3",
-          "maintenances": {
-            "description": "des",
-            "id": "0x123f5d",
-            "repair_time": null,
-            "repairer": "lis",
-            "report_time": null,
-            "sponsor": "asda",
-            "state": true,
-            "valuation": "good"
-          },
-          "room_number": "312",
-          "vacant_bed": 0
+            "bed_count": "123",
+            "building_location": "loa",
+            "building_name": "nam",
+            "building_number": "1",
+            "dormitories": [
+                {
+                    "floor": "3",
+                    "maintenances": [
+                        {
+                            "description": "空调坏了",
+                            "id": "c040618e64691d64",
+                            "repair_time": {
+                                "day": 1,
+                                "hour": 0,
+                                "minute": 53,
+                                "month": 0,
+                                "second": 0,
+                                "year": 0
+                            },
+                            "repairer": "",
+                            "report_time": {
+                                "day": 6,
+                                "hour": 23,
+                                "minute": 8,
+                                "month": 1,
+                                "second": 52,
+                                "year": 2026
+                            },
+                            "sponsor": "刘兴康",
+                            "state": false,
+                            "valuation": ""
+                        },
+                        {
+                            "description": "sdfsdf",
+                            "id": "985ea8cf47506204",
+                            "repair_time": {
+                                "day": 1,
+                                "hour": 0,
+                                "minute": 53,
+                                "month": 0,
+                                "second": 0,
+                                "year": 0
+                            },
+                            "repairer": "",
+                            "report_time": {
+                                "day": 6,
+                                "hour": 23,
+                                "minute": 36,
+                                "month": 1,
+                                "second": 19,
+                                "year": 2026
+                            },
+                            "sponsor": "刘兴康",
+                            "state": false,
+                            "valuation": ""
+                        },
+                        {
+                            "description": "这是这个",
+                            "id": "ad47d42ebb3adfd6",
+                            "repair_time": {
+                                "day": 1,
+                                "hour": 0,
+                                "minute": 53,
+                                "month": 0,
+                                "second": 0,
+                                "year": 0
+                            },
+                            "repairer": "",
+                            "report_time": {
+                                "day": 7,
+                                "hour": 10,
+                                "minute": 23,
+                                "month": 1,
+                                "second": 2,
+                                "year": 2026
+                            },
+                            "sponsor": "这是这个",
+                            "state": false,
+                            "valuation": ""
+                        }
+                    ],
+                    "room_number": "312",
+                    "vacant_bed": 0
+                }
+            ],
+            "dormitories_count": "114514"
         }
-      ],
-      "dormitories_count": "114514"
-    }
-  ]
+    ]
 }
