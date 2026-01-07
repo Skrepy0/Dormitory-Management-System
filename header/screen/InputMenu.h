@@ -8,21 +8,21 @@ private:
     Text text;
 
 public: // 输出类：
-    void showTitle(const std::string &title); // 显示菜单标题
-    void clearInputBuffer(); // 辅助函数，用于清空cin可能带来的负面效果
-    void clearScreen(); // 用于清空屏幕
-    void showSuccess(const std::string &message); // 显示成功提示
-    void showError(const std::string &message); // 显示错误提示
-    void showPrompt(const std::string &message); // 显示普通提示文本
-    void showContent(const std::string &content);
-    void pause(); // 暂停等待（按任意键继续）
+    static void showTitle(const std::string &title); // 显示菜单标题
+    static void clearInputBuffer(); // 辅助函数，用于清空cin可能带来的负面效果
+    static void clearScreen(); // 用于清空屏幕
+    static void showSuccess(const std::string &message); // 显示成功提示
+    static void showError(const std::string &message); // 显示错误提示
+    static void showPrompt(const std::string &message); // 显示普通提示文本
+    static void showContent(const std::string &content);
+    static void pause(); // 暂停等待（按任意键继续）
     // 输入类：
-    std::string getDigitInput(const std::string &prompt, int minlen = 0,
-                              int maxlen = 0); // 获取纯数字输入（如学号）
-    std::string getNonEmptyInput(const std::string &prompt); // 获取非空字符串输入（如姓名，学号）
-    bool isAllDigit(const std::string &str);
+    static std::string getDigitInput(const std::string &prompt, int minlen = 0,
+                                     int maxlen = 0); // 获取纯数字输入（如学号）
+    static std::string getNonEmptyInput(const std::string &prompt); // 获取非空字符串输入（如姓名，学号）
+    static bool isAllDigit(const std::string &str);
 
-    bool confirmOperation(const std::string &prompt); // 确认操作
+    static bool confirmOperation(const std::string &prompt); // 确认操作
 };
 // 目前我只把自己能想到的写上去了，以后要是有用的再加
 // 这个其中最常用的是 void showPrompt(const string& message);

@@ -1,15 +1,26 @@
 {
-  "user": [
-    {
-      "dormitory": {
-        "bed_number": "4",
-        "building_number": "1",
-        "room_number": "312"
-      },
-      "email": "123@qq.com",
-      "id": "123",
-      "name": "123",
-      "password": 10676640704186402002
-    }
-  ]
+    "user": [
+        {
+            "dormitory": {
+                "bed_number": "4",
+                "building_number": "1",
+                "room_number": "312"
+            },
+            "email": "123@qq.com",
+            "id": "202508010613",
+            "name": "123",
+            "password": 10676640704186402002
+        },
+        {
+            "dormitory": {
+                "bed_number": "",
+                "building_number": "",
+                "room_number": ""
+            },
+            "email": "",
+            "id": "202508010612",
+            "name": "",
+            "password": "222"
+        }
+    ]
 }

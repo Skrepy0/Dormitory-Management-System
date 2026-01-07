@@ -1,35 +1,43 @@
 ﻿#include "../../../header/screen/Login/UserLogInInputMenu.h"
+#include "../../../header/data/UserData.h"
 #include <fstream>
+#include<iostream>
+#include <direct.h>
 
-bool UserLoginInputMenu::verifyCredentials(const std::string& studentId, const std::string& password) {
-    std::ifstream file("../../../data/data/UserData.json");
-    nlohmann::json jsonData;
-    file >> jsonData;
-
-    for (const auto& user : jsonData["user"]) {
-        std::cout << "读取到的id：" << user["id"] << "，类型：" << user["id"].type_name() << std::endl;
-        std::cout << "读取到的password：" << user["password"] << "，类型：" << user["password"].type_name() << std::endl;
-        std::cout << "输入的password：" << password << "，类型：字符串" << std::endl;
-
-        if (user["id"] == studentId && user["password"] == password) {
-            return true;
+bool UserLoginInputMenu::verifyCredentials(const std::string &studentId, const std::string &password) {
+    try {
+        long long userIndex = UserData::findUserById(studentId);
+        if (userIndex == -1) {
+            return false;
         }
+
+
+        nlohmann::json allUserData = UserData::readJson();
+
+
+        const auto &user = allUserData["user"][userIndex];
+
+
+        return user["password"] == password;
+
+    } catch (const std::exception &e) {
+
+        std::cerr << "登录验证失败：" << e.what() << std::endl;
+        return false;
     }
-    return false;
 }
 
 void UserLoginInputMenu::showUserLogin() {
     clearScreen();
-    showTitle("screen.login.student.title"); // 读取配置Key显示标题
-
+    showTitle("screen.login.student.title");
+    std::cout << std::endl;
     std::string studentId;
     std::string idPromptKey = "screen.login.student.input.id.prompt";
-
     bool loginSuccess = this->login(studentId, idPromptKey);
 
     clearScreen();
     if (loginSuccess) {
-        showSuccess("screen.login.student.success" );
+        showSuccess("screen.login.student.success");
         pause();
     } else {
         showError("screen.login.student.fail");

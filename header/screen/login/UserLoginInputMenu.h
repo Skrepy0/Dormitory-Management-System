@@ -2,6 +2,7 @@
 #include "../../../header/screen/Login/LoginInputMenu.h"
 #include <string>
 
+
 class UserLoginInputMenu : public LoginInputMenu
 {
 public:

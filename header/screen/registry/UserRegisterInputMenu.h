@@ -1,8 +1,15 @@
-//
-// Created by 27350 on 2026/1/7.
-//
+#pragma once
+#include "../InputMenu.h"
+#include <string>
 
-#ifndef HNU_DMS_USERREGISTERINPUTMENU_H
-#define HNU_DMS_USERREGISTERINPUTMENU_H
+class UserRegisterInputMenu : public InputMenu {
+public:
 
-#endif //HNU_DMS_USERREGISTERINPUTMENU_H
+    static void showUserRegisterUI();
+
+protected:
+
+    static bool isIdExists(const std::string& userId) ;
+
+    static bool saveNewUser(const std::string& userId, const std::string& password);
+};

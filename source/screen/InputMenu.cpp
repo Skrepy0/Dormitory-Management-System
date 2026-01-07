@@ -148,8 +148,8 @@ bool InputMenu::confirmOperation(const std::string &prompt) {
             return false;
         }
         Text t("screen.InputMenu.confirmOperation.error");
-        Message message(t.getContent());
-        message.printContent();
+        Message message2(t.getContent());
+        message2.printContent();
         showContent(prompt);
         Text t1("screen.InputMenu.confirmOperation.choice");
         Message message1(t1.getContent());
