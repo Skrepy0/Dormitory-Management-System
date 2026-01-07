@@ -13,9 +13,8 @@ add_executable(hnu_dms main.cpp
         source/data/Accommodations.cpp
         source/data/BuildingData.cpp
         source/data/UserData.cpp
-        source/screen/login/AdministratorLogInInputMenu.cpp
-        source/screen/login/UserLogInInputMenu.cpp
-        source/screen/login/LoginInputMenu.cpp
+        source/screen/login/AdministratorLogInMenu.cpp
+        source/screen/login/UserLogInMenu.cpp
         source/screen/operation/AdministratorOptions.cpp
         source/screen/operation/UserOptions.cpp
         source/screen/registry/UserRegistryMenu.cpp
@@ -32,7 +31,7 @@ add_executable(hnu_dms main.cpp
         source/screen/operation/operations/administrator/AdminAuditSubMenu.cpp
         source/screen/operation/operations/user/UserMaintenance.cpp
         source/screen/operation/AdministratorOperationMenu.cpp
-        source/screen/login/LoginInputMenu.cpp
+        source/screen/login/LoginScreen.cpp
         source/screen/operation/UserOperationMenu.cpp
         source/screen/operation/operations/administrator/DormitoryManageMenu.cpp
         source/screen/operation/operations/user/UserMaintenanceSelectMenu.cpp
@@ -40,12 +39,4 @@ add_executable(hnu_dms main.cpp
         source/data/HashHelper.cpp
         header/data/HashHelper.h
         header/data/DataHelper.h
-        header/screen/registry/RegisterInputMenu.h
-        header/screen/registry/UserRegisterInputMenu.h
-        header/screen/registry/AdministratorRegisterInputMenu.h
-        source/screen/registry/RegisterInputMenu.cpp
-        source/screen/registry/UserRegisterInputMenu.cpp
-        source/screen/registry/AdministratorRegisterInputMenu.cpp
-        header/screen/operation/operations/administrator/AdminDormitoryManagement.h
-        source/screen/operation/operations/administrator/AdminDormitoryManagement.cpp
 )

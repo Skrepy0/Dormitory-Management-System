@@ -37,6 +37,10 @@ public:
     void eraseChar(int index); // 删除content中指定位置的字符
     void eraseChar(int begin, int end); // 删除content中指定范围的字符
     void replaceChar(int index, char c); // 替换content中指定位置的字符
+
+    Text append(Text text);
+
+    static Text intToText(int num);
 };
 
 /*  使用参考：

@@ -147,5 +147,15 @@
   "screen.operation.operations.UserMaintenance.repair.confirmation": "$A您是否确认报修$r",
   "screen.operation.operations.UserMaintenance.repair.success": "$k报修成功$r",
   "screen.operation.operations.UserMaintenance.repair.error": "$m报修失败$r",
-  "password": "202508010613"
+  "password": "202508010613",
+
+  "operation.user.dormitory_info.title": "\t$y$l宿舍信息 \n$r",
+  "operation.user.dormitory_info.info.welcome_front": "$w尊敬的$b$l",
+  "operation.user.dormitory_info.info.welcome_back": "$r$w同学您好，下面是您的宿舍信息！$r\n\n",
+  "operation.user.dormitory_info.info.building_name": "$g宿舍楼名：$r",
+  "operation.user.dormitory_info.info.building_number": "$g宿舍楼号：$r",
+  "operation.user.dormitory_info.info.floor": "$g楼层：$r",
+  "operation.user.dormitory_info.info.room_number": "$g房间号：$r",
+  "operation.user.dormitory_info.info.bed_number": "$g床号：$r",
+  "operation.user.dormitory_info.info.vacant_bed": "$g空床数量：$r"
 }

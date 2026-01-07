@@ -86,6 +86,11 @@ void Text::eraseChar(int begin, int end) {
 
 void Text::replaceChar(int index, char c) { content[index] = c; }
 
+Text Text::append(Text text) { return of(this->getContent() + text.getContent()); }
+
+Text Text::intToText(int num) { return of(std::to_string(num)); }
+
+
 void Text::translate() {
     auto data = readFromJson();
     if (!path.empty() && data.contains(path)) {

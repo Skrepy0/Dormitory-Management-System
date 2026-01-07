@@ -2,25 +2,17 @@
     "user": [
         {
             "dormitory": {
-                "bed_number": "4",
-                "building_number": "1",
-                "room_number": "312"
+                "bed_number": 4,
+                "building_name": "天马3区",
+                "building_number": "11",
+                "floor": "3",
+                "room_number": "312",
+                "vacant_bed": 0
             },
-            "email": "123@qq.com",
+            "email": "123456@qq.com",
             "id": "202508010613",
-            "name": "123",
+            "name": "刘兴康",
             "password": 10676640704186402002
-        },
-        {
-            "dormitory": {
-                "bed_number": "",
-                "building_number": "",
-                "room_number": ""
-            },
-            "email": "",
-            "id": "202508010612",
-            "name": "",
-            "password": "222"
         }
     ]
 }

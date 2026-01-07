@@ -1,24 +1,23 @@
 ﻿#pragma once
 #include <iostream>
 #include "../../source/data/library/json.hpp"
+#include "basic/Dormitory.h"
+
 class UserData {
 private:
     nlohmann::json data;
     std::string name;
     std::string password;
     std::string email;
-    std::string building_number;
-    std::string room_number;
-    std::string bed_number;
+    Dormitory dormitory;
     std::string id;
     void init();
     void addToData();
     static bool compareDormitory(nlohmann::json dormitory_1, nlohmann::json dormitory_2);
 
 public:
-    UserData();
-    UserData(std::string name, std::string id, std::string password, std::string email, std::string building_number,
-             std::string room_number, std::string bed_number);
+    UserData() = delete;
+    UserData(std::string name, std::string id, std::string password, std::string email, Dormitory dormitory);
 
     static void addFromJson(nlohmann::json userData); // 通过json直接添加用户数据
     nlohmann::json getData(); // 获取对象的数据
