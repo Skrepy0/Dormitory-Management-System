@@ -3,6 +3,8 @@
 #include <fstream>
 #include <iostream>
 #include "../../../header/data/UserData.h"
+#include "../../../header/screen/SelectMenu.h"
+#include "../../../header/screen/operation/UserOperationMenu.h"
 
 bool UserLoginInputMenu::verifyCredentials(const std::string &studentId, const std::string &password) {
     try {
@@ -39,6 +41,10 @@ void UserLoginInputMenu::showUserLogin() {
     if (loginSuccess) {
         showSuccess("screen.login.student.success");
         pause();
+        system("cls");
+        SelectMenu::hideCursor();
+        UserOperationMenu menu;
+        menu.loop();
     } else {
         showError("screen.login.student.fail");
         pause();

@@ -22,4 +22,8 @@
 #include "header/screen/registry/UserRegisterInputMenu.h"
 
 
-int main() { return 0; }
+int main() {
+    LoginSelectMenu loginSelectMenu;
+    loginSelectMenu.loop();
+    return 0;
+}

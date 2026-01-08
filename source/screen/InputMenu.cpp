@@ -77,7 +77,7 @@ void InputMenu::pause() {
     Message message(t.getContent());
     message.printContent();
     clearInputBuffer();
-    std::cin.get();
+    // std::cin.get();
 }
 
 

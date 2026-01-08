@@ -1,6 +1,7 @@
 ﻿{
   "login.title": "\t$y$lHNU学生宿舍管理系统\n\n$r",
   "login.option.user": "✏\uFE0F用户登录\n$r",
+  "login.option.registry": "📝学生注册\n$r",
   "login.option.administrator": "\uD83D\uDD27管理员登录\n$r",
   "login.option.set_language": "\uD83C\uDF89语言\n$r",
   "operation.administrator.title": "\t$y$l管理员操作页面\n\n$r",
