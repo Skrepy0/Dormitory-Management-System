@@ -8,6 +8,7 @@
 #include "../../source/data/library/json.hpp"
 #include "Accommodations.h"
 #include "AdminData.h"
+#include "StayLog.h"
 #include "UserData.h"
 
 class DataHelper {
@@ -36,4 +37,19 @@ public:
     static nlohmann::json getDormitory(const nlohmann::json &userData) { return userData["dormitory"]; }
 
     static nlohmann::json getDormitoryBuildingList() { return Accommodations::readFromJson()["dormitory_building"]; }
+
+    static int findStayLogByHash(const std::string &type, const std::string &hash) {
+        nlohmann::json json;
+        if (type == "check-in") {
+            json = StayLog::getCheckInRecords();
+        } else if (type == "check-out") {
+            json = StayLog::getCheckOutRecords();
+        }
+        for (int i = 0; i < json.size(); i++) {
+            if (json[i]["hash"] == hash) {
+                return i;
+            }
+        }
+        return -1;
+    }
 };

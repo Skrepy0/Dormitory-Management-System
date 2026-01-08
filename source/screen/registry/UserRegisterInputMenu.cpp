@@ -1,9 +1,9 @@
 #include "../../../header/screen/registry/UserRegisterInputMenu.h"
 // 假设UserData.h位于header/data目录下，根据你的项目路径修改
-#include "../../../header/data/UserData.h"
 #include <fstream>
-#include <iostream>
 #include <iomanip>
+#include <iostream>
+#include "../../../header/data/UserData.h"
 
 
 void UserRegisterInputMenu::showUserRegisterUI() {

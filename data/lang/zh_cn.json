@@ -44,7 +44,7 @@
   "screen.InputMenu.showSuccess": "✅ ",
   "screen.InputMenu.showError": "❌ ",
   "screen.InputMenu.showError": "$8 操作错误！$r",
-  "screen.InputMenu.pause": "$m⏸️\\n按任意键继续...$r",
+  "screen.InputMenu.pause": "$m⏸️\n按任意键继续...$r",
   "screen.login.student.title": "$t$y🎓 学生登录界面$r",
   "screen.login.student.input.id.prompt": "$D🆔 请输入你的学生ID： $r",
   "screen.login.student.success": "$a$l 登录成功！欢迎你$r",

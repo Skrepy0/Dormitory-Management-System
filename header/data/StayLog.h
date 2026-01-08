@@ -4,16 +4,16 @@
 #include "basic/Time.h"
 class StayLog {
     // 住、退宿记录
-    nlohmann::json data; // 总数据
+    static nlohmann::json data; // 总数据
     std::string type; // 形式 "check-in" or "check-out"
-    Time time; // 办理时间
+    Time time{}; // 办理时间
     std::string id; // 申请人id
     std::string name; // 处理人名字
     nlohmann::json dormitoryData; // 申请人的宿舍详细信息
-    nlohmann::json checkInRecords; // 入住列表
-    nlohmann::json checkOutRecords; // 退宿列表
+    static nlohmann::json checkInRecords; // 入住列表
+    static nlohmann::json checkOutRecords; // 退宿列表
     std::string recordId; // 该记录的id值
-    void init();
+    static void init();
 
     void addToData();
 
@@ -22,9 +22,7 @@ public:
 
     StayLog(std::string type, Time time, std::string id, std::string name, nlohmann::json dormitoryData);
 
-    explicit StayLog(nlohmann::json data);
-
-    nlohmann::json getData();
+    static nlohmann::json getData();
 
     Time getTime();
 
@@ -32,8 +30,8 @@ public:
 
     std::string getName(); // 获取处理人名字
     nlohmann::json getDormitoryData(); // 获取宿舍信息
-    nlohmann::json getCheckInRecords(); // 获取入宿列表
-    nlohmann::json getCheckOutRecords(); // 获取退宿列表
+    static nlohmann::json getCheckInRecords(); // 获取入宿列表
+    static nlohmann::json getCheckOutRecords(); // 获取退宿列表
 
     bool writeToFile(); // 将该对象的数据存入文件
     static nlohmann::json readJson(); // 读取json并返回数据
@@ -43,8 +41,8 @@ public:
     void setId(std::string id); // 获取申请人名字
     void setName(std::string name); // 获取处理人名字
     void setDormitoryData(nlohmann::json dormitoryData); // 设置宿舍信息
-    void addCheckInRecords(nlohmann::json checkInRecord); // 添加入宿记录
-    void addCheckOutRecords(nlohmann::json checkOutRecord); // 添加退宿记录
+    static void addCheckInRecords(nlohmann::json checkInRecord); // 添加入宿记录
+    static void addCheckOutRecords(nlohmann::json checkOutRecord); // 添加退宿记录
 };
 
 /*
@@ -60,8 +58,7 @@ public:
     checkIn["initiator"] = "456";
     checkIn["dormitory"] = data;
     StayLog stayLog;
-    stayLog.addCheckOutRecords(checkIn);
-    stayLog.writeToFile();
+    StayLog::addCheckOutRecords(checkIn);
     std::cout << checkIn.dump(4) << std::endl;
  */
 

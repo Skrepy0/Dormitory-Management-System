@@ -13,6 +13,28 @@
             "id": "202508010613",
             "name": "刘兴康",
             "password": 10676640704186402002
+        },
+        {
+            "dormitory": {
+                "bed_number": "",
+                "building_number": "",
+                "room_number": ""
+            },
+            "email": "",
+            "id": "202508010612",
+            "name": "",
+            "password": "123456"
+        },
+        {
+            "dormitory": {
+                "bed_number": "",
+                "building_number": "",
+                "room_number": ""
+            },
+            "email": "",
+            "id": "123456789123",
+            "name": "",
+            "password": "123456"
         }
     ]
 }

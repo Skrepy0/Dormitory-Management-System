@@ -88,8 +88,8 @@ std::string ChangePassword::changePassword() {
         }
 
         if (newPassword == confirmPwd) {
-            bool isConfirm = confirmOperation(
-                    "screen.operation.operations.UserChangePassword.new_password.confirmation");
+            bool isConfirm =
+                    confirmOperation("screen.operation.operations.UserChangePassword.new_password.confirmation");
             if (isConfirm) {
 
                 showSuccess("screen.operation.operations.UserChangePassword.new_password.success");

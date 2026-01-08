@@ -4,13 +4,17 @@
 #include <fstream>
 #include <utility>
 
+// 定义静态成员变量
+nlohmann::json StayLog::data;
+nlohmann::json StayLog::checkInRecords;
+nlohmann::json StayLog::checkOutRecords;
+
 namespace {
-    std::string FILE_PATH;
+    std::string FILE_PATH = R"(..\data\data\StayLog.json)";
 }
 
 void StayLog::init() {
-    FILE_PATH = R"(..\data\data\StayLog.json)";
-    this->data = readJson();
+    data = readJson();
     checkInRecords = data["check-in"];
     checkOutRecords = data["check-out"];
 }
@@ -48,9 +52,10 @@ StayLog::StayLog(std::string type, Time time, std::string id, std::string name, 
     writeToFile();
 }
 
-StayLog::StayLog(nlohmann::json data) : data(std::move(data)) {}
-
-nlohmann::json StayLog::getData() { return data; }
+nlohmann::json StayLog::getData() {
+    init();
+    return data;
+}
 
 Time StayLog::getTime() { return this->time; }
 
@@ -60,9 +65,15 @@ std::string StayLog::getName() { return this->name; }
 
 nlohmann::json StayLog::getDormitoryData() { return dormitoryData; }
 
-nlohmann::json StayLog::getCheckInRecords() { return checkInRecords; }
+nlohmann::json StayLog::getCheckInRecords() {
+    init();
+    return checkInRecords;
+}
 
-nlohmann::json StayLog::getCheckOutRecords() { return checkOutRecords; }
+nlohmann::json StayLog::getCheckOutRecords() {
+    init();
+    return checkOutRecords;
+}
 
 bool StayLog::writeToFile() {
     addToData();
@@ -93,11 +104,28 @@ void StayLog::setName(std::string name) { this->name = name; }
 void StayLog::setDormitoryData(nlohmann::json dormitoryData) { this->dormitoryData = dormitoryData; }
 
 void StayLog::addCheckInRecords(nlohmann::json checkInRecord) {
+    init();
     checkInRecord["hash"] = HashHelper::getHashFromCurrentTime();
     checkInRecords.push_back(checkInRecord);
+    data["check-in"] = checkInRecords;
+    data["check-out"] = checkOutRecords;
+    std::ofstream out_file(FILE_PATH);
+    if (!out_file.is_open()) {
+        throw("Error opening file");
+    }
+    out_file << data.dump(4);
+    out_file.close();
 }
 
 void StayLog::addCheckOutRecords(nlohmann::json checkOutRecord) {
+    init();
     checkOutRecord["hash"] = HashHelper::getHashFromCurrentTime();
     checkOutRecords.push_back(checkOutRecord);
+    data["check-in"] = checkInRecords;
+    data["check-out"] = checkOutRecords;
+    std::ofstream out_file(FILE_PATH);
+    if (!out_file.is_open()) {
+        throw("Error opening file");
+    }
+    out_file << data.dump(4);
 }

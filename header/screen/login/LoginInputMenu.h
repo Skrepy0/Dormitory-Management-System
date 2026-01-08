@@ -8,6 +8,7 @@ class LoginInputMenu : public InputMenu {
 public:
     bool login(std::string &key, std::string &prompt);
     virtual ~LoginInputMenu() = default;
+
 protected:
     virtual bool verifyCredentials(const std::string &studentId, const std::string &password) = 0;
 };

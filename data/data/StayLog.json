@@ -1,45 +1,85 @@
 {
-  "check-in": [
-    {
-      "dormitory": {
-        "bed_number": "4",
-        "building_name": "B",
-        "building_number": "11",
-        "reason": "入学",
-        "room_number": "312"
-      },
-      "handler": "123",
-      "hash": "fd3647bb4d16f5ed",
-      "initiator": "456",
-      "time": null
-    },
-    {
-      "dormitory": {
-        "bed_number": "4",
-        "building_name": "B",
-        "building_number": "11",
-        "reason": "入学",
-        "room_number": "312"
-      },
-      "handler": "123",
-      "hash": "7f35121b80656fbf",
-      "initiator": "456",
-      "time": null
-    }
-  ],
-  "check-out": [
-    {
-      "dormitory": {
-        "bed_number": "4",
-        "building_name": "B",
-        "building_number": "11",
-        "reason": "入学",
-        "room_number": "312"
-      },
-      "handler": "123",
-      "hash": "15c3ed2f5a74ced9",
-      "initiator": "456",
-      "time": null
-    }
-  ]
+    "check-in": [
+        {
+            "dormitory": {
+                "bed_number": "4",
+                "building_name": "B",
+                "building_number": "11",
+                "reason": "入学",
+                "room_number": "312"
+            },
+            "handler": "123",
+            "hash": "fd3647bb4d16f5ed",
+            "initiator": "456",
+            "time": null
+        },
+        {
+            "dormitory": {
+                "bed_number": "4",
+                "building_name": "B",
+                "building_number": "11",
+                "reason": "入学",
+                "room_number": "312"
+            },
+            "handler": "123",
+            "hash": "7f35121b80656fbf",
+            "initiator": "456",
+            "time": null
+        }
+    ],
+    "check-out": [
+        {
+            "dormitory": {
+                "bed_number": "4",
+                "building_name": "B",
+                "building_number": "11",
+                "reason": "入学",
+                "room_number": "312"
+            },
+            "handler": "123",
+            "hash": "15c3ed2f5a74ced9",
+            "initiator": "456",
+            "time": null
+        },
+        {
+            "dormitory": {
+                "bed_number": "4",
+                "building_name": "B",
+                "building_number": "11",
+                "reason": "入学",
+                "room_number": "312"
+            },
+            "handler": "123",
+            "hash": "5988e7c5188c8fcb",
+            "initiator": "456",
+            "time": {
+                "day": 0,
+                "hour": 0,
+                "minute": 0,
+                "month": 0,
+                "second": 0,
+                "year": 0
+            }
+        },
+        {
+            "dormitory": {
+                "bed_number": "4",
+                "building_name": "B",
+                "building_number": "11",
+                "reason": "入学",
+                "room_number": "312"
+            },
+            "handler": "123",
+            "hash": "1a5c46e529b2e38b",
+            "initiator": "456",
+            "time": {
+                "day": 0,
+                "hour": 0,
+                "minute": 0,
+                "month": 0,
+                "second": 0,
+                "year": 0
+            }
+        }
+    ]
 }

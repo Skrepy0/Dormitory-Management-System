@@ -39,8 +39,8 @@ void AdminDormitoryManagement::inputAddDorm() {
         json newDorm;
         newDorm["room_number"] = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.room_number");
         newDorm["floor"] = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.floor");
-        newDorm["vacant_bed"] = std::stoi(
-                getNonEmptyInput("operation.administrator.dormitory_manage.prompt.vacant_bed"));
+        newDorm["vacant_bed"] =
+                std::stoi(getNonEmptyInput("operation.administrator.dormitory_manage.prompt.vacant_bed"));
         newDorm["maintenances"] = json::array(); // 初始化维修记录
         dormList.push_back(newDorm);
     }

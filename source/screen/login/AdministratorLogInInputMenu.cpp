@@ -2,11 +2,11 @@
 #include <fstream>
 #include "../../../header/screen/InputMenu.h"
 
-bool AdministratorLoginInputMenu::verifyCredentials(const std::string& adminId, const std::string& password) {
+bool AdministratorLoginInputMenu::verifyCredentials(const std::string &adminId, const std::string &password) {
     std::string filePath = "data/data/Admin.json";
     nlohmann::json jsonData;
 
-    for (const auto& administrator : jsonData["administrator"]) {
+    for (const auto &administrator: jsonData["administrator"]) {
         if (administrator["id"] == adminId && administrator["password"] == password) {
             return true; // 验证成功
         }
@@ -25,7 +25,7 @@ void AdministratorLoginInputMenu::showAdministratorLoginUI() {
 
     clearScreen();
     if (loginSuccess) {
-        showSuccess("screen.login.administrator.success" ); // 配置Key："登录成功！欢迎你，管理员ID："
+        showSuccess("screen.login.administrator.success"); // 配置Key："登录成功！欢迎你，管理员ID："
         pause();
 
     } else {
