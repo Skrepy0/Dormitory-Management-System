@@ -23,7 +23,6 @@
 
 
 int main() {
-    LoginSelectMenu loginSelectMenu;
-    loginSelectMenu.loop();
+    AdminData admin("admin", "admin");
     return 0;
 }

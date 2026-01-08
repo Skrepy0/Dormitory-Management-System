@@ -2,6 +2,8 @@
 #include <direct.h>
 #include <fstream>
 #include <iostream>
+
+#include "../../../header/data/HashHelper.h"
 #include "../../../header/data/UserData.h"
 #include "../../../header/screen/SelectMenu.h"
 #include "../../../header/screen/operation/UserOperationMenu.h"
@@ -20,7 +22,7 @@ bool UserLoginInputMenu::verifyCredentials(const std::string &studentId, const s
         const auto &user = allUserData["user"][userIndex];
 
 
-        return user["password"] == password;
+        return user["password"] == HashHelper::getHash(password);
 
     } catch (const std::exception &e) {
 

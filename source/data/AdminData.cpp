@@ -8,6 +8,8 @@
 #include <fstream>
 #include <utility>
 
+#include "../../header/data/HashHelper.h"
+
 // 初始化静态成员变量
 nlohmann::json AdminData::data;
 // 初始化静态哈希表
@@ -42,7 +44,7 @@ void AdminData::initFilePath() {
 void AdminData::updateData() {
     data = getAdminJsonData();
     admin["id"] = id;
-    admin["password"] = password;
+    admin["password"] = HashHelper::getHash(password);
     data["admin"].push_back(admin);
 
     // 更新哈希表

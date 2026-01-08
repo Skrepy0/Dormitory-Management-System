@@ -47,4 +47,5 @@ add_executable(hnu_dms main.cpp
         source/screen/registry/RegisterInputMenu.cpp
         source/screen/registry/UserRegistryMenu.cpp
         source/screen/registry/AdministratorRegisterInputMenu.cpp
+        source/data/AdminData.cpp
 )
