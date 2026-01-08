@@ -4,7 +4,7 @@
 
 class UserMaintenance : public InputMenu {
 private:
-    Time reportTime ; // 自动记录的报修时间
+    Time reportTime; // 自动记录的报修时间
     Time repairTime; // 维修时间（初始为空）
     std::string sponsor; // 报修人（用户输入）
     std::string description; // 报修描述（用户输入）
@@ -17,5 +17,4 @@ public:
     static std::string getCurrentTime();
     void submitRepair();
     void submitValuation();
-}
-;
+};

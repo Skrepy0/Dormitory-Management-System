@@ -11,14 +11,13 @@
 #include "../../../../../header/data/UserData.h"
 #include "../../../../../header/data/basic/Maintenance.h"
 #include "../../../../../header/data/basic/Time.h"
-void init() {
-
-}
+void init() {}
 void UserMaintenance::upLoadNewMaintenance() {
     Maintenance maintenance(reportTime, repairTime, sponsor, description, repairer, false, "",
                             HashHelper::getHashFromCurrentTime());
-    nlohmann::json userData = DataHelper::getUser("123");// TODO 换成user-id
-    long long buildingIndex = Accommodations::findBuildingByNumber(DataHelper::getDormitory(userData)["building_number"]);
+    nlohmann::json userData = DataHelper::getUser("123"); // TODO 换成user-id
+    long long buildingIndex =
+            Accommodations::findBuildingByNumber(DataHelper::getDormitory(userData)["building_number"]);
     nlohmann::json buildingData = DataHelper::getDormitoryBuildingList()[buildingIndex];
     for (auto &room: buildingData["dormitories"]) {
         if (room["room_number"] == userData["dormitory"]["room_number"]) {
@@ -103,13 +102,9 @@ void UserMaintenance::submitValuation() {
         return;
     }
 
-    std::string evalContent = getNonEmptyInput(
-        "screen.operation.operations.UserMaintenance.valuation.prompt"
-    );
+    std::string evalContent = getNonEmptyInput("screen.operation.operations.UserMaintenance.valuation.prompt");
 
-    bool isConfirm = confirmOperation(
-        "screen.operation.operations.UserMaintenance.valuation.confirm"
-    );
+    bool isConfirm = confirmOperation("screen.operation.operations.UserMaintenance.valuation.confirm");
 
     if (isConfirm) {
 
