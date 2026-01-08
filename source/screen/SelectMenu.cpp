@@ -150,13 +150,7 @@ void SelectMenu::showCursor() {
     SetConsoleCursorInfo(consoleHandle, &info);
 }
 
-void SelectMenu::onSelection() {
-    void (*func)();
-    func = optionList[pointer].getSelectedFunction();
-    if (func != nullptr) {
-        func();
-    }
-}
+void SelectMenu::onSelection() { optionList[pointer].executeSelectedFunction(); }
 
 // 退出系统
 void SelectMenu::exitSystem() { exit(0); }

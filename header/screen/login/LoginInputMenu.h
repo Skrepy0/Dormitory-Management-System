@@ -6,6 +6,7 @@
 #include "../InputMenu.h"
 class LoginInputMenu : public InputMenu {
 public:
+    static nlohmann::json data;
     bool login(std::string &key, std::string &prompt);
     virtual ~LoginInputMenu() = default;
 

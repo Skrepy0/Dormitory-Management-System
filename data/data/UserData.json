@@ -46,6 +46,17 @@
             "id": "114514191981",
             "name": "",
             "password": "114514"
+        },
+        {
+            "dormitory": {
+                "bed_number": "",
+                "building_number": "",
+                "room_number": ""
+            },
+            "email": "",
+            "id": "000000000000",
+            "name": "",
+            "password": "000"
         }
     ]
 }

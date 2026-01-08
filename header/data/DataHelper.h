@@ -4,6 +4,7 @@
 #pragma once
 #include <direct.h>
 #include <fstream>
+#include <windows.h>
 
 #include "../../source/data/library/json.hpp"
 #include "Accommodations.h"
@@ -51,5 +52,40 @@ public:
             }
         }
         return -1;
+    }
+
+    static std::vector<std::string> getFileListInDirectory(const std::string &directory) {
+        std::vector<std::string> files;
+        std::string search_path = directory + "/*.*";
+        WIN32_FIND_DATA fd;
+        HANDLE hFind = FindFirstFile(search_path.c_str(), &fd);
+
+        if (hFind != INVALID_HANDLE_VALUE) {
+            do {
+                // 读取文件名
+                std::string name = fd.cFileName;
+
+                // 过滤 . 和 ..
+                if (name != "." && name != "..") {
+                    // dwFileAttributes 属性位判断是否为目录
+                    if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+                        files.push_back(name);
+                    }
+                }
+            } while (FindNextFile(hFind, &fd));
+            FindClose(hFind);
+        }
+
+        return files;
+    }
+    static nlohmann::json getLanguageList() {
+        std::ifstream in_file(R"(..\data\lang\language.json)");
+        if (!in_file.is_open()) {
+            return nlohmann::json{};
+        }
+        nlohmann::json langData;
+        in_file >> langData;
+        in_file.close();
+        return langData["languages"];
     }
 };
