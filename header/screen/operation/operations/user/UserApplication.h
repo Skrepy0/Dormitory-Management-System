@@ -1,7 +1,7 @@
 #pragma once
+#include "../../../../../header/data/HashHelper.h"
+#include "../../../../../header/data/StayLog.h"
 #include "../../../InputMenu.h"
-#include"../../../../../header/data/StayLog.h"
-#include"../../../../../header/data/HashHelper.h"
 using json = nlohmann::json;
 
 class UserApplication : public InputMenu {

@@ -5,16 +5,12 @@
 #include <iostream>
 #include "../../../header/data/UserData.h"
 
-bool UserRegisterInputMenu::isIdExists(const std::string& userId) {
+bool UserRegisterInputMenu::isIdExists(const std::string &userId) {
     long long userIndex = UserData::findUserById(userId);
     return userIndex != -1;
 }
-bool UserRegisterInputMenu::saveNewUser(
-    const std::string& userId,
-    const std::string& name,
-    const std::string& email,
-    const std::string& password
-) {
+bool UserRegisterInputMenu::saveNewUser(const std::string &userId, const std::string &name, const std::string &email,
+                                        const std::string &password) {
     try {
         nlohmann::json newUserJson;
         newUserJson["id"] = userId;
@@ -35,27 +31,14 @@ bool UserRegisterInputMenu::saveNewUser(
         UserData::addFromJson(newUserJson);
 
         nlohmann::json allUserData = UserData::readJson();
-        UserData userInstance(
-    "",
-    "",
-    "",
-    "",
-    Dormitory(
-        "",
-        "",
-        "",
-        "",
-        0,
-        0
-    )
-);
+        UserData userInstance("", "", "", "", Dormitory("", "", "", "", 0, 0));
 
         userInstance.setData(allUserData);
 
         return userInstance.writeToFile();
 
 
-    } catch (const std::exception& e) {
+    } catch (const std::exception &e) {
         std::cerr << "保存用户失败：" << e.what() << std::endl;
         return false;
     }

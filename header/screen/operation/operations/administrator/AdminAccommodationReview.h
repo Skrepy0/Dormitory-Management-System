@@ -1,11 +1,11 @@
 #ifndef ADMINACCOMMODATIONREVIEW_H
 #define ADMINACCOMMODATIONREVIEW_H
 
-#include "../../../InputMenu.h"
-#include "../../../../data/StayLog.h"
-#include "Time.h"
-#include <vector>
 #include <string>
+#include <vector>
+#include "../../../../data/StayLog.h"
+#include "../../../InputMenu.h"
+#include "Time.h"
 
 using json = nlohmann::json;
 
@@ -20,16 +20,16 @@ private:
     std::vector<json> loadPendingApplications();
 
     // 辅助：让管理员选择待审核的申请
-    json selectPendingApplication(const std::vector<json>& pendingApps);
+    json selectPendingApplication(const std::vector<json> &pendingApps);
 
     // 辅助：显示申请详情
-    void showApplicationDetail(const json& app);
+    void showApplicationDetail(const json &app);
 
     // 辅助：处理“审核通过”的申请（更新房间状态+写入StayLog）
-    void handleApprovedApplication(const json& app);
+    void handleApprovedApplication(const json &app);
 
     // 辅助：更新宿舍房间的空闲床位状态
-    void updateDormVacantBed(const json& dormInfo, bool isCheckIn);
+    void updateDormVacantBed(const json &dormInfo, bool isCheckIn);
 };
 
 #endif // ADMINACCOMMODATIONREVIEW_H

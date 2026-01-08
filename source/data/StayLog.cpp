@@ -52,6 +52,11 @@ StayLog::StayLog(std::string type, Time time, std::string id, std::string name, 
     writeToFile();
 }
 
+StayLog::StayLog(nlohmann::json data) {
+    checkInRecords = data["check-in"];
+    checkOutRecords = data["check-out"];
+}
+
 nlohmann::json StayLog::getData() {
     init();
     return data;

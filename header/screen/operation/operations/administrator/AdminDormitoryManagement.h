@@ -1,13 +1,13 @@
 #pragma once
-#include "../../../InputMenu.h"
+#include <string>
 #include "../../../../data/Accommodations.h"
 #include "../../../../data/BuildingData.h"
 #include "../../../../data/basic/Dormitory.h"
-#include <string>
+#include "../../../InputMenu.h"
 
 class AdminDormitoryManagement : public InputMenu {
 private:
-    static Accommodations& getAccommodations();
+    static Accommodations &getAccommodations();
 
     static bool isBuildingOccupied(const std::string &buildingNumber);
 
@@ -20,9 +20,8 @@ public:
     static void inputDeleteBuilding();
     // 4. 删除宿舍房间
     static void inputDeleteDormRoom();
-    //5. 更新宿舍楼信息
+    // 5. 更新宿舍楼信息
     static void inputUpdateBuildingInfo(Accommodations &acc);
-    //6. 更新宿舍房间信息
+    // 6. 更新宿舍房间信息
     static void inputUpdateRoomInfo(Accommodations &acc);
-
 };

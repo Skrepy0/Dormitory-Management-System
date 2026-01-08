@@ -1,7 +1,7 @@
 #include "../../../../../header/screen/operation/operations/user/UserApplication.h"
+#include <stdexcept>
 #include "../../../../../header/data/info/Message.h"
 #include "../../../../../header/data/info/Text.h"
-#include <stdexcept>
 // 获取申请理由（非空+长度限制）
 std::string UserApplication::getDormApplyReason() {
     while (true) {
@@ -27,18 +27,16 @@ void UserApplication::inputCheckInApplication() {
     showTitle("screen.operation.operations.UserApplication.user.accommodation.checkin.title");
     std::cout << std::endl;
     try {
-        std::string userId = getDigitInput(
-                "screen.operation.operations.UserApplication.user.accommodation.prompt.user_id",
-                1, 12
-                );
-        std::string userName = getNonEmptyInput(
-                "screen.operation.operations.UserApplication.user.accommodation.prompt.user_name");
+        std::string userId =
+                getDigitInput("screen.operation.operations.UserApplication.user.accommodation.prompt.user_id", 1, 12);
+        std::string userName =
+                getNonEmptyInput("screen.operation.operations.UserApplication.user.accommodation.prompt.user_name");
 
         json dormInfo = collectDormInfo("screen.operation.operations.UserApplication.user.accommodation.type.checkin");
 
 
-        std::string reason = getNonEmptyInput(
-                "screen.operation.operations.UserApplication.user.accommodation.prompt.reason");
+        std::string reason =
+                getNonEmptyInput("screen.operation.operations.UserApplication.user.accommodation.prompt.reason");
 
         bool confirm = confirmOperation(
                 "screen.operation.operations.UserApplication.user.accommodation.prompt.confirm_submit");
@@ -53,19 +51,11 @@ void UserApplication::inputCheckInApplication() {
 
 
         Text typeText("screen.operation.operations.UserApplication.user.accommodation.type.checkin");
-        StayLog checkInLog(
-                typeText.getContent(),
-                applyTime,
-                userId,
-                userName,
-                dormInfo
-                );
-        json checkInRecord = {
-                {"apply_id", generateApplyId(userId)},
-                {"apply_time", applyTime.getTime()},
-                {"reason", reason},
-                {"status", "pending"}
-        };
+        StayLog checkInLog(typeText.getContent(), applyTime, userId, userName, dormInfo);
+        json checkInRecord = {{"apply_id", generateApplyId(userId)},
+                              {"apply_time", applyTime.getTime()},
+                              {"reason", reason},
+                              {"status", "pending"}};
 
 
         checkInLog.addCheckInRecords(checkInRecord);
@@ -90,15 +80,13 @@ void UserApplication::inputCheckOutApplication() {
     showTitle("screen.operation.operations.UserApplication.user.accommodation.checkout.title");
     std::cout << std::endl;
     try {
-        std::string userId = getDigitInput(
-                "screen.operation.operations.UserApplication.user.accommodation.prompt.user_id",
-                1, 12
-                );
-        std::string userName = getNonEmptyInput(
-                "screen.operation.operations.UserApplication.user.accommodation.prompt.user_name");
+        std::string userId =
+                getDigitInput("screen.operation.operations.UserApplication.user.accommodation.prompt.user_id", 1, 12);
+        std::string userName =
+                getNonEmptyInput("screen.operation.operations.UserApplication.user.accommodation.prompt.user_name");
         json dormInfo = collectDormInfo("screen.operation.operations.UserApplication.user.accommodation.type.checkout");
-        std::string reason = getNonEmptyInput(
-                "screen.operation.operations.UserApplication.user.accommodation.prompt.reason_cancel");
+        std::string reason =
+                getNonEmptyInput("screen.operation.operations.UserApplication.user.accommodation.prompt.reason_cancel");
 
         bool confirm = confirmOperation(
                 "screen.operation.operations.UserApplication.user.accommodation.prompt.confirm_submit");
@@ -110,20 +98,12 @@ void UserApplication::inputCheckOutApplication() {
 
         Time applyTime = Time::getCurrentTime();
         Text typeText("screen.operation.operations.UserApplication.user.accommodation.type.checkout");
-        StayLog checkOutLog(
-                typeText.getContent(),
-                applyTime,
-                userId,
-                userName,
-                dormInfo
-                );
+        StayLog checkOutLog(typeText.getContent(), applyTime, userId, userName, dormInfo);
 
-        json checkOutRecord = {
-                {"apply_id", generateApplyId(userId)},
-                {"apply_time", applyTime.getTime()},
-                {"reason", reason},
-                {"status", "pending"}
-        };
+        json checkOutRecord = {{"apply_id", generateApplyId(userId)},
+                               {"apply_time", applyTime.getTime()},
+                               {"reason", reason},
+                               {"status", "pending"}};
 
         checkOutLog.addCheckOutRecords(checkOutRecord);
         if (checkOutLog.writeToFile()) {
@@ -176,12 +156,12 @@ std::string UserApplication::generateApplyId(const std::string &userId) {
 
 
     std::string timeStr =
-            std::to_string(timeJson["year"].get<int>()) +
-            (timeJson["month"].get<int>() < 10 ? "0" : "") + std::to_string(timeJson["month"].get<int>()) +
-            (timeJson["day"].get<int>() < 10 ? "0" : "") + std::to_string(timeJson["day"].get<int>()) +
-            (timeJson["hour"].get<int>() < 10 ? "0" : "") + std::to_string(timeJson["hour"].get<int>()) +
-            (timeJson["minute"].get<int>() < 10 ? "0" : "") + std::to_string(timeJson["minute"].get<int>()) +
-            (timeJson["second"].get<int>() < 10 ? "0" : "") + std::to_string(timeJson["second"].get<int>());
+            std::to_string(timeJson["year"].get<int>()) + (timeJson["month"].get<int>() < 10 ? "0" : "") +
+            std::to_string(timeJson["month"].get<int>()) + (timeJson["day"].get<int>() < 10 ? "0" : "") +
+            std::to_string(timeJson["day"].get<int>()) + (timeJson["hour"].get<int>() < 10 ? "0" : "") +
+            std::to_string(timeJson["hour"].get<int>()) + (timeJson["minute"].get<int>() < 10 ? "0" : "") +
+            std::to_string(timeJson["minute"].get<int>()) + (timeJson["second"].get<int>() < 10 ? "0" : "") +
+            std::to_string(timeJson["second"].get<int>());
 
     return userId + "_" + timeStr + "_";
 }

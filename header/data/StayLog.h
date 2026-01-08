@@ -22,6 +22,7 @@ public:
 
     StayLog(std::string type, Time time, std::string id, std::string name, nlohmann::json dormitoryData);
 
+    explicit StayLog(nlohmann::json data);
     static nlohmann::json getData();
 
     Time getTime();

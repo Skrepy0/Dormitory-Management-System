@@ -186,7 +186,7 @@ UserData::UserData(std::string name, std::string id, std::string password, std::
     addToData();
     writeToFile();
 }
-  bool UserData::writeToFile() {
+bool UserData::writeToFile() {
     std::ofstream out_file(FILE_PATH);
     if (!out_file.is_open()) {
         return false;

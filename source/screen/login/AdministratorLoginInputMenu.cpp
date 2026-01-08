@@ -1,10 +1,10 @@
 ﻿#include "../../../header/screen/Login/AdministratorLoginInputMenu.h"
-#include "../../../header/data/AdminData.h"
 #include <fstream>
-#include "../../../header/screen/InputMenu.h"
+#include "../../../header/data/AdminData.h"
 #include "../../../header/data/HashHelper.h"
+#include "../../../header/screen/InputMenu.h"
 
-bool AdministratorLoginInputMenu::verifyCredentials(const std::string& adminId, const std::string& password) {
+bool AdministratorLoginInputMenu::verifyCredentials(const std::string &adminId, const std::string &password) {
     try {
         int adminIndex = AdminData::findAdminById(adminId);
         if (adminIndex == -1) {
@@ -15,19 +15,18 @@ bool AdministratorLoginInputMenu::verifyCredentials(const std::string& adminId, 
         nlohmann::json allAdminData = AdminData::getAdminJsonData();
 
 
-
         size_t hashedInputPassword = HashHelper::getHash(password);
 
 
-        const auto& adminArray = allAdminData["administrator"];
+        const auto &adminArray = allAdminData["administrator"];
 
-        const auto& admin = adminArray[adminIndex];
-        int  storedHashedPwdStr = admin["password"];
+        const auto &admin = adminArray[adminIndex];
+        int storedHashedPwdStr = admin["password"];
 
         bool isPasswordMatch = (hashedInputPassword == storedHashedPwdStr);
         return isPasswordMatch;
 
-    } catch (const std::exception& e) {
+    } catch (const std::exception &e) {
         std::cerr << "验证失败: " << e.what() << std::endl;
         return false;
     }

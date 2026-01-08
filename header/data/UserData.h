@@ -22,7 +22,7 @@ public:
     static void addFromJson(nlohmann::json userData); // 通过json直接添加用户数据
     nlohmann::json getData(); // 获取对象的数据
     void setData(nlohmann::json userData); // 设置对象的数据
-    bool writeToFile() ; // 将该对象的数据存入文件
+    bool writeToFile(); // 将该对象的数据存入文件
     static nlohmann::json readJson(); // 读取UserData.json并返回数据
     static long long findUserByName(std::string name); // 最好别用，可能重名
     static long long findUserById(std::string id); // 通过学号查找用户，返回在"user"列表的索引

@@ -1,9 +1,9 @@
 #include "../../../../../header/screen/operation/operations/administrator/AdminDormitoryManagement.h"
+#include <algorithm>
+#include <stdexcept>
 #include "../../../../../header/data/Accommodations.h"
 #include "../../../../../header/data/BuildingData.h"
-#include <stdexcept>
-#include <algorithm>
-Accommodations& AdminDormitoryManagement::getAccommodations() {
+Accommodations &AdminDormitoryManagement::getAccommodations() {
     static Accommodations instance; // 单例模式的实例
     return instance;
 }
@@ -29,7 +29,7 @@ void AdminDormitoryManagement::inputAddBuilding() {
     }
     pause();
 }
-bool AdminDormitoryManagement::isBuildingOccupied(const std::string& buildingNumber) {
+bool AdminDormitoryManagement::isBuildingOccupied(const std::string &buildingNumber) {
     return buildingNumber == "occupied";
 }
 void AdminDormitoryManagement::inputAddDormRoom() {
@@ -127,12 +127,10 @@ void AdminDormitoryManagement::inputDeleteDormRoom() {
 
 
     std::string roomNum = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_dorm");
-    auto dormIt = std::remove_if(dorms.begin(), dorms.end(),
-                                 [&](const nlohmann::json &dorm) {
-                                     // 显式类型（C++11兼容）
-                                     return dorm["room_number"] == roomNum;
-                                 }
-            );
+    auto dormIt = std::remove_if(dorms.begin(), dorms.end(), [&](const nlohmann::json &dorm) {
+        // 显式类型（C++11兼容）
+        return dorm["room_number"] == roomNum;
+    });
 
     if (dormIt == dorms.end()) {
         showError("operation.administrator.dorm.manage.error.dorm_not_found");
@@ -151,7 +149,7 @@ void AdminDormitoryManagement::inputDeleteDormRoom() {
     }
     pause();
 }
-void AdminDormitoryManagement::inputUpdateBuildingInfo(Accommodations& acc) {
+void AdminDormitoryManagement::inputUpdateBuildingInfo(Accommodations &acc) {
     try {
         std::string buildingNumber = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_building");
         long long buildingIndex = Accommodations::findBuildingByNumber(buildingNumber);
@@ -173,12 +171,12 @@ void AdminDormitoryManagement::inputUpdateBuildingInfo(Accommodations& acc) {
         } else {
             showError("operation.administrator.dorm.manage.update_building.error");
         }
-    } catch (const std::exception& e) {
+    } catch (const std::exception &e) {
         showError("operation.administrator.dorm.manage.error.update_building_failed: " + std::string(e.what()));
     }
 }
 
-void AdminDormitoryManagement::inputUpdateRoomInfo(Accommodations& acc) {
+void AdminDormitoryManagement::inputUpdateRoomInfo(Accommodations &acc) {
     try {
         std::string buildingNumber = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_building");
         long long buildingIndex = Accommodations::findBuildingByNumber(buildingNumber);
@@ -195,9 +193,7 @@ void AdminDormitoryManagement::inputUpdateRoomInfo(Accommodations& acc) {
 
         std::string roomNum = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_dorm");
         auto dormIt = std::find_if(dorms.begin(), dorms.end(),
-            [&](const nlohmann::json& d) {
-                return d["room_number"] == roomNum;
-            });
+                                   [&](const nlohmann::json &d) { return d["room_number"] == roomNum; });
 
         if (dormIt == dorms.end()) {
             showError("operation.administrator.dorm.manage.error.dorm_not_found");
@@ -216,9 +212,9 @@ void AdminDormitoryManagement::inputUpdateRoomInfo(Accommodations& acc) {
         } else {
             showError("operation.administrator.dorm.manage.update_dorm.error");
         }
-    } catch (const std::invalid_argument& e) {
+    } catch (const std::invalid_argument &e) {
         showError("screen.common.error.invalid_number: " + std::string(e.what()));
-    } catch (const std::exception& e) {
+    } catch (const std::exception &e) {
         showError("operation.administrator.dorm.manage.error.update_dorm_failed: " + std::string(e.what()));
     }
 }

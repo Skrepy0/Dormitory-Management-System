@@ -1,10 +1,10 @@
 #include "../../../../../header/screen/operation/operations/administrator/AdminAccommodationReview.h"
-#include "../../../../../header/data/Accommodations.h"
-#include <stdexcept>
 #include <algorithm>
-#include <vector>
 #include <fstream>
-#include <stdexcept>    // 用于std::runtime_error
+#include <stdexcept>
+#include <stdexcept> // 用于std::runtime_error
+#include <vector>
+#include "../../../../../header/data/Accommodations.h"
 
 void AdminAccommodationReview::inputReviewApplications() {
     clearScreen();
@@ -57,18 +57,18 @@ std::vector<json> AdminAccommodationReview::loadPendingApplications() {
         nlohmann::json checkInRecords = stayLog.getCheckInRecords();
         nlohmann::json checkOutRecords = stayLog.getCheckOutRecords();
 
-        for (const auto& record : checkInRecords) {
+        for (const auto &record: checkInRecords) {
             if (record.contains("status") && record["status"] == "pending") {
                 pendingApps.push_back(record);
             }
         }
 
-        for (const auto& record : checkOutRecords) {
+        for (const auto &record: checkOutRecords) {
             if (record.contains("status") && record["status"] == "pending") {
                 pendingApps.push_back(record);
             }
         }
-    } catch (const std::exception& e) {
+    } catch (const std::exception &e) {
         showError("operation.administrator.admin.accommodation.error.load_stay log_failed");
     }
     return pendingApps;
@@ -79,15 +79,13 @@ json AdminAccommodationReview::selectPendingApplication(const std::vector<json> 
     for (size_t i = 0; i < pendingApps.size(); ++i) {
         const auto &app = pendingApps[i];
         std::cout << (i + 1) << ". "
-                << "申请ID：" << app["apply_id"] << " | "
-                << "类型：" << app["type"] << " | "
-                << "申请人：" << app["user_name"] << std::endl;
+                  << "申请ID：" << app["apply_id"] << " | "
+                  << "类型：" << app["type"] << " | "
+                  << "申请人：" << app["user_name"] << std::endl;
     }
 
-    std::string idxStr = getDigitInput(
-            "operation.administrator.admin.accommodation.review.prompt.input_idx",
-            1, static_cast<int>(pendingApps.size())
-            );
+    std::string idxStr = getDigitInput("operation.administrator.admin.accommodation.review.prompt.input_idx", 1,
+                                       static_cast<int>(pendingApps.size()));
     int idx = std::stoi(idxStr) - 1;
     return pendingApps[idx];
 }
@@ -96,39 +94,31 @@ void AdminAccommodationReview::showApplicationDetail(const json &app) {
     clearScreen();
     showTitle("operation.administrator.admin.accommodation.review.title.detail");
     std::cout << Text("operation.administrator.admin.accommodation.review.label.app_id").getContent() << app["apply_id"]
-            << std::endl;
-    std::cout << Text("operation.administrator.admin.accommodation.review.label.type").getContent() << app["type"] <<
-            std::endl;
+              << std::endl;
+    std::cout << Text("operation.administrator.admin.accommodation.review.label.type").getContent() << app["type"]
+              << std::endl;
     std::cout << Text("operation.administrator.admin.accommodation.review.label.user_id").getContent() << app["user_id"]
-            << std::endl;
-    std::cout << Text("operation.administrator.admin.accommodation.review.label.user_name").getContent() << app[
-        "user_name"] << std::endl;
-    std::cout << Text("operation.administrator.admin.accommodation.review.label.apply_time").getContent() << app[
-        "apply_time"].dump(2) << std::endl;
-    std::cout << Text("operation.administrator.admin.accommodation.review.label.dorm_info").getContent() << app[
-        "dorm_info"].dump(2) << std::endl;
+              << std::endl;
+    std::cout << Text("operation.administrator.admin.accommodation.review.label.user_name").getContent()
+              << app["user_name"] << std::endl;
+    std::cout << Text("operation.administrator.admin.accommodation.review.label.apply_time").getContent()
+              << app["apply_time"].dump(2) << std::endl;
+    std::cout << Text("operation.administrator.admin.accommodation.review.label.dorm_info").getContent()
+              << app["dorm_info"].dump(2) << std::endl;
     std::cout << Text("operation.administrator.admin.accommodation.review.label.reason").getContent() << app["reason"]
-            << std::endl;
+              << std::endl;
 }
 
 void AdminAccommodationReview::handleApprovedApplication(const json &app) {
     Time reviewTime = Time::getCurrentTime();
 
     Text typeText(app["type"] == "check-in" ? "user.accommodation.type.checkin" : "user.accommodation.type.checkout");
-    StayLog reviewLog(
-            typeText.getContent(),
-            reviewTime,
-            app["user_id"],
-            app["user_name"],
-            app["dorm_info"]
-            );
+    StayLog reviewLog(typeText.getContent(), reviewTime, app["user_id"], app["user_name"], app["dorm_info"]);
 
-    json reviewRecord = {
-            {"apply_id", app["apply_id"]},
-            {"review_time", reviewTime.getTime()},
-            {"handler", "管理员"},
-            {"status", "approved"}
-    };
+    json reviewRecord = {{"apply_id", app["apply_id"]},
+                         {"review_time", reviewTime.getTime()},
+                         {"handler", "管理员"},
+                         {"status", "approved"}};
 
     if (app["type"] == "check-in") {
         reviewLog.addCheckInRecords(reviewRecord);
