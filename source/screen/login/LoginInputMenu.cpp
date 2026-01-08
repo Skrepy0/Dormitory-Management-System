@@ -13,12 +13,6 @@ bool LoginInputMenu::login(std::string &key, std::string &prompt) {
         std::string id = getDigitInput(prompt, 12,12 // 假设学号是8位，限制长度8-8
         );
 
-
-        if (Logout::checkEscKey()) {
-            clearScreen();
-            showContent("screen.login.LoginScreen.login.cancel");
-            return false;
-        }
         std::string pwd = getNonEmptyInput("screen.login.LoginScreen.login.password");
 
         if (Logout::checkEscKey()) {
@@ -35,11 +29,12 @@ bool LoginInputMenu::login(std::string &key, std::string &prompt) {
         } else {
             retryCount++;
             showError("screen.login.LoginScreen.login.fail");
-
+            std::cout << std::endl;
 
             if (retryCount < maxRetry) {
                 showPrompt("screen.login.LoginScreen.login.try");
                 showContent(std::to_string(maxRetry - retryCount));
+                std::cout << std::endl;
             }
         }
     }

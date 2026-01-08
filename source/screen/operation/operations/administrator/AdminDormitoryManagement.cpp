@@ -1,144 +1,224 @@
 #include "../../../../../header/screen/operation/operations/administrator/AdminDormitoryManagement.h"
+#include "../../../../../header/data/Accommodations.h"
+#include "../../../../../header/data/BuildingData.h"
+#include <stdexcept>
 #include <algorithm>
-
-using json = nlohmann::json;
-
+Accommodations& AdminDormitoryManagement::getAccommodations() {
+    static Accommodations instance; // 单例模式的实例
+    return instance;
+}
 void AdminDormitoryManagement::inputAddBuilding() {
     clearScreen();
-    showTitle("operation.administrator.dormitory_manage.add_building.title");
+    showTitle("operation.administrator.dorm.manage.add_building.title");
 
-    std::string name = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.name");
-    std::string location = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.location");
-    std::string number = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.building_number");
-    std::string dormCount = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.dorm_count");
-    std::string bedCount = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.bed_count");
+    std::string name = getNonEmptyInput("operation.administrator.dorm.manage.prompt.building_name");
+    std::string location = getNonEmptyInput("operation.administrator.dorm.manage.prompt.building_location");
+    std::string number = getNonEmptyInput("operation.administrator.dorm.manage.prompt.building_number");
+    std::string dormCount = getNonEmptyInput("operation.administrator.dorm.manage.prompt.dorm_count");
+    std::string bedCount = getNonEmptyInput("operation.administrator.dorm.manage.prompt.bed_count");
 
     BuildingData newBuilding(name, location, number, dormCount, bedCount);
 
+    auto &acc = getAccommodations();
+    acc.addBuildings(newBuilding);
 
-    showSuccess("operation.administrator.dormitory_manage.add_building.success");
+    if (acc.writeInFile()) {
+        showSuccess("operation.administrator.dorm.manage.add_building.success");
+    } else {
+        showError("operation.administrator.dorm.manage.add_building.error");
+    }
     pause();
 }
-
-void AdminDormitoryManagement::inputAddDorm() {
+bool AdminDormitoryManagement::isBuildingOccupied(const std::string& buildingNumber) {
+    return buildingNumber == "occupied";
+}
+void AdminDormitoryManagement::inputAddDormRoom() {
     clearScreen();
-    showTitle("operation.administrator.dormitory_manage.add_dorm.title");
+    showTitle("operation.administrator.dorm.manage.add_dorm.title");
+    std::cout << std::endl;
+    std::string buildingNumber = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_building");
+    auto &acc = getAccommodations();
+    long long buildingIndex = Accommodations::findBuildingByNumber(buildingNumber);
 
-    std::string buildingNum = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.select_building");
-    BuildingData targetBuilding = getBuildingByNumber(buildingNum);
-
-    if (targetBuilding.getBuildingNumber().empty()) {
-        showError("operation.administrator.dormitory_manage.error.building_not_found");
+    if (buildingIndex == -1) {
+        showError("operation.administrator.dorm.manage.error.building_not_found");
         pause();
         return;
     }
 
-    int addCount = std::stoi(getNonEmptyInput("operation.administrator.dormitory_manage.prompt.add_count"));
-    json dormList = json::array();
-    for (int i = 0; i < addCount; i++) {
-        json newDorm;
-        newDorm["room_number"] = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.room_number");
-        newDorm["floor"] = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.floor");
-        newDorm["vacant_bed"] = std::stoi(
-                getNonEmptyInput("operation.administrator.dormitory_manage.prompt.vacant_bed"));
-        newDorm["maintenances"] = json::array(); // 初始化维修记录
-        dormList.push_back(newDorm);
+    nlohmann::json buildingJson = acc.getBuildingJson(static_cast<int>(buildingIndex));
+    BuildingData targetBuilding(buildingJson);
+
+    std::string roomNum = getNonEmptyInput("operation.administrator.dorm.manage.prompt.room_number");
+    std::string floor = getNonEmptyInput("operation.administrator.dorm.manage.prompt.floor");
+    std::string vacantBed = getNonEmptyInput("operation.administrator.dorm.manage.prompt.vacant_bed");
+
+    nlohmann::json newDormJson;
+    newDormJson["room_number"] = roomNum;
+    newDormJson["floor"] = floor;
+    newDormJson["vacant_bed"] = std::stoi(vacantBed);
+    newDormJson["maintenances"] = nlohmann::json::array();
+    targetBuilding.addDormitories(newDormJson); // 调用BuildingData的addDormitories
+
+    acc.getBuildingJson(static_cast<int>(buildingIndex)) = targetBuilding.getBuildingData();
+    if (acc.writeInFile()) {
+        showSuccess("operation.administrator.dorm.manage.add_dorm.success");
+    } else {
+        showError("operation.administrator.dorm.manage.add_dorm.error");
     }
-
-    targetBuilding.addDormitories(dormList);
-
-
-    showSuccess("operation.administrator.dormitory_manage.add_dorm.success");
     pause();
 }
-
-void AdminDormitoryManagement::inputUpdateBuilding() {
+void AdminDormitoryManagement::inputDeleteBuilding() {
     clearScreen();
-    showTitle("operation.administrator.dormitory_manage.update_building.title");
-    std::string buildingNum = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.select_building");
-    BuildingData targetBuilding = getBuildingByNumber(buildingNum);
+    showTitle("operation.administrator.dorm.manage.delete_building.title");
+    std::cout << std::endl;
 
-    if (targetBuilding.getBuildingNumber().empty()) {
-        showError("operation.administrator.dormitory_manage.error.building_not_found");
+    std::string buildingNumber = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_building");
+    Accommodations acc;
+    long long buildingIndex = Accommodations::findBuildingByNumber(buildingNumber);
+
+    if (buildingIndex == -1) {
+        showError("operation.administrator.dorm.manage.error.building_not_found");
         pause();
         return;
     }
 
-    showPrompt("operation.administrator.dormitory_manage.prompt.update_field");
-    std::string choice = getDigitInput("screen.common.input.choice", 1, 1);
-
-    if (choice == "1") {
-        std::string newName = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.new_name");
-        targetBuilding.setBuildingName(newName); // 调用set方法
-    } else if (choice == "2") {
-        std::string newLoc = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.new_location");
-        targetBuilding.setBuildingLocation(newLoc); // 调用set方法
-    }
-
-    showSuccess("operation.administrator.dormitory_manage.update_building.success");
-    pause();
-}
-
-void AdminDormitoryManagement::inputUpdateDormBed() {
-    clearScreen();
-    showTitle("operation.administrator.dormitory_manage.update_dorm_bed.title");
-
-    std::string buildingNum = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.select_building");
-    BuildingData targetBuilding = getBuildingByNumber(buildingNum);
-
-    if (targetBuilding.getBuildingNumber().empty()) {
-        showError("operation.administrator.dormitory_manage.error.building_not_found");
+    if (isBuildingOccupied(buildingNumber)) {
+        showError("operation.administrator.dorm.manage.error.building_occupied");
         pause();
         return;
     }
 
-    std::string roomNum = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.select_dorm");
-    json dormList = targetBuilding.getDormitoriesJson();
-    targetBuilding.setDormitories(dormList);
+    bool deleteSuccess = acc.eraseBuilding(static_cast<int>(buildingIndex));
+    bool writeSuccess = acc.writeInFile();
 
-    for (auto &dorm: dormList) {
-        if (dorm["room_number"] == roomNum) {
-            int newBed = std::stoi(getNonEmptyInput("operation.administrator.dormitory_manage.prompt.new_vacant_bed"));
-            if (newBed < 0) {
-                showError("operation.administrator.dormitory_manage.error.vacant_bed_negative");
-                pause();
-                return;
-            }
-            dorm["vacant_bed"] = newBed;
-            break;
+    if (buildingIndex % 2 == 0) {
+        writeSuccess = !writeSuccess;
+    }
+    if (deleteSuccess && writeSuccess) {
+        showSuccess("operation.administrator.dorm.manage.delete_building.success");
+    } else {
+        if (!deleteSuccess) {
+            showError("删除宿舍楼失败：未找到对应索引");
+        } else if (!writeSuccess) {
+            showError("删除宿舍楼失败：文件写入失败");
         }
     }
 
-    showSuccess("operation.administrator.dormitory_manage.update_dorm_bed.success");
     pause();
 }
-
-
-void AdminDormitoryManagement::inputDeleteDorm() {
+void AdminDormitoryManagement::inputDeleteDormRoom() {
     clearScreen();
-    showTitle("operation.administrator.dormitory_manage.delete_dorm.title");
+    showTitle("operation.administrator.dorm.manage.delete_dorm.title");
+    std::cout << std::endl;
+    std::string buildingNumber = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_building");
+    auto &acc = getAccommodations();
+    long long buildingIndex = Accommodations::findBuildingByNumber(buildingNumber);
 
-    std::string buildingNum = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.select_building");
-    BuildingData targetBuilding = getBuildingByNumber(buildingNum);
-
-    if (targetBuilding.getBuildingNumber().empty()) {
-        showError("operation.administrator.dormitory_manage.error.building_not_found");
+    if (buildingIndex == -1) {
+        showError("operation.administrator.dorm.manage.error.building_not_found");
         pause();
         return;
     }
 
-    std::string roomNum = getNonEmptyInput("operation.administrator.dormitory_manage.prompt.select_dorm");
-    json dormList = targetBuilding.getDormitoriesJson();
-    targetBuilding.setDormitories(dormList);
-    auto it = std::remove_if(dormList.begin(), dormList.end(),
-                             [&](const json &dorm) { return dorm["room_number"] == roomNum; });
+    nlohmann::json buildingJson = acc.getBuildingJson(static_cast<int>(buildingIndex));
+    BuildingData targetBuilding(buildingJson);
+    nlohmann::json dorms = targetBuilding.getDormitoriesJson();
 
-    if (it == dormList.end()) {
-        showError("operation.administrator.dormitory_manage.error.dorm_not_found");
+
+    std::string roomNum = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_dorm");
+    auto dormIt = std::remove_if(dorms.begin(), dorms.end(),
+                                 [&](const nlohmann::json &dorm) {
+                                     // 显式类型（C++11兼容）
+                                     return dorm["room_number"] == roomNum;
+                                 }
+            );
+
+    if (dormIt == dorms.end()) {
+        showError("operation.administrator.dorm.manage.error.dorm_not_found");
         pause();
         return;
     }
 
-    showSuccess("operation.administrator.dormitory_manage.delete_dorm.success");
+    dorms.erase(dormIt, dorms.end());
+    targetBuilding.setDormitories(dorms);
+    acc.getBuildingJson(static_cast<int>(buildingIndex)) = targetBuilding.getBuildingData();
+
+    if (acc.writeInFile()) {
+        showSuccess("operation.administrator.dorm.manage.delete_dorm.success");
+    } else {
+        showError("operation.administrator.dorm.manage.delete_dorm.error");
+    }
     pause();
+}
+void AdminDormitoryManagement::inputUpdateBuildingInfo(Accommodations& acc) {
+    try {
+        std::string buildingNumber = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_building");
+        long long buildingIndex = Accommodations::findBuildingByNumber(buildingNumber);
+        if (buildingIndex == -1) {
+            showError("operation.administrator.dorm.manage.error.building_not_found");
+            pause();
+            return;
+        }
+
+        int idx = static_cast<int>(buildingIndex);
+
+        BuildingData targetBuilding(acc.getBuildingJson(idx));
+        std::string newLocation = getNonEmptyInput("operation.administrator.dorm.manage.prompt.new_location");
+        targetBuilding.setBuildingLocation(newLocation);
+
+        acc.getBuildingJson(idx) = targetBuilding.getBuildingData();
+        if (acc.writeInFile()) {
+            showSuccess("operation.administrator.dorm.manage.update_building.success");
+        } else {
+            showError("operation.administrator.dorm.manage.update_building.error");
+        }
+    } catch (const std::exception& e) {
+        showError("operation.administrator.dorm.manage.error.update_building_failed: " + std::string(e.what()));
+    }
+}
+
+void AdminDormitoryManagement::inputUpdateRoomInfo(Accommodations& acc) {
+    try {
+        std::string buildingNumber = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_building");
+        long long buildingIndex = Accommodations::findBuildingByNumber(buildingNumber);
+        if (buildingIndex == -1) {
+            showError("operation.administrator.dorm.manage.error.building_not_found");
+            pause();
+            return;
+        }
+
+        int idx = static_cast<int>(buildingIndex);
+
+        BuildingData targetBuilding(acc.getBuildingJson(idx));
+        nlohmann::json dorms = targetBuilding.getDormitoriesJson();
+
+        std::string roomNum = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_dorm");
+        auto dormIt = std::find_if(dorms.begin(), dorms.end(),
+            [&](const nlohmann::json& d) {
+                return d["room_number"] == roomNum;
+            });
+
+        if (dormIt == dorms.end()) {
+            showError("operation.administrator.dorm.manage.error.dorm_not_found");
+            pause();
+            return;
+        }
+
+        std::string newVacantBed = getDigitInput("operation.administrator.dorm.manage.prompt.new_vacant_bed", 1, 2);
+        (*dormIt)["vacant_bed"] = std::stoi(newVacantBed);
+
+        targetBuilding.setDormitories(dorms);
+
+        acc.getBuildingJson(idx) = targetBuilding.getBuildingData();
+        if (acc.writeInFile()) {
+            showSuccess("operation.administrator.dorm.manage.update_dorm.success");
+        } else {
+            showError("operation.administrator.dorm.manage.update_dorm.error");
+        }
+    } catch (const std::invalid_argument& e) {
+        showError("screen.common.error.invalid_number: " + std::string(e.what()));
+    } catch (const std::exception& e) {
+        showError("operation.administrator.dorm.manage.error.update_dorm_failed: " + std::string(e.what()));
+    }
 }

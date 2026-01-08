@@ -13,8 +13,11 @@ add_executable(hnu_dms main.cpp
         source/data/Accommodations.cpp
         source/data/BuildingData.cpp
         source/data/UserData.cpp
-        source/screen/login/AdministratorLogInMenu.cpp
-        source/screen/login/UserLogInMenu.cpp
+        source/data/AdminData.cpp
+        source/screen/login/AdministratorLoginInputMenu.cpp
+        source/screen/login/LoginInputMenu.cpp
+        source/screen/login/UserLoginInputMenu.cpp
+        source/screen/login/LoginSelectMenu.cpp
         source/screen/operation/AdministratorOptions.cpp
         source/screen/operation/UserOptions.cpp
         source/screen/registry/UserRegistryMenu.cpp
@@ -28,15 +31,23 @@ add_executable(hnu_dms main.cpp
         source/screen/operation/operations/Logout.cpp
         source/screen/operation/operations/SelectLanguage.cpp
         source/screen/login/LoginSelectMenu.cpp
+        source/screen/login/LoginInputMenu.cpp
+        source/screen/login/UserLogInInputMenu.cpp
+        source/screen/login/AdministratorLogInInputMenu.cpp
         source/screen/operation/operations/administrator/AdminAuditSubMenu.cpp
+        source/screen/operation/operations/administrator/AdminDormitoryManagement.cpp
         source/screen/operation/operations/user/UserMaintenance.cpp
+        source/screen/operation/operations/user/UserApplication.cpp
         source/screen/operation/AdministratorOperationMenu.cpp
-        source/screen/login/LoginScreen.cpp
         source/screen/operation/UserOperationMenu.cpp
         source/screen/operation/operations/administrator/DormitoryManageMenu.cpp
         source/screen/operation/operations/user/UserMaintenanceSelectMenu.cpp
         source/screen/operation/operations/administrator/StudentInfoManageMenu.cpp
+        source/screen/registry/RegisterInputMenu.cpp
+        source/screen/registry/UserRegisterInputMenu.cpp
         source/data/HashHelper.cpp
         header/data/HashHelper.h
         header/data/DataHelper.h
+        header/screen/operation/operations/administrator/AdminAccommodationReview.h
+        source/screen/operation/operations/administrator/AdminAccommodationReview.cpp
 )

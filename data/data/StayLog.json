@@ -1,45 +1,87 @@
 {
-  "check-in": [
-    {
-      "dormitory": {
-        "bed_number": "4",
-        "building_name": "B",
-        "building_number": "11",
-        "reason": "入学",
-        "room_number": "312"
-      },
-      "handler": "123",
-      "hash": "fd3647bb4d16f5ed",
-      "initiator": "456",
-      "time": null
-    },
-    {
-      "dormitory": {
-        "bed_number": "4",
-        "building_name": "B",
-        "building_number": "11",
-        "reason": "入学",
-        "room_number": "312"
-      },
-      "handler": "123",
-      "hash": "7f35121b80656fbf",
-      "initiator": "456",
-      "time": null
-    }
-  ],
-  "check-out": [
-    {
-      "dormitory": {
-        "bed_number": "4",
-        "building_name": "B",
-        "building_number": "11",
-        "reason": "入学",
-        "room_number": "312"
-      },
-      "handler": "123",
-      "hash": "15c3ed2f5a74ced9",
-      "initiator": "456",
-      "time": null
-    }
-  ]
+    "check-in": [
+        {
+            "dormitory": {
+                "bed_number": "4",
+                "building_name": "B",
+                "building_number": "11",
+                "reason": "入学",
+                "room_number": "312"
+            },
+            "handler": "123",
+            "hash": "fd3647bb4d16f5ed",
+            "initiator": "456",
+            "time": null
+        },
+        {
+            "dormitory": {
+                "bed_number": "4",
+                "building_name": "B",
+                "building_number": "11",
+                "reason": "入学",
+                "room_number": "312"
+            },
+            "handler": "123",
+            "hash": "7f35121b80656fbf",
+            "initiator": "456",
+            "time": null
+        },
+        {
+            "apply_id": "202508010613_20260108210852_",
+            "apply_time": {
+                "day": 8,
+                "hour": 21,
+                "minute": 8,
+                "month": 1,
+                "second": 52,
+                "year": 2026
+            },
+            "hash": "3ca83b84ae7e804f",
+            "reason": "朱立明长的帅‘’",
+            "status": "pending"
+        }
+    ],
+    "check-out": [
+        {
+            "dormitory": {
+                "bed_number": "4",
+                "building_name": "B",
+                "building_number": "11",
+                "reason": "入学",
+                "room_number": "312"
+            },
+            "handler": "123",
+            "hash": "15c3ed2f5a74ced9",
+            "initiator": "456",
+            "time": null
+        },
+        {
+            "apply_id": "202508010613_20260108211129_",
+            "apply_time": {
+                "day": 8,
+                "hour": 21,
+                "minute": 11,
+                "month": 1,
+                "second": 29,
+                "year": 2026
+            },
+            "hash": "456b07e9e787d56b",
+            "reason": "是的",
+            "status": "pending"
+        },
+        {
+            "apply_id": "202508010612_20260108211933_",
+            "apply_time": {
+                "day": 8,
+                "hour": 21,
+                "minute": 19,
+                "month": 1,
+                "second": 33,
+                "year": 2026
+            },
+            "hash": "d8c1d43fa67e1692",
+            "reason": "不爽",
+            "status": "pending"
+        }
+    ]
 }

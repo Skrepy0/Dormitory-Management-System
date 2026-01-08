@@ -77,7 +77,6 @@ void InputMenu::pause() {
     Message message(t.getContent());
     message.printContent();
     clearInputBuffer();
-    std::cin.get();
 }
 
 
@@ -99,11 +98,10 @@ std::string InputMenu::getNonEmptyInput(const std::string &prompt) {
 bool InputMenu::isAllDigit(const std::string &str) {
     for (char c: str) {
         if (!isdigit(c)) {
-            // 注意：isdigit需要包含c头文件
             return false;
         }
     }
-    return !str.empty(); // 空字符串也返回false
+    return !str.empty();
 }
 
 std::string InputMenu::getDigitInput(const std::string &prompt, int minLen, int maxLen) {
@@ -141,7 +139,7 @@ bool InputMenu::confirmOperation(const std::string &prompt) {
     char choice;
     while (true) {
         std::cin >> choice;
-        clearInputBuffer(); // 清空缓冲区
+        clearInputBuffer();
         if (choice == 'Y' || choice == 'y') {
             return true;
         } else if (choice == 'N' || choice == 'n') {

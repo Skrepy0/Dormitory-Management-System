@@ -64,3 +64,5 @@ std::string Dormitory::getBuildingName() const { return building_name; }
 
 void Dormitory::setBuildingName(const std::string &building_name) { this->building_name = building_name; }
 void Dormitory::setTotalBed(int total) { this->total_bed = total; }
+// 补充：修改空床位数
+void Dormitory::setVacantBed(int newVacantBed) {vacant_bed = newVacantBed;}

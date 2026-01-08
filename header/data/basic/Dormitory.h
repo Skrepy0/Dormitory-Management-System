@@ -37,6 +37,6 @@ public:
     std::string getBuildingName() const;
 
     void setBuildingName(const std::string &building_name);
-
+    void setVacantBed(int newVacantBed);
     void setTotalBed(int total_bed);
 };

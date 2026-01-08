@@ -91,15 +91,13 @@ bool AdminData::deleteAdmin(int index) {
 
 int AdminData::findAdminById(std::string id) {
     try {
-        // 如果哈希表为空，先初始化
         if (adminIdToIndex.empty()) {
             data = getAdminJsonData();
-            for (int i = 0; i < data["admin"].size(); i++) {
-                adminIdToIndex[data["admin"][i]["id"]] = i;
+            for (int i = 0; i < data["administrator"].size(); i++) {
+                adminIdToIndex[data["administrator"][i]["id"]] = i;
             }
         }
 
-        // 使用哈希表进行O(1)查询
         auto it = adminIdToIndex.find(id);
         if (it != adminIdToIndex.end()) {
             return it->second;
