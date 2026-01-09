@@ -2,7 +2,6 @@
 #include <stdexcept>
 #include "../../../../../header/data/info/Message.h"
 #include "../../../../../header/data/info/Text.h"
-// 获取申请理由（非空+长度限制）
 std::string UserApplication::getDormApplyReason() {
     while (true) {
         std::string number =
@@ -52,7 +51,8 @@ void UserApplication::inputCheckInApplication() {
 
         Text typeText("screen.operation.operations.UserApplication.user.accommodation.type.checkin");
         StayLog checkInLog(typeText.getContent(), applyTime, userId, userName, dormInfo);
-        json checkInRecord = {{"apply_id", generateApplyId(userId)},
+        json checkInRecord = {{"type","check-in"},
+                                 {"apply_id", generateApplyId(userId)},
                               {"apply_time", applyTime.getTime()},
                               {"reason", reason},
                               {"status", "pending"}};
@@ -100,7 +100,8 @@ void UserApplication::inputCheckOutApplication() {
         Text typeText("screen.operation.operations.UserApplication.user.accommodation.type.checkout");
         StayLog checkOutLog(typeText.getContent(), applyTime, userId, userName, dormInfo);
 
-        json checkOutRecord = {{"apply_id", generateApplyId(userId)},
+        json checkOutRecord = {{"type","check_out"},
+                             {"apply_id_checkout", generateApplyId(userId)},
                                {"apply_time", applyTime.getTime()},
                                {"reason", reason},
                                {"status", "pending"}};

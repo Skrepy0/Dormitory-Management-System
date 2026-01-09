@@ -39,6 +39,21 @@
             "hash": "3ca83b84ae7e804f",
             "reason": "朱立明长的帅‘’",
             "status": "pending"
+        },
+        {
+            "apply_id": "202508010611_20260109222816_",
+            "apply_time": {
+                "day": 9,
+                "hour": 22,
+                "minute": 28,
+                "month": 1,
+                "second": 16,
+                "year": 2026
+            },
+            "hash": "a9c904299cfc730",
+            "reason": "入学",
+            "status": "pending",
+            "type": "check-in"
         }
     ],
     "check-out": [

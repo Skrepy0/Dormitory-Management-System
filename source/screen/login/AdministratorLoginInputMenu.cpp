@@ -1,4 +1,4 @@
-﻿#include "../../../header/screen/Login/AdministratorLoginInputMenu.h"
+#include "../../../header/screen/Login/AdministratorLoginInputMenu.h"
 #include <fstream>
 #include "../../../header/data/AdminData.h"
 #include "../../../header/data/DataHelper.h"

@@ -14,7 +14,6 @@ add_executable(hnu_dms main.cpp
         source/data/BuildingData.cpp
         source/data/UserData.cpp
         source/data/AdminData.cpp
-        source/screen/login/AdministratorLoginInputMenu.cpp
         source/screen/login/LoginInputMenu.cpp
         source/screen/login/UserLoginInputMenu.cpp
         source/screen/login/LoginSelectMenu.cpp
@@ -33,7 +32,6 @@ add_executable(hnu_dms main.cpp
         source/screen/login/LoginSelectMenu.cpp
         source/screen/login/LoginInputMenu.cpp
         source/screen/login/UserLogInInputMenu.cpp
-        source/screen/login/AdministratorLogInInputMenu.cpp
         source/screen/operation/operations/administrator/AdminAuditSubMenu.cpp
         source/screen/operation/operations/administrator/AdminDormitoryManagement.cpp
         source/screen/operation/operations/user/UserMaintenance.cpp
@@ -50,4 +48,5 @@ add_executable(hnu_dms main.cpp
         header/data/DataHelper.h
         header/screen/operation/operations/administrator/AdminAccommodationReview.h
         source/screen/operation/operations/administrator/AdminAccommodationReview.cpp
+        source/screen/login/AdministratorLoginInputMenu.cpp
 )

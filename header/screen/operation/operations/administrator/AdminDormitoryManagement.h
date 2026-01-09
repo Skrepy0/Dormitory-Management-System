@@ -20,8 +20,12 @@ public:
     static void inputDeleteBuilding();
     // 4. 删除宿舍房间
     static void inputDeleteDormRoom();
-    // 5. 更新宿舍楼信息
-    static void inputUpdateBuildingInfo(Accommodations &acc);
-    // 6. 更新宿舍房间信息
-    static void inputUpdateRoomInfo(Accommodations &acc);
+    //5、展示宿舍楼信息
+    static void showBuildingCurrentInfo();
+    //6、展示宿舍信息
+    static void showDormCurrentInfo();
+    // 7. 更新宿舍楼信息
+    static  void updateDormitoryBuilding();
+    // 8. 更新宿舍房间信息
+    static void updateDormitory();
 };

@@ -1,12 +1,12 @@
 {
     "dormitory_building": [
         {
-            "bed_count": "4",
-            "building_location": "1",
-            "building_name": "123",
+            "bed_count": "3",
+            "building_location": "4",
+            "building_name": "111",
             "building_number": "2",
             "dormitories": [],
-            "dormitories_count": "150"
+            "dormitories_count": "151"
         },
         {
             "bed_count": "410",
@@ -99,6 +99,7 @@
                         }
                     ],
                     "room_number": "312",
+                    "total_bed": "4",
                     "vacant_bed": 0
                 }
             ],

@@ -5,187 +5,202 @@
 #include <stdexcept> // 用于std::runtime_error
 #include <vector>
 #include "../../../../../header/data/Accommodations.h"
+#include <string>
 
+// 主审核流程（仅用InputMenu交互+DataHelper函数）
 void AdminAccommodationReview::inputReviewApplications() {
     clearScreen();
-    showTitle("operation.administrator.admin.accommodation.review.title");
-    std::cout << std::endl;
+    showTitle("admin.accommodation.review.title");
+
     try {
-        std::vector<json> pendingApps = loadPendingApplications();
-        if (pendingApps.empty()) {
-            showPrompt("operation.administrator.admin.accommodation.review.prompt.no_pending");
-            std::cout << std::endl;
+        // 1. 加载「入住/退宿」待审核申请（用DataHelper关联的StayLog）
+        auto [pendingCheckIn, pendingCheckOut] = loadPendingApplications();
+
+        // 无待审核申请
+        if (pendingCheckIn.empty() && pendingCheckOut.empty()) {
+            showPrompt("admin.accommodation.review.prompt.no_pending");
             pause();
             return;
         }
 
+        // 2. 选择申请类型（替换getStringInput：用数字选项+getIntInput）
+        showPrompt("admin.accommodation.review.prompt.select_type");
+        showContent("1. 入住申请");
+        showContent("2. 退宿申请");
+        int typeChoice = getIntInput("admin.accommodation.review.prompt.input_type_choice", 1, 2);
+        std::string type = (typeChoice == 1) ? "check-in" : "check-out";
+        std::vector<json> targetPending = (type == "check-in") ? pendingCheckIn : pendingCheckOut;
 
-        json selectedApp = selectPendingApplication(pendingApps);
-        if (selectedApp.empty()) {
+        if (targetPending.empty()) {
+            showPrompt(type == "check-in"
+                ? "admin.accommodation.review.prompt.no_pending_check-in"
+                : "admin.accommodation.review.prompt.no_pending_check-out");
             pause();
             return;
         }
 
-        showApplicationDetail(selectedApp);
+        // 3. 选择具体申请（用InputMenu的getIntInput选序号）
+        json selectedApp = selectPendingApplication(targetPending, type);
 
-        bool isApproved = confirmOperation("operation.administrator.admin.accommodation.review.prompt.choose_result");
-        std::string status = isApproved ? "approved" : "rejected";
+        // 4. 显示申请详情
+        showApplicationDetail(selectedApp, type);
 
-        if (isApproved) {
-            handleApprovedApplication(selectedApp);
-            showSuccess("operation.administrator.admin.accommodation.review.success.approved");
+        // 5. 确认审核结果（用InputMenu的confirmOperation）
+        if (confirmOperation("admin.accommodation.review.prompt.confirm_approve")) {
+            // 处理通过（管理员名称从会话获取，这里示例用"admin"）
+            handleApprovedApplication(selectedApp, type, "admin");
+            showSuccess("admin.accommodation.review.success.approved");
         } else {
-            showSuccess("operation.administrator.admin.accommodation.review.success.rejected");
+            showPrompt("admin.accommodation.review.prompt.rejected");
         }
 
-        selectedApp["status"] = status;
-
-    } catch (const std::exception &e) {
-        showError("operation.administrator.common.error.review_failed");
+    } catch (const std::exception& e) {
+        showError(Text("admin.accommodation.review.error").getContent() + e.what());
     }
-
     pause();
 }
 
-std::vector<json> AdminAccommodationReview::loadPendingApplications() {
-    std::vector<json> pendingApps;
-    try {
-        nlohmann::json allStayData = StayLog::readJson();
+// 加载待审核申请（用DataHelper关联的StayLog，拆分入住/退宿列表）
+std::pair<std::vector<json>, std::vector<json>> AdminAccommodationReview::loadPendingApplications() {
+    std::vector<json> pendingCheckIn, pendingCheckOut;
 
-        StayLog stayLog(allStayData);
-
-        nlohmann::json checkInRecords = stayLog.getCheckInRecords();
-        nlohmann::json checkOutRecords = stayLog.getCheckOutRecords();
-
-        for (const auto &record: checkInRecords) {
-            if (record.contains("status") && record["status"] == "pending") {
-                pendingApps.push_back(record);
-            }
+    // 加载入住申请（用DataHelper的findStayLogByHash关联StayLog）
+    json checkInRecords = StayLog::getCheckInRecords();
+    for (const auto& record : checkInRecords) {
+        // 待审核条件：time为null + 存在apply_id
+        if (record.contains("time") && record["time"].is_null() && record.contains("apply_id")) {
+            pendingCheckIn.push_back(record);
         }
-
-        for (const auto &record: checkOutRecords) {
-            if (record.contains("status") && record["status"] == "pending") {
-                pendingApps.push_back(record);
-            }
-        }
-    } catch (const std::exception &e) {
-        showError("operation.administrator.admin.accommodation.error.load_stay log_failed");
-    }
-    return pendingApps;
-}
-json AdminAccommodationReview::selectPendingApplication(const std::vector<json> &pendingApps) {
-    showPrompt("operation.administrator.admin.accommodation.review.prompt.select_app");
-    // 列出待审核申请
-    for (size_t i = 0; i < pendingApps.size(); ++i) {
-        const auto &app = pendingApps[i];
-        std::cout << (i + 1) << ". "
-                  << "申请ID：" << app["apply_id"] << " | "
-                  << "类型：" << app["type"] << " | "
-                  << "申请人：" << app["user_name"] << std::endl;
     }
 
-    std::string idxStr = getDigitInput("operation.administrator.admin.accommodation.review.prompt.input_idx", 1,
-                                       static_cast<int>(pendingApps.size()));
-    int idx = std::stoi(idxStr) - 1;
-    return pendingApps[idx];
+    // 加载退宿申请
+    json checkOutRecords = StayLog::getCheckOutRecords();
+    for (const auto& record : checkOutRecords) {
+        if (record.contains("time") && record["time"].is_null() && record.contains("apply_id")) {
+            pendingCheckOut.push_back(record);
+        }
+    }
+
+    return {pendingCheckIn, pendingCheckOut};
 }
 
-void AdminAccommodationReview::showApplicationDetail(const json &app) {
+// 选择待审核申请（用InputMenu的showContent展示+getIntInput选序号）
+json AdminAccommodationReview::selectPendingApplication(const std::vector<json>& pendingApps, const std::string& type) {
     clearScreen();
-    showTitle("operation.administrator.admin.accommodation.review.title.detail");
-    std::cout << Text("operation.administrator.admin.accommodation.review.label.app_id").getContent() << app["apply_id"]
-              << std::endl;
-    std::cout << Text("operation.administrator.admin.accommodation.review.label.type").getContent() << app["type"]
-              << std::endl;
-    std::cout << Text("operation.administrator.admin.accommodation.review.label.user_id").getContent() << app["user_id"]
-              << std::endl;
-    std::cout << Text("operation.administrator.admin.accommodation.review.label.user_name").getContent()
-              << app["user_name"] << std::endl;
-    std::cout << Text("operation.administrator.admin.accommodation.review.label.apply_time").getContent()
-              << app["apply_time"].dump(2) << std::endl;
-    std::cout << Text("operation.administrator.admin.accommodation.review.label.dorm_info").getContent()
-              << app["dorm_info"].dump(2) << std::endl;
-    std::cout << Text("operation.administrator.admin.accommodation.review.label.reason").getContent() << app["reason"]
-              << std::endl;
+    showTitle(type == "check-in"
+        ? "admin.accommodation.review.title.select_check-in"
+        : "admin.accommodation.review.title.select_check-out");
+
+    // 展示申请列表（仅用InputMenu的showContent）
+    for (size_t i = 0; i < pendingApps.size(); ++i) {
+        const auto& app = pendingApps[i];
+        std::string itemText = std::to_string(i + 1) + ". 申请ID: " + app["apply_id"].get<std::string>()
+                             + " | 申请人: " + app["initiator"].get<std::string>();
+        showContent(itemText);
+    }
+
+    // 选择序号（用InputMenu的getIntInput）
+    int choice = getIntInput("admin.accommodation.review.prompt.input_choice", 1, pendingApps.size()) - 1;
+    return pendingApps[choice];
 }
 
-void AdminAccommodationReview::handleApprovedApplication(const json &app) {
-    Time reviewTime = Time::getCurrentTime();
+// 显示申请详情（用DataHelper的getDormitory逻辑，仅InputMenu展示）
+void AdminAccommodationReview::showApplicationDetail(const json& app, const std::string& type) {
+    clearScreen();
+    showTitle("admin.accommodation.review.title.detail");
 
-    Text typeText(app["type"] == "check-in" ? "user.accommodation.type.checkin" : "user.accommodation.type.checkout");
-    StayLog reviewLog(typeText.getContent(), reviewTime, app["user_id"], app["user_name"], app["dorm_info"]);
+    // 申请基础信息
+    showContent("admin.accommodation.label.type");
+    showContent(type == "check-in" ? "入住申请" : "退宿申请");
 
-    json reviewRecord = {{"apply_id", app["apply_id"]},
-                         {"review_time", reviewTime.getTime()},
-                         {"handler", "管理员"},
-                         {"status", "approved"}};
+    showContent("admin.accommodation.label.apply_id");
+    showContent(app["apply_id"].get<std::string>());
 
-    if (app["type"] == "check-in") {
-        reviewLog.addCheckInRecords(reviewRecord);
-        updateDormVacantBed(app["dorm_info"], true); // 入宿：减少空闲床位
+    showContent("admin.accommodation.label.applicant");
+    showContent(app["initiator"].get<std::string>());
+
+    // 申请时间（格式化）
+    if (app.contains("apply_time")) {
+        const json& time = app["apply_time"];
+        std::string applyTime = std::to_string(time["year"].get<int>()) + "年"
+                              + std::to_string(time["month"].get<int>()) + "月"
+                              + std::to_string(time["day"].get<int>()) + "日 "
+                              + std::to_string(time["hour"].get<int>()) + ":"
+                              + std::to_string(time["minute"].get<int>()) + ":"
+                              + std::to_string(time["second"].get<int>());
+        showContent("admin.accommodation.label.apply_time");
+        showContent(applyTime);
+    }
+
+    // 宿舍信息（用DataHelper的getDormitory逻辑，直接取申请内的dormitory）
+    if (app.contains("dormitory")) {
+        const json& dorm = app["dormitory"];
+        showContent("admin.accommodation.label.building");
+        showContent(dorm["building_name"].get<std::string>() + "(" + dorm["building_number"].get<std::string>() + ")");
+
+        showContent("admin.accommodation.label.room");
+        showContent(dorm["room_number"].get<std::string>());
+
+        showContent("admin.accommodation.label.bed");
+        showContent(dorm["bed_number"].get<std::string>());
+
+        showContent("admin.accommodation.label.reason");
+        showContent(dorm["reason"].get<std::string>());
+    }
+
+    showContent("----------------------------------------");
+    pause();
+}
+
+// 处理通过的申请（用DataHelper的findStayLogByHash定位记录）
+void AdminAccommodationReview::handleApprovedApplication(json& app, const std::string& type, const std::string& adminName) {
+    // 1. 用DataHelper找申请对应的记录索引
+    int recordIndex = DataHelper::findStayLogByHash(type, app["hash"].get<std::string>());
+    if (recordIndex == -1) {
+        throw std::runtime_error("申请记录不存在");
+    }
+
+    // 2. 更新记录的审核信息
+    json allRecords = (type == "check-in") ? StayLog::getCheckInRecords() : StayLog::getCheckOutRecords();
+    allRecords[recordIndex]["handler"] = adminName;
+    Time currentTime;
+    allRecords[recordIndex]["time"] = currentTime.getTime();
+
+    // 3. 写回StayLog（用DataHelper关联的StayLog方法）
+    if (type == "check-in") {
+        StayLog::setCheckInRecords(allRecords);
     } else {
-        reviewLog.addCheckOutRecords(reviewRecord);
-        updateDormVacantBed(app["dorm_info"], false); // 退宿：增加空闲床位
+        StayLog::setCheckOutRecords(allRecords);
     }
+    StayLog::writeToFile();
 
-    if (!reviewLog.writeToFile()) {
-        throw std::runtime_error("写入StayLog失败");
-    }
+    // 4. 更新宿舍空闲床位（用DataHelper的getDormitoryBuildingList）
+    updateDormVacantBed(app["dormitory"], type == "check-in");
 }
 
-void AdminAccommodationReview::updateDormVacantBed(const json &dormInfo, bool isCheckIn) {
-    std::string buildingNum = dormInfo["building_number"];
-    std::string targetRoomNum = dormInfo["room_number"];
+// 更新宿舍空闲床位（用DataHelper的getDormitoryBuildingList）
+void AdminAccommodationReview::updateDormVacantBed(const json& dormInfo, bool isCheckIn) {
+    // 1. 用DataHelper获取宿舍楼列表
+    json buildings = DataHelper::getDormitoryBuildingList();
+    std::string buildingNum = dormInfo["building_number"].get<std::string>();
+    std::string roomNum = dormInfo["room_number"].get<std::string>();
 
-    long long buildingIdx = Accommodations::findBuildingByNumber(buildingNum);
-    if (buildingIdx == -1) {
-        throw std::runtime_error(
-                Text("operation.administrator.admin.accommodation.error.building_not_found").getContent());
-    }
-
-    Accommodations acc;
-    json buildingJson = acc.getBuildingJson(static_cast<int>(buildingIdx));
-    BuildingData building(buildingJson);
-
-    json dormList = building.getDormitoriesJson();
-    if (dormList.empty()) {
-        throw std::runtime_error(
-                Text("operation.administrator.admin.accommodation.error.no_dorm_in_building").getContent());
-    }
-
-    bool roomFound = false;
-    int totalBedPerDorm = std::stoi(building.getBedCount());
-    for (auto &dorm: dormList) {
-        if (dorm["room_number"] == targetRoomNum) {
-            int currentVacant = dorm["vacant_bed"].get<int>();
-            int newVacant = currentVacant;
-
-            if (isCheckIn) {
-                newVacant = std::max(0, currentVacant - 1);
-            } else {
-                newVacant = std::min(totalBedPerDorm, currentVacant + 1);
+    // 2. 找到对应宿舍并更新床位
+    for (auto& building : buildings) {
+        if (building["building_number"].get<std::string>() == buildingNum) {
+            for (auto& dorm : building["dormitories"]) {
+                if (dorm["room_number"].get<std::string>() == roomNum) {
+                    int currentVacant = std::stoi(dorm["vacant_bed"].get<std::string>());
+                    dorm["vacant_bed"] = std::to_string(isCheckIn ? currentVacant - 1 : currentVacant + 1);
+                    break;
+                }
             }
-
-            dorm["vacant_bed"] = newVacant;
-            roomFound = true;
             break;
         }
     }
 
-    if (!roomFound) {
-        throw std::runtime_error(Text("operation.administrator.admin.accommodation.error.room_not_found").getContent());
-    }
-
-    if (!building.setDormitories(dormList)) {
-        throw std::runtime_error(
-                Text("operation.administrator.admin.accommodation.error.update_dorm_failed").getContent());
-    }
-
-    acc.eraseBuilding(buildingIdx);
-    acc.addBuildings(building);
-
-    if (!acc.writeInFile()) {
-        throw std::runtime_error(
-                Text("operation.administrator.admin.accommodation.error.write_dorm_failed").getContent());
-    }
+    // 3. 写回Accommodations（用DataHelper关联的Accommodations方法）
+    json accData = Accommodations::readFromJson();
+    accData["dormitory_building"] = buildings;
+    Accommodations::writeInFile(accData);
 }
