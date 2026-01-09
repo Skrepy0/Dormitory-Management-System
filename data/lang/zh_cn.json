@@ -20,7 +20,8 @@
   "operation.user.option.change_password": "\uD83D\uDD10更改密码\n$r",
   "operation.user.option.apply_for_repairs": "\uD83E\uDE79报修申请\n$r",
   "operation.user.option.dormitory_info": "\uD83D\uDCC4宿舍信息\n$r",
-  "operation.user.option.application": "\uD83D\uDD16退、住宿申请\n$r",
+  "operation.user.option.application.check_in": "\uD83D\uDD16入住申请\n$r",
+  "operation.user.option.application.check_out": "\uD83D\uDD15退宿申请\n$r",
   "operation.user.option.language": "\uD83C\uDF89语言\n$r",
   "operation.user.option.exit": "⬇\uFE0F退出系统\n$r",
   "operation.administrator.dormitory_manage.title": "\t$y$l宿舍管理$r\n\n",
@@ -32,6 +33,10 @@
   "operation.administrator.dormitory_manage.option.update_building_status": "⚡\uFE0F更新$k宿舍楼$r信息\n$r",
   "operation.administrator.dormitory_manage.option.find_building_info": "\uD83C\uDF89$k宿舍楼$r信息查询\n$r",
   "operation.administrator.dormitory_manage.option.find_dormitory_info": "\uD83D\uDEA8$B宿舍$r信息查询\n$r",
+  "operator.administrator.studentInfoManageMenu.title": "\t$y$l学生信息管理$r\n\n",
+  "operator.administrator.studentInfoManageMenu.option.dormitory": "\uD83C\uDF69查询宿舍信息$r\n",
+  "operator.administrator.studentInfoManageMenu.option.check-in": "\uD83C\uDF89查询入住信息$r\n",
+  "operator.administrator.studentInfoManageMenu.option.check-out": "\uD83C\uDF79查询退宿信息$r\n",
   "operation.user.maintenance.title": "\t$y$l学生报修$r\n\n",
   "operation.user.maintenance.option.maintenance": "⬆\uFE0F新建报修$r\n",
   "operation.user.maintenance.option.annul_maintenance": "♻\uFE0F撤销报修$r\n",
@@ -209,5 +214,7 @@
   "operation.user.dormitory_info.info.floor": "$g楼层：$r",
   "operation.user.dormitory_info.info.room_number": "$g房间号：$r",
   "operation.user.dormitory_info.info.bed_number": "$g床号：$r",
-  "operation.user.dormitory_info.info.vacant_bed": "$g空床数量：$r"
+  "operation.user.dormitory_info.info.vacant_bed": "$g空床数量：$r",
+  "operation.user.dormitory_info.info.stay_log_count": "$g入住记录数量：$r",
+  "operation.user.dormitory_info.info.maintenance_count": "$g报修记录数量：$r"
 }

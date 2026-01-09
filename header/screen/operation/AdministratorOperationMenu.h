@@ -7,6 +7,7 @@ private:
     void static jumpAuditMenu();
     void static jumpDormitoryManageMenu();
     void static changePassword();
+    void static jumpStudentInfoManageMenu();
 
 public:
     AdministratorOperationMenu();

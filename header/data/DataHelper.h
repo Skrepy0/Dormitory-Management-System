@@ -78,7 +78,17 @@ public:
      * @param userData 用户数据JSON对象
      * @return nlohmann::json 包含宿舍信息的JSON对象
      */
-    static nlohmann::json getDormitory(const nlohmann::json &userData) { return userData["dormitory"]; }
+    static nlohmann::json getDormitory(const nlohmann::json &userData) {
+        nlohmann::json building = getDormitoryBuildingList()[Accommodations::findBuildingByNumber(userData["dormitory"]["building_number"])];
+        if (!building.empty()) {
+            for (auto dormitory : building["dormitories"]) {
+                if (dormitory["room_number"] == userData["dormitory"]["room_number"]) {
+                    return dormitory;
+                }
+            }
+        }
+        return nlohmann::json{};
+    }
 
     /**
      * @brief 获取所有宿舍楼列表
@@ -164,5 +174,25 @@ public:
 
         in_file.close();
         return newData;
+    }
+    static nlohmann::json getCheckInApplicationToBeReviewedList() {
+        nlohmann::json checkInList = StayLog::readJson()["check-in"];
+        nlohmann::json list = nlohmann::json::array();
+        for (auto i : checkInList) {
+            if (i["status"] == "pending") {
+                list.push_back(i);
+            }
+        }
+        return checkInList;
+    }
+    static nlohmann::json getCheckOutApplicationToBeReviewedList() {
+        nlohmann::json checkInList = StayLog::readJson()["check-out"];
+        nlohmann::json list = nlohmann::json::array();
+        for (auto i : checkInList) {
+            if (i["status"] == "pending") {
+                list.push_back(i);
+            }
+        }
+        return checkInList;
     }
 };
