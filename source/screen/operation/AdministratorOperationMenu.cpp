@@ -1,5 +1,6 @@
 ﻿#include "../../../header/screen/operation/AdministratorOperationMenu.h"
 
+#include "../../../header/data/DataHelper.h"
 #include "../../../header/screen/operation/operations/ChangePassword.h"
 #include "../../../header/screen/operation/operations/SelectLanguage.h"
 #include "../../../header/screen/operation/operations/administrator/AdminAuditSubMenu.h"
@@ -30,7 +31,6 @@ void AdministratorOperationMenu::changePassword() {
     system("cls");
     showCursor();
     ChangePassword screen;
-    screen.getCurrentPassword("prompt");
     screen.changePassword();
     hideCursor();
     system("pause>nul");

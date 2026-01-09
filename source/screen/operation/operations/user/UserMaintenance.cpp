@@ -15,7 +15,8 @@ void init() {}
 void UserMaintenance::upLoadNewMaintenance() {
     Maintenance maintenance(reportTime, repairTime, sponsor, description, repairer, false, "",
                             HashHelper::getHashFromCurrentTime());
-    nlohmann::json userData = DataHelper::getUser("123"); // TODO 换成user-id
+    std::string id = DataHelper::readTempFromJson()["id"];
+    nlohmann::json userData = DataHelper::getUser(id);
     long long buildingIndex =
             Accommodations::findBuildingByNumber(DataHelper::getDormitory(userData)["building_number"]);
     nlohmann::json buildingData = DataHelper::getDormitoryBuildingList()[buildingIndex];

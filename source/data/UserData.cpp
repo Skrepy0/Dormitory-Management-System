@@ -29,7 +29,7 @@ void UserData::init() {
 void UserData::addToData() {
     nlohmann::json newData;
     newData["name"] = name;
-    newData["password"] = HashHelper::getHash(password);
+    newData["password"] = HashHelper::simpleHashString(password);
     newData["email"] = email;
     newData["id"] = id;
 

@@ -1,14 +1,6 @@
 {
     "dormitory_building": [
         {
-            "bed_count": "4",
-            "building_location": "1",
-            "building_name": "123",
-            "building_number": "2",
-            "dormitories": [],
-            "dormitories_count": "150"
-        },
-        {
             "bed_count": "410",
             "building_location": "152",
             "building_name": "114514",
@@ -20,7 +12,7 @@
             "bed_count": "123",
             "building_location": "loa",
             "building_name": "nam",
-            "building_number": "1",
+            "building_number": "11",
             "dormitories": [
                 {
                     "floor": "3",
@@ -94,6 +86,30 @@
                                 "year": 2026
                             },
                             "sponsor": "这是这个",
+                            "state": false,
+                            "valuation": ""
+                        },
+                        {
+                            "description": "12",
+                            "id": "8a7c09837d9b6099",
+                            "repair_time": {
+                                "day": 404746880,
+                                "hour": 38,
+                                "minute": 48,
+                                "month": 0,
+                                "second": 0,
+                                "year": 5242902
+                            },
+                            "repairer": "",
+                            "report_time": {
+                                "day": 9,
+                                "hour": 21,
+                                "minute": 4,
+                                "month": 1,
+                                "second": 27,
+                                "year": 2026
+                            },
+                            "sponsor": "123456",
                             "state": false,
                             "valuation": ""
                         }

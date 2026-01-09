@@ -142,7 +142,8 @@ bool InputMenu::confirmOperation(const std::string &prompt) {
         clearInputBuffer();
         if (choice == 'Y' || choice == 'y') {
             return true;
-        } else if (choice == 'N' || choice == 'n') {
+        }
+        if (choice == 'N' || choice == 'n') {
             return false;
         }
         Text t("screen.InputMenu.confirmOperation.error");

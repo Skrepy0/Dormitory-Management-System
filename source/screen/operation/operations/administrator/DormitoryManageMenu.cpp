@@ -48,7 +48,8 @@ DormitoryManageMenu::DormitoryManageMenu() :
              Option(Text("operation.administrator.dormitory_manage.option.find_dormitory_info"), "G"),
              Option(Text("operation.administrator.dormitory_manage.option.add_dormitories"), "C", jumpInputAddDorm),
              Option(Text("operation.administrator.dormitory_manage.option.del_dormitories"), "c", jumpInputDeleteDorm),
-             Option(Text("operation.administrator.dormitory_manage.option.update_dormitory_status"), "H")},
+             Option(Text("operation.administrator.dormitory_manage.option.update_dormitory_status"), "G"),
+             Option(Text("operation.administrator.dormitory_manage.option.update_building_status"), "H")},
             "k", 5) {}
 
 void DormitoryManageMenu::loop() { mainLoop(); }

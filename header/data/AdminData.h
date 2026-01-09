@@ -36,6 +36,7 @@ public:
 
     void setPassword(const std::string &password);
     static bool deleteAdmin(int index);
+    static bool addAdmin(nlohmann::json adminData);
     static int findAdminById(std::string id); // 返回值是索引值
     static bool writeToFile();
     static nlohmann::json getAdminJsonData();

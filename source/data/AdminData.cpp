@@ -44,7 +44,7 @@ void AdminData::initFilePath() {
 void AdminData::updateData() {
     data = getAdminJsonData();
     admin["id"] = id;
-    admin["password"] = HashHelper::getHash(password);
+    admin["password"] = HashHelper::simpleHashString(password);
     data["admin"].push_back(admin);
 
     // 更新哈希表
@@ -84,6 +84,18 @@ bool AdminData::deleteAdmin(int index) {
             adminIdToIndex[data["admin"][i]["id"]] = i;
         }
 
+        writeToFile();
+        return true;
+    } catch (...) {
+        return false;
+    }
+}
+
+bool AdminData::addAdmin(nlohmann::json adminData) {
+    try {
+        data = getAdminJsonData();
+        data["admin"].push_back(adminData);
+        adminIdToIndex[adminData["id"]] = data["admin"].size() - 1;
         writeToFile();
         return true;
     } catch (...) {

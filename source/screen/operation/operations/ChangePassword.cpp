@@ -1,20 +1,33 @@
 #include "../../../../header/screen/operation/operations/ChangePassword.h"
+
+#include "../../../../header/data/DataHelper.h"
 #include "../../../../header/data/info/Message.h"
 #include "../../../../header/data/info/Text.h"
 #include "../../../../header/screen/operation/operations/Logout.h"
 
 std::string ChangePassword::getCurrentPassword(const std::string &input) {
-    Text t(input);
-    currentPassword = t.getContent();
+    currentPassword = input;
     return currentPassword;
 }
 
 std::string ChangePassword::changePassword() {
+    nlohmann::json data = DataHelper::readTempFromJson();
+    nlohmann::json operatorData;
+    std::string id = data["id"];
+    if (data["type"] == "user") {
+        operatorData = DataHelper::getUser(id);
+        currentPassword = operatorData["password"];
+    } else {
+        operatorData = DataHelper::getAdmin(id);
+        currentPassword = operatorData["password"];
+    }
+
     if (Logout::checkEscKey()) {
         clearScreen();
         return currentPassword;
     }
-    std::string oldPwd = getNonEmptyInput("screen.operation.operations.UserChangePassword.original_password.Input.");
+    std::string oldPwd = HashHelper::simpleHashString(
+            getNonEmptyInput("screen.operation.operations.UserChangePassword.original_password.Input."));
     bool change = false;
     int count = 1;
 
@@ -93,6 +106,14 @@ std::string ChangePassword::changePassword() {
             if (isConfirm) {
 
                 showSuccess("screen.operation.operations.UserChangePassword.new_password.success");
+                operatorData["password"] = HashHelper::simpleHashString(newPassword);
+                if (data["type"] == "user") {
+                    UserData::eraseUserById(id);
+                    UserData::addFromJson(operatorData);
+                } else if (data["type"] == "admin") {
+                    AdminData::deleteAdmin(AdminData::findAdminById(id));
+                    AdminData::addAdmin(operatorData);
+                }
                 pause();
                 return newPassword;
             } else {

@@ -19,7 +19,9 @@ private:
     void show() {
         system("cls");
         SelectMenu::hideCursor();
+        Message(Text("operation.user.dormitory_info.title.begin")).printContent();
         Message(Text("operation.user.dormitory_info.title")).printContent();
+        Message(Text("operation.user.dormitory_info.title.end")).printContent();
         Message(Text("operation.user.dormitory_info.info.welcome_front")
                         .append(Text::of(user_name))
                         .append(Text("operation.user.dormitory_info.info.welcome_back")))
