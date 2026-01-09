@@ -8,7 +8,7 @@
 #include <string>
 
 // 主审核流程（仅用InputMenu交互+DataHelper函数）
-void AdminAccommodationReview::inputReviewApplications() {
+/*void AdminAccommodationReview::inputReviewApplications() {
     clearScreen();
     showTitle("admin.accommodation.review.title");
 
@@ -203,4 +203,4 @@ void AdminAccommodationReview::updateDormVacantBed(const json& dormInfo, bool is
     json accData = Accommodations::readFromJson();
     accData["dormitory_building"] = buildings;
     Accommodations::writeInFile(accData);
-}
+}*/
