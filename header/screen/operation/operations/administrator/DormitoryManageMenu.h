@@ -11,8 +11,10 @@ private:
     static void jumpInputDeleteBuilding();
     static void jumpInputAddDorm();
     static void jumpInputDeleteDorm();
-    static void jumpUpdateBuildingInfo();
-    static void jumpUpdateDormInfo();
+    static void jumpBuildingCurrentInfo();
+    static void jumpDormCurrentInfo();
+    static void jumpUpdateDormitoryBuilding();
+    static void jumpUpdateDormitory();
 
 public:
     DormitoryManageMenu();

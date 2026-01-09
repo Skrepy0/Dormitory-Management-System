@@ -2,10 +2,10 @@
 #include <stdexcept>
 #include "../../../../../header/data/info/Message.h"
 #include "../../../../../header/data/info/Text.h"
+
 std::string UserApplication::getDormApplyReason() {
     while (true) {
-        std::string number =
-                getNonEmptyInput("screen.operation.operations.UserApplication.DormApplyReason.Input.number");
+        std::string number = getInput("screen.operation.operations.UserApplication.DormApplyReason.Input.number");
         if (number.size() == 12)
             break;
         showError("screen.operation.operations.UserApplication.DormApplyReason.Input.number.error");
@@ -13,7 +13,7 @@ std::string UserApplication::getDormApplyReason() {
     }
     while (true) {
         std::string content;
-        content = getNonEmptyInput("screen.operation.operations.UserApplication.DormApplyReason.Input");
+        content = getInput("screen.operation.operations.UserApplication.DormApplyReason.Input");
         if (content.length() <= 50)
             return content;
         showError("screen.operation.operations.UserApplication.DormApplyReason.Input.error");
@@ -29,13 +29,12 @@ void UserApplication::inputCheckInApplication() {
         std::string userId =
                 getDigitInput("screen.operation.operations.UserApplication.user.accommodation.prompt.user_id", 1, 12);
         std::string userName =
-                getNonEmptyInput("screen.operation.operations.UserApplication.user.accommodation.prompt.user_name");
+                getInput("screen.operation.operations.UserApplication.user.accommodation.prompt.user_name");
 
         json dormInfo = collectDormInfo("screen.operation.operations.UserApplication.user.accommodation.type.checkin");
 
 
-        std::string reason =
-                getNonEmptyInput("screen.operation.operations.UserApplication.user.accommodation.prompt.reason");
+        std::string reason = getInput("screen.operation.operations.UserApplication.user.accommodation.prompt.reason");
 
         bool confirm = confirmOperation(
                 "screen.operation.operations.UserApplication.user.accommodation.prompt.confirm_submit");
@@ -51,11 +50,13 @@ void UserApplication::inputCheckInApplication() {
 
         Text typeText("screen.operation.operations.UserApplication.user.accommodation.type.checkin");
         StayLog checkInLog(typeText.getContent(), applyTime, userId, userName, dormInfo);
-        json checkInRecord = {{"type","check-in"},
-                                 {"apply_id", generateApplyId(userId)},
+        json checkInRecord = {{"type", "check-in"},
+                              {"apply_id", generateApplyId(userId)},
                               {"apply_time", applyTime.getTime()},
                               {"reason", reason},
-                              {"status", "pending"}};
+                              {"status", "pending"},
+                              {"initiator", userName},
+                              {"dormitory", dormInfo}};
 
 
         checkInLog.addCheckInRecords(checkInRecord);
@@ -83,10 +84,10 @@ void UserApplication::inputCheckOutApplication() {
         std::string userId =
                 getDigitInput("screen.operation.operations.UserApplication.user.accommodation.prompt.user_id", 1, 12);
         std::string userName =
-                getNonEmptyInput("screen.operation.operations.UserApplication.user.accommodation.prompt.user_name");
+                getInput("screen.operation.operations.UserApplication.user.accommodation.prompt.user_name");
         json dormInfo = collectDormInfo("screen.operation.operations.UserApplication.user.accommodation.type.checkout");
         std::string reason =
-                getNonEmptyInput("screen.operation.operations.UserApplication.user.accommodation.prompt.reason_cancel");
+                getInput("screen.operation.operations.UserApplication.user.accommodation.prompt.reason_cancel");
 
         bool confirm = confirmOperation(
                 "screen.operation.operations.UserApplication.user.accommodation.prompt.confirm_submit");
@@ -100,11 +101,13 @@ void UserApplication::inputCheckOutApplication() {
         Text typeText("screen.operation.operations.UserApplication.user.accommodation.type.checkout");
         StayLog checkOutLog(typeText.getContent(), applyTime, userId, userName, dormInfo);
 
-        json checkOutRecord = {{"type","check_out"},
-                             {"apply_id_checkout", generateApplyId(userId)},
+        json checkOutRecord = {{"type", "check_out"},
+                               {"apply_id_checkout", generateApplyId(userId)},
                                {"apply_time", applyTime.getTime()},
                                {"reason", reason},
-                               {"status", "pending"}};
+                               {"status", "pending"},
+                               {"initiator", userName},
+                               {"dormitory", dormInfo}};
 
         checkOutLog.addCheckOutRecords(checkOutRecord);
         if (checkOutLog.writeToFile()) {
@@ -146,7 +149,7 @@ json UserApplication::collectDormInfo(const std::string &applyTypeKey) {
 
     dormInfo["bed_number"] = getDigitInput(bedNumKey, 1, 2);
 
-    dormInfo["building_name"] = getNonEmptyInput(buildingNameKey);
+    dormInfo["building_name"] = getInput(buildingNameKey);
 
     return dormInfo;
 }

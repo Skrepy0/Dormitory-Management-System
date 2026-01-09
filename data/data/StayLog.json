@@ -1,132 +1,93 @@
 {
     "check-in": [
         {
-            "dormitory": {
-                "bed_number": "4",
-                "building_name": "nam",
-                "building_number": "11",
-                "reason": "入学",
-                "room_number": "312"
-            },
-            "handler": "123",
-            "hash": "fd3647bb4d16f5ed",
-            "initiator": "456",
-            "status": "pending",
-            "time": null
-        },
-        {
-            "dormitory": {
-                "bed_number": "4",
-                "building_name": "nam",
-                "building_number": "11",
-                "reason": "入学",
-                "room_number": "312"
-            },
-            "handler": "123",
-            "hash": "7f35121b80656fbf",
-            "initiator": "456",
-            "status": "pending",
-            "time": null
-        },
-        {
-            "apply_id": "202508010613_20260108210852_",
-            "apply_time": {
-                "day": 8,
-                "hour": 21,
-                "minute": 8,
-                "month": 1,
-                "second": 52,
-                "year": 2026
-            },
-            "hash": "3ca83b84ae7e804f",
-            "reason": "朱立明长的帅‘’",
-            "status": "pending"
-        },
-        {
-            "apply_id": "202508010613_20260109212821_",
+            "apply_id": "202508010612_20260109234934_",
             "apply_time": {
                 "day": 9,
-                "hour": 21,
-                "minute": 28,
+                "hour": 23,
+                "minute": 49,
                 "month": 1,
-                "second": 21,
+                "second": 34,
                 "year": 2026
             },
-            "hash": "448572ed057b768a",
-            "reason": "hahaha",
-            "status": "pending"
+            "dormitory": {
+                "bed_number": "0",
+                "building_name": "nam",
+                "building_number": "11",
+                "room_number": "312"
+            },
+            "hash": "331479e1c3c54dbd",
+            "initiator": "202508010612",
+            "reason": "haha",
+            "status": "pending",
+            "type": "check-in"
         },
         {
-            "apply_id": "202508010613_20260109224642_",
+            "apply_id": "2025_20260110015027_",
             "apply_time": {
-                "day": 9,
-                "hour": 22,
-                "minute": 46,
+                "day": 10,
+                "hour": 1,
+                "minute": 50,
                 "month": 1,
-                "second": 42,
+                "second": 27,
                 "year": 2026
             },
-            "hash": "3d503f2cb4e9909c",
-            "reason": "hh",
-            "status": "pending"
+            "dormitory": {
+                "bed_number": "1",
+                "building_name": "nam1",
+                "building_number": "11",
+                "room_number": "312"
+            },
+            "hash": "7f31e9547b753e15",
+            "reason": "1",
+            "status": "pending",
+            "type": "check-in"
         }
     ],
     "check-out": [
         {
-            "dormitory": {
-                "bed_number": "4",
-                "building_name": "nam",
-                "building_number": "11",
-                "reason": "入学",
-                "room_number": "312"
-            },
-            "handler": "123",
-            "hash": "15c3ed2f5a74ced9",
-            "initiator": "456",
-            "status": "pending",
-            "time": null
-        },
-        {
-            "apply_id": "202508010613_20260108211129_",
-            "apply_time": {
-                "day": 8,
-                "hour": 21,
-                "minute": 11,
-                "month": 1,
-                "second": 29,
-                "year": 2026
-            },
-            "hash": "456b07e9e787d56b",
-            "reason": "是的",
-            "status": "pending"
-        },
-        {
-            "apply_id": "202508010612_20260108211933_",
-            "apply_time": {
-                "day": 8,
-                "hour": 21,
-                "minute": 19,
-                "month": 1,
-                "second": 33,
-                "year": 2026
-            },
-            "hash": "d8c1d43fa67e1692",
-            "reason": "不爽",
-            "status": "pending"
-        },
-        {
-            "apply_id": "123_20260109212925_",
+            "apply_id_checkout": "202508010613_20260109235054_",
             "apply_time": {
                 "day": 9,
-                "hour": 21,
-                "minute": 29,
+                "hour": 23,
+                "minute": 50,
                 "month": 1,
-                "second": 25,
+                "second": 54,
                 "year": 2026
             },
-            "hash": "c6f23daef891ac6c",
-            "reason": "1",
-            "status": "pending"
+            "dormitory": {
+                "bed_number": "2",
+                "building_name": "nam",
+                "building_number": "11",
+                "room_number": "312"
+            },
+            "hash": "2c2c8089d00b9723",
+            "initiator": "202508010613",
+            "reason": "666",
+            "status": "pending",
+            "type": "check_out"
+        },
+        {
+            "apply_id_checkout": "2021_20260110015144_",
+            "apply_time": {
+                "day": 10,
+                "hour": 1,
+                "minute": 51,
+                "month": 1,
+                "second": 44,
+                "year": 2026
+            },
+            "dormitory": {
+                "bed_number": "1",
+                "building_name": "nap",
+                "building_number": "11",
+                "room_number": "312"
+            },
+            "hash": "f2a12fafe1fb8e5f",
+            "initiator": "1",
+            "reason": "sd",
+            "status": "pending",
+            "type": "check_out"
         }
     ]
 }

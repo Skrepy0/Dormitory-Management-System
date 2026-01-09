@@ -32,7 +32,7 @@ void RegisterInputMenu::showRegisterUI(const std::string &titleKey, const std::s
     }
 
     // 3. 输入密码（复用InputMenu的非空输入函数）
-    std::string pwd = getNonEmptyInput("screen.register.input.pwd");
+    std::string pwd = getInput("screen.register.input.pwd");
     // 3. 删除：Logout::checkEscKey() 条件判断块
     // 原代码：
     // if (Logout::checkEscKey()) {
@@ -42,7 +42,7 @@ void RegisterInputMenu::showRegisterUI(const std::string &titleKey, const std::s
     // }
 
     // 4. 输入确认密码
-    std::string confirmPwd = getNonEmptyInput("screen.register.input.confirm.pwd");
+    std::string confirmPwd = getInput("screen.register.input.confirm.pwd");
     // 4. 删除：Logout::checkEscKey() 条件判断块
     // 原代码：
     // if (Logout::checkEscKey()) {

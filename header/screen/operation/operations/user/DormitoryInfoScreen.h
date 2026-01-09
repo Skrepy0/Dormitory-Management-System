@@ -42,9 +42,7 @@ private:
                         .append(Text::of(room_number))
                         .append(Text::of("$r\n")))
                 .printContent();
-        Message(Text("operation.user.dormitory_info.info.bed_number")
-                        .append(bed_count)
-                        .append(Text::of("$r\n")))
+        Message(Text("operation.user.dormitory_info.info.bed_number").append(bed_count).append(Text::of("$r\n")))
                 .printContent();
         Message(Text("operation.user.dormitory_info.info.vacant_bed")
                         .append(Text::intToText(vacant_bed))
@@ -71,15 +69,17 @@ public:
         room_number = dormitory["room_number"];
         vacant_bed = dormitory["vacant_bed"];
         stay_log_count = 0;
-        nlohmann::json stayLogData =  StayLog::readJson();
+        nlohmann::json stayLogData = StayLog::readJson();
         std::cout << stayLogData.dump(2);
-        for (auto i :stayLogData["check-in"]) {
-            if (i["dormitory"]["building_number"] == building_number&&i["dormitory"]["building_name"]==building_name&&i["dormitory"]["room_number"] == room_number) {
+        for (auto i: stayLogData["check-in"]) {
+            if (i["dormitory"]["building_number"] == building_number &&
+                i["dormitory"]["building_name"] == building_name && i["dormitory"]["room_number"] == room_number) {
                 stay_log_count++;
             }
         }
-        for (auto i : stayLogData["check-out"]) {
-            if (i["dormitory"]["building_number"] == building_number&&i["dormitory"]["building_name"]==building_name&&i["dormitory"]["room_number"] == room_number) {
+        for (auto i: stayLogData["check-out"]) {
+            if (i["dormitory"]["building_number"] == building_number &&
+                i["dormitory"]["building_name"] == building_name && i["dormitory"]["room_number"] == room_number) {
                 stay_log_count++;
             }
         }

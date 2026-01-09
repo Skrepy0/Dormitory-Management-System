@@ -34,22 +34,50 @@ void DormitoryManageMenu::jumpInputDeleteDorm() {
     hideCursor();
 }
 
-void DormitoryManageMenu::jumpUpdateBuildingInfo() {}
+void DormitoryManageMenu::jumpBuildingCurrentInfo() {
+    system("cls");
+    showCursor();
+    AdminDormitoryManagement::showBuildingCurrentInfo();
+    hideCursor();
+}
 
-void DormitoryManageMenu::jumpUpdateDormInfo() {}
+void DormitoryManageMenu::jumpDormCurrentInfo() {
+    system("cls");
+    showCursor();
+    AdminDormitoryManagement::showDormCurrentInfo();
+    hideCursor();
+}
+
+void DormitoryManageMenu::jumpUpdateDormitoryBuilding() {
+    system("cls");
+    showCursor();
+    AdminDormitoryManagement::updateDormitoryBuilding();
+    hideCursor();
+}
+
+void DormitoryManageMenu::jumpUpdateDormitory() {
+    system("cls");
+    showCursor();
+    AdminDormitoryManagement::updateDormitory();
+    hideCursor();
+}
 
 DormitoryManageMenu::DormitoryManageMenu() :
     SelectMenu(
             Text("operation.administrator.dormitory_manage.title"),
-            {Option(Text("operation.administrator.dormitory_manage.option.find_building_info"), "B"),
-             Option(Text("operation.administrator.dormitory_manage.option.add_buildings"), "F", jumpInputAddBuilding),
+            {Option(Text("operation.administrator.dormitory_manage.option.add_buildings"), "F", jumpInputAddBuilding),
              Option(Text("operation.administrator.dormitory_manage.option.del_buildings"), "c",
                     jumpInputDeleteBuilding),
-             Option(Text("operation.administrator.dormitory_manage.option.find_dormitory_info"), "G"),
+             Option(Text("operation.administrator.dormitory_manage.option.find_dormitory_info"), "G",
+                    jumpDormCurrentInfo),
+             Option(Text("operation.administrator.dormitory_manage.option.find_building_info"), "G",
+                    jumpBuildingCurrentInfo),
              Option(Text("operation.administrator.dormitory_manage.option.add_dormitories"), "C", jumpInputAddDorm),
              Option(Text("operation.administrator.dormitory_manage.option.del_dormitories"), "c", jumpInputDeleteDorm),
-             Option(Text("operation.administrator.dormitory_manage.option.update_dormitory_status"), "G"),
-             Option(Text("operation.administrator.dormitory_manage.option.update_building_status"), "H")},
+             Option(Text("operation.administrator.dormitory_manage.option.update_dormitory_status"), "G",
+                    jumpUpdateDormitory),
+             Option(Text("operation.administrator.dormitory_manage.option.update_building_status"), "H",
+                    jumpUpdateDormitoryBuilding)},
             "k", 5) {}
 
 void DormitoryManageMenu::loop() { mainLoop(); }

@@ -27,7 +27,7 @@ std::string ChangePassword::changePassword() {
         return currentPassword;
     }
     std::string oldPwd = HashHelper::simpleHashString(
-            getNonEmptyInput("screen.operation.operations.UserChangePassword.original_password.Input."));
+            getInput("screen.operation.operations.UserChangePassword.original_password.Input."));
     bool change = false;
     int count = 1;
 
@@ -46,7 +46,7 @@ std::string ChangePassword::changePassword() {
                 return currentPassword;
             }
 
-            oldPwd = getNonEmptyInput("screen.operation.operations.UserChangePassword.Password.Input.again");
+            oldPwd = getInput("screen.operation.operations.UserChangePassword.Password.Input.again");
             count++;
         } else {
             change = true;
@@ -71,7 +71,7 @@ std::string ChangePassword::changePassword() {
                 return currentPassword;
             }
 
-            newPassword = getNonEmptyInput("screen.operation.operations.UserChangePassword.new_password.Input");
+            newPassword = getInput("screen.operation.operations.UserChangePassword.new_password.Input");
             if (!newPassword.empty()) {
                 break;
             }
@@ -92,7 +92,7 @@ std::string ChangePassword::changePassword() {
         }
 
 
-        confirmPwd = getNonEmptyInput("screen.operation.operations.UserChangePassword.new_password.Input.again");
+        confirmPwd = getInput("screen.operation.operations.UserChangePassword.new_password.Input.again");
 
 
         if (Logout::checkEscKey()) {
@@ -116,10 +116,9 @@ std::string ChangePassword::changePassword() {
                 }
                 pause();
                 return newPassword;
-            } else {
-                showError("screen.operation.operations.UserChangePassword.new_password.confirmation.fail");
-                std::cout << std::endl;
             }
+            showError("screen.operation.operations.UserChangePassword.new_password.confirmation.fail");
+            std::cout << std::endl;
         } else {
             showError("screen.operation.operations.UserChangePassword.new_password.difference");
         }

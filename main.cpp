@@ -27,5 +27,7 @@ int main() {
     system("cls");
     LoginSelectMenu menu;
     menu.loop();
+    // AdminAccommodationReview m;
+    // m.inputReviewApplications();
     return 0;
 }

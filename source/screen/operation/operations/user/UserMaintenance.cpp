@@ -48,8 +48,8 @@ void UserMaintenance::submitRepair() {
     std::cout << std::endl;
 
 
-    sponsor = getNonEmptyInput("screen.operation.operations.UserMaintenance.sponsor");
-    description = getNonEmptyInput("screen.operation.operations.UserMaintenance.repair.content");
+    sponsor = getInput("screen.operation.operations.UserMaintenance.sponsor");
+    description = getInput("screen.operation.operations.UserMaintenance.repair.content");
     bool isConfirm = confirmOperation("screen.operation.operations.UserMaintenance.repair.confirmation");
     if (isConfirm) {
         showSuccess("screen.operation.operations.UserMaintenance.repair.success");
@@ -103,7 +103,7 @@ void UserMaintenance::submitValuation() {
         return;
     }
 
-    std::string evalContent = getNonEmptyInput("screen.operation.operations.UserMaintenance.valuation.prompt");
+    std::string evalContent = getInput("screen.operation.operations.UserMaintenance.valuation.prompt");
 
     bool isConfirm = confirmOperation("screen.operation.operations.UserMaintenance.valuation.confirm");
 

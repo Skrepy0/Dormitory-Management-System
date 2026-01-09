@@ -19,7 +19,8 @@ public: // 输出类：
     // 输入类：
     static std::string getDigitInput(const std::string &prompt, int minlen = 0,
                                      int maxlen = 0); // 获取纯数字输入（如学号）
-    static std::string getNonEmptyInput(const std::string &prompt); // 获取非空字符串输入（如姓名，学号）
+    static std::string getInput(const std::string &prompt,
+                                bool allowEmpty = false); // 获取非空字符串输入（如姓名，学号）
     static bool isAllDigit(const std::string &str);
 
     static bool confirmOperation(const std::string &prompt); // 确认操作

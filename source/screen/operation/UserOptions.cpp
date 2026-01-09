@@ -74,7 +74,7 @@ std::string StudentOptions::getStudentIdInput() { return getDigitInput("请输�
 std::string StudentOptions::getDormApplyReason() {
     std::string reason;
     while (true) {
-        reason = getNonEmptyInput("请输入申请理由（最多50字）：");
+        reason = getInput("请输入申请理由（最多50字）：");
         if (reason.length() <= 50)
             return reason;
         showError("理由长度不能超过50字！");
@@ -82,7 +82,7 @@ std::string StudentOptions::getDormApplyReason() {
 }
 
 // 获取报修内容
-std::string StudentOptions::getRepairContentInput() { return getNonEmptyInput("请描述报修设施及问题："); }
+std::string StudentOptions::getRepairContentInput() { return getInput("请描述报修设施及问题："); }
 
 // 展示学生宿舍信息（专属格式）
 void StudentOptions::showStudentDormInfo(const std::string &id, const std::string &dormNum,

@@ -26,7 +26,6 @@ void UserOperationMenu::changePassword() {
     ChangePassword screen;
     screen.changePassword();
     hideCursor();
-    system("pause>nul");
 }
 
 void UserOperationMenu::jumpDormitoryInfoScreen() { DormitoryInfoScreen screen; }
@@ -37,7 +36,6 @@ void UserOperationMenu::jumpInputCheckInApplication() {
     UserApplication menu;
     menu.inputCheckInApplication();
     hideCursor();
-    system("pause>nul");
 }
 
 void UserOperationMenu::jumpInputCheckOutApplication() {
@@ -46,7 +44,6 @@ void UserOperationMenu::jumpInputCheckOutApplication() {
     UserApplication menu;
     menu.inputCheckOutApplication();
     hideCursor();
-    system("pause>nul");
 }
 
 UserOperationMenu::UserOperationMenu() :
@@ -55,8 +52,8 @@ UserOperationMenu::UserOperationMenu() :
                        Option(Text("operation.user.option.change_password"), "a", changePassword),
                        Option(Text("operation.user.option.apply_for_repairs"), "d", jumpMaintenanceMenu),
                        Option(Text("operation.user.option.dormitory_info"), "p", jumpDormitoryInfoScreen),
-                       Option(Text("operation.user.option.application.check_in"), "b",jumpInputCheckInApplication),
-                       Option(Text("operation.user.option.application.check_out"), "y",jumpInputCheckOutApplication),
+                       Option(Text("operation.user.option.application.check_in"), "b", jumpInputCheckInApplication),
+                       Option(Text("operation.user.option.application.check_out"), "y", jumpInputCheckOutApplication),
                        Option(Text("operation.user.option.language"), "g", jumpSelectLanguageMenu),
                        Option(Text("operation.user.option.exit"), "p", exitSystem),
                },

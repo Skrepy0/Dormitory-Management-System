@@ -51,7 +51,7 @@ AdministratorOperationMenu::AdministratorOperationMenu() :
     SelectMenu(Text("operation.administrator.title"),
                {Option(Text("operation.administrator.option.dormitory_management"), "a", jumpDormitoryManageMenu),
                 Option(Text("operation.administrator.option.verify"), "y", jumpAuditMenu),
-                Option(Text("operation.administrator.option.student_info"), "p",jumpStudentInfoManageMenu),
+                Option(Text("operation.administrator.option.student_info"), "p", jumpStudentInfoManageMenu),
                 Option(Text("operation.administrator.option.change_password"), "g", changePassword),
                 Option(Text("operation.administrator.option.language"), "d", jumpSelectLanguageMenu),
                 Option(Text("operation.administrator.option.exit"), "c", exitSystem)},

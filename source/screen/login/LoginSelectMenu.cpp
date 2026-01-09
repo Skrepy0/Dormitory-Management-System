@@ -51,7 +51,13 @@ void LoginSelectMenu::jumpAdminLogInInput() {
 
 LoginSelectMenu::LoginSelectMenu() :
     SelectMenu(Text("login.title"),
-               {Option(Text("login.option.user"), "a", jumpUserLogInInput),
+               {Option(Text("login.option.user"), "a",
+                       []() -> void {
+                           system("cls");
+                           UserOperationMenu menu;
+                           menu.loop();
+                           hideCursor();
+                       }),
                 Option(Text("login.option.registry"), "p", jumpUserRegisterInput),
                 Option(Text("login.option.administrator"), "d", jumpAdminOperationMenu),
                 Option(Text("login.option.set_language"), "A", jumpSelectLanguageMenu),

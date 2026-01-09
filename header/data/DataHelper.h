@@ -79,9 +79,10 @@ public:
      * @return nlohmann::json 包含宿舍信息的JSON对象
      */
     static nlohmann::json getDormitory(const nlohmann::json &userData) {
-        nlohmann::json building = getDormitoryBuildingList()[Accommodations::findBuildingByNumber(userData["dormitory"]["building_number"])];
+        nlohmann::json building = getDormitoryBuildingList()[Accommodations::findBuildingByNumber(
+                userData["dormitory"]["building_number"])];
         if (!building.empty()) {
-            for (auto dormitory : building["dormitories"]) {
+            for (auto dormitory: building["dormitories"]) {
                 if (dormitory["room_number"] == userData["dormitory"]["room_number"]) {
                     return dormitory;
                 }
@@ -178,7 +179,7 @@ public:
     static nlohmann::json getCheckInApplicationToBeReviewedList() {
         nlohmann::json checkInList = StayLog::readJson()["check-in"];
         nlohmann::json list = nlohmann::json::array();
-        for (auto i : checkInList) {
+        for (auto i: checkInList) {
             if (i["status"] == "pending") {
                 list.push_back(i);
             }
@@ -188,7 +189,7 @@ public:
     static nlohmann::json getCheckOutApplicationToBeReviewedList() {
         nlohmann::json checkInList = StayLog::readJson()["check-out"];
         nlohmann::json list = nlohmann::json::array();
-        for (auto i : checkInList) {
+        for (auto i: checkInList) {
             if (i["status"] == "pending") {
                 list.push_back(i);
             }

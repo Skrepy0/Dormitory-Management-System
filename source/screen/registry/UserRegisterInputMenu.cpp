@@ -41,12 +41,12 @@ void UserRegisterInputMenu::showUserRegisterUI() {
     }
 
     // 输入姓名
-    std::string name = getNonEmptyInput("screen.register.user.input.name");
+    std::string name = getInput("screen.register.user.input.name");
     // 输入邮箱
-    std::string email = getNonEmptyInput("screen.register.user.input.email");
+    std::string email = getInput("screen.register.user.input.email");
     // 输入密码
-    std::string pwd = getNonEmptyInput("screen.register.input.pwd");
-    std::string confirmPwd = getNonEmptyInput("screen.register.input.confirm.pwd");
+    std::string pwd = getInput("screen.register.input.pwd");
+    std::string confirmPwd = getInput("screen.register.input.confirm.pwd");
     if (pwd != confirmPwd) {
         showError("screen.register.pwd.not.match");
         pause();

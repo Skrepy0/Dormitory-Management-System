@@ -247,5 +247,30 @@
   "operation.user.dormitory_info.info.bed_number": "$g床号：$r",
   "operation.user.dormitory_info.info.vacant_bed": "$g空床数量：$r",
   "operation.user.dormitory_info.info.stay_log_count": "$g入住记录数量：$r",
-  "operation.user.dormitory_info.info.maintenance_count": "$g报修记录数量：$r"
+  "operation.user.dormitory_info.info.maintenance_count": "$g报修记录数量：$r",
+  "admin.accommodation.review.title": "$D🔍 管理员-住宿申请审核 🔍$r",
+  "admin.accommodation.review.title.select_check-in": "$D📥 待审核入住申请列表 📥$r",
+  "admin.accommodation.review.title.select_check-out": "$D📤 待审核退宿申请列表 📤$r",
+  "admin.accommodation.review.title.detail": "$D📋 申请详情 📋$r",
+
+  "admin.accommodation.review.prompt.no_pending": "$D🟡 暂无待审核的住宿申请$r",
+  "admin.accommodation.review.prompt.select_type": "$D请选择申请类型：$r",
+  "admin.accommodation.review.prompt.input_type_choice": "$D请输入选项（1/2）：$r",
+  "admin.accommodation.review.prompt.no_pending_check-in": "$D🟡 暂无待审核的入住申请$r",
+  "admin.accommodation.review.prompt.no_pending_check-out": "$D🟡 暂无待审核的退宿申请$r",
+  "admin.accommodation.review.prompt.input_choice": "$D请输入要审核的申请序号：$r",
+  "admin.accommodation.review.prompt.confirm_approve": "$D是否通过该申请？（Y/N）$r",
+  "admin.accommodation.review.prompt.rejected": "$D🟢 已拒绝该申请$r",
+
+  "admin.accommodation.label.type": "$D🏷️ 申请类型：$r",
+  "admin.accommodation.label.apply_id": "$D📝 申请ID：$r",
+  "admin.accommodation.label.applicant": "$D🧑‍🎓 申请人：$r",
+  "admin.accommodation.label.apply_time": "$D⏰ 申请时间：$r",
+  "admin.accommodation.label.building": "$D🏢 所属楼栋：$r",
+  "admin.accommodation.label.room": "$D🚪 宿舍号：$r",
+  "admin.accommodation.label.bed": "$D🛏️ 床位号：$r",
+  "admin.accommodation.label.reason": "$D📝 申请原因：$r",
+
+  "admin.accommodation.review.success.approved": "$D✅ 申请审核通过，已更新记录$r",
+  "admin.accommodation.review.error": "$D❌ 审核过程出错：$r"
 }

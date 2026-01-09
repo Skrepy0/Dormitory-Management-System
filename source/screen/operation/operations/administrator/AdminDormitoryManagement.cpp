@@ -13,11 +13,11 @@ void AdminDormitoryManagement::inputAddBuilding() {
     clearScreen();
     showTitle("operation.administrator.dorm.manage.add_building.title");
     std::cout << std::endl;
-    std::string name = getNonEmptyInput("operation.administrator.dorm.manage.prompt.building_name");
-    std::string location = getNonEmptyInput("operation.administrator.dorm.manage.prompt.building_location");
-    std::string number = getNonEmptyInput("operation.administrator.dorm.manage.prompt.building_number");
-    std::string dormCount = getNonEmptyInput("operation.administrator.dorm.manage.prompt.dorm_count");
-    std::string bedCount = getNonEmptyInput("operation.administrator.dorm.manage.prompt.bed_count");
+    std::string name = getInput("operation.administrator.dorm.manage.prompt.building_name", true);
+    std::string location = getInput("operation.administrator.dorm.manage.prompt.building_location", true);
+    std::string number = getInput("operation.administrator.dorm.manage.prompt.building_number", true);
+    std::string dormCount = getInput("operation.administrator.dorm.manage.prompt.dorm_count", true);
+    std::string bedCount = getInput("operation.administrator.dorm.manage.prompt.bed_count", true);
 
     BuildingData newBuilding(name, location, number, dormCount, bedCount);
 
@@ -38,7 +38,7 @@ void AdminDormitoryManagement::inputAddDormRoom() {
     clearScreen();
     showTitle("operation.administrator.dorm.manage.add_dorm.title");
     std::cout << std::endl;
-    std::string buildingNumber = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_building");
+    std::string buildingNumber = getInput("operation.administrator.dorm.manage.prompt.select_building");
     auto &acc = getAccommodations();
     long long buildingIndex = Accommodations::findBuildingByNumber(buildingNumber);
 
@@ -51,9 +51,9 @@ void AdminDormitoryManagement::inputAddDormRoom() {
     nlohmann::json buildingJson = acc.getBuildingJson(static_cast<int>(buildingIndex));
     BuildingData targetBuilding(buildingJson);
 
-    std::string roomNum = getNonEmptyInput("operation.administrator.dorm.manage.prompt.room_number");
-    std::string floor = getNonEmptyInput("operation.administrator.dorm.manage.prompt.floor");
-    std::string vacantBed = getNonEmptyInput("operation.administrator.dorm.manage.prompt.vacant_bed");
+    std::string roomNum = getInput("operation.administrator.dorm.manage.prompt.room_number");
+    std::string floor = getInput("operation.administrator.dorm.manage.prompt.floor");
+    std::string vacantBed = getInput("operation.administrator.dorm.manage.prompt.vacant_bed");
 
     nlohmann::json newDormJson;
     newDormJson["building_number"] = buildingNumber;
@@ -80,7 +80,7 @@ void AdminDormitoryManagement::inputDeleteBuilding() {
     showTitle("operation.administrator.dorm.manage.delete_building.title");
     std::cout << std::endl;
 
-    std::string buildingNumber = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_building");
+    std::string buildingNumber = getInput("operation.administrator.dorm.manage.prompt.select_building");
     Accommodations acc;
     long long buildingIndex = Accommodations::findBuildingByNumber(buildingNumber);
 
@@ -118,7 +118,7 @@ void AdminDormitoryManagement::inputDeleteDormRoom() {
     clearScreen();
     showTitle("operation.administrator.dorm.manage.delete_dorm.title");
     std::cout << std::endl;
-    std::string buildingNumber = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_building");
+    std::string buildingNumber = getInput("operation.administrator.dorm.manage.prompt.select_building");
     auto &acc = getAccommodations();
     long long buildingIndex = Accommodations::findBuildingByNumber(buildingNumber);
 
@@ -133,7 +133,7 @@ void AdminDormitoryManagement::inputDeleteDormRoom() {
     nlohmann::json dorms = buildingJson["dormitories"];
 
 
-    std::string roomNum = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_dorm");
+    std::string roomNum = getInput("operation.administrator.dorm.manage.prompt.select_dorm");
     bool flag = false;
     for (auto it = dorms.begin(); it != dorms.end(); ++it) {
         if ((*it)["room_number"].get<std::string>() == roomNum) {
@@ -163,13 +163,10 @@ void AdminDormitoryManagement::showBuildingCurrentInfo() {
     clearScreen();
     showTitle("admin.dorm.update.building.title.detail");
     std::cout << std::endl;
-    std::string targetBuildingNum = getDigitInput(
-        "admin.dorm.update.building.prompt.input_building_num",
-        1, 3
-    );
+    std::string targetBuildingNum = getDigitInput("admin.dorm.update.building.prompt.input_building_num", 1, 3);
     nlohmann::json allBuildings = DataHelper::getDormitoryBuildingList();
     auto buildingIt = std::find_if(allBuildings.begin(), allBuildings.end(),
-        [&](const nlohmann::json& b) { return b["building_number"] == targetBuildingNum; });
+                                   [&](const nlohmann::json &b) { return b["building_number"] == targetBuildingNum; });
 
     if (buildingIt == allBuildings.end()) {
         showError(Text("admin.dorm.error.building_not_found").getContent());
@@ -197,26 +194,20 @@ void AdminDormitoryManagement::showDormCurrentInfo() {
     clearScreen();
     showTitle("admin.dorm.update.dorm.title.detail");
     std::cout << std::endl;
-    std::string targetBuildingNum = getDigitInput(
-        "admin.dorm.update.dorm.prompt.input_building_num",
-        1, 3
-    );
+    std::string targetBuildingNum = getDigitInput("admin.dorm.update.dorm.prompt.input_building_num", 1, 3);
     nlohmann::json allBuildings = DataHelper::getDormitoryBuildingList();
     auto buildingIt = std::find_if(allBuildings.begin(), allBuildings.end(),
-        [&](const nlohmann::json& b) { return b["building_number"] == targetBuildingNum; });
+                                   [&](const nlohmann::json &b) { return b["building_number"] == targetBuildingNum; });
 
     if (buildingIt == allBuildings.end()) {
         showError(Text("admin.dorm.error.building_not_found").getContent());
         pause();
         return;
     }
-    std::string targetRoomNum = getDigitInput(
-        "admin.dorm.update.dorm.prompt.input_room_num",
-        3, 4
-    );
-    nlohmann::json& dormList = (*buildingIt)["dormitories"];
+    std::string targetRoomNum = getDigitInput("admin.dorm.update.dorm.prompt.input_room_num", 3, 4);
+    nlohmann::json &dormList = (*buildingIt)["dormitories"];
     auto dormIt = std::find_if(dormList.begin(), dormList.end(),
-        [&](const nlohmann::json& d) { return d["room_number"] == targetRoomNum; });
+                               [&](const nlohmann::json &d) { return d["room_number"] == targetRoomNum; });
 
     if (dormIt == dormList.end()) {
         showError(Text("admin.dorm.error.dorm_not_found").getContent());
@@ -228,14 +219,19 @@ void AdminDormitoryManagement::showDormCurrentInfo() {
     bool hasMaintenance = false;
 
     if (!maintenances.empty()) {
-        std::sort(maintenances.begin(), maintenances.end(), [](const nlohmann::json& a, const nlohmann::json& b) {
-            const auto& aTime = a["report_time"];
-            const auto& bTime = b["report_time"];
-            if (aTime["year"] != bTime["year"]) return aTime["year"] > bTime["year"];
-            if (aTime["month"] != bTime["month"]) return aTime["month"] > bTime["month"];
-            if (aTime["day"] != bTime["day"]) return aTime["day"] > bTime["day"];
-            if (aTime["hour"] != bTime["hour"]) return aTime["hour"] > bTime["hour"];
-            if (aTime["minute"] != bTime["minute"]) return aTime["minute"] > bTime["minute"];
+        std::sort(maintenances.begin(), maintenances.end(), [](const nlohmann::json &a, const nlohmann::json &b) {
+            const auto &aTime = a["report_time"];
+            const auto &bTime = b["report_time"];
+            if (aTime["year"] != bTime["year"])
+                return aTime["year"] > bTime["year"];
+            if (aTime["month"] != bTime["month"])
+                return aTime["month"] > bTime["month"];
+            if (aTime["day"] != bTime["day"])
+                return aTime["day"] > bTime["day"];
+            if (aTime["hour"] != bTime["hour"])
+                return aTime["hour"] > bTime["hour"];
+            if (aTime["minute"] != bTime["minute"])
+                return aTime["minute"] > bTime["minute"];
             return aTime["second"] > bTime["second"];
         });
         latestMaintenance = maintenances[0];
@@ -251,7 +247,7 @@ void AdminDormitoryManagement::showDormCurrentInfo() {
     std::cout << std::endl;
 
     showContent("admin.dorm.label.total_bed");
-    showContent((*dormIt)["total_bed"]);
+    showContent((*dormIt)["bed_count"]);
     std::cout << std::endl;
 
     showContent("admin.dorm.label.vacant_bed");
@@ -287,31 +283,34 @@ void AdminDormitoryManagement::updateDormitoryBuilding() {
         pause();
         showBuildingCurrentInfo();
         clearScreen();
-        std::string targetBuildingNum = getDigitInput(
-            "admin.dorm.update.building.prompt.input_building_num_update",
-            1, 3
-        );
+        std::string targetBuildingNum =
+                getDigitInput("admin.dorm.update.building.prompt.input_building_num_update", 1, 3);
         nlohmann::json allBuildings = DataHelper::getDormitoryBuildingList();
-        auto buildingIt = std::find_if(allBuildings.begin(), allBuildings.end(),
-            [&](const nlohmann::json& b) { return b["building_number"] == targetBuildingNum; });
+        auto buildingIt = std::find_if(allBuildings.begin(), allBuildings.end(), [&](const nlohmann::json &b) {
+            return b["building_number"] == targetBuildingNum;
+        });
 
         if (buildingIt == allBuildings.end()) {
             showError(Text("admin.dorm.error.building_not_found").getContent());
             pause();
             return;
         }
-        std::string newName = getNonEmptyInput("admin.dorm.update.building.prompt.input_new_name");
+        std::string newName = getInput("admin.dorm.update.building.prompt.input_new_name", true);
 
-        std::string newLocation = getNonEmptyInput("admin.dorm.update.building.prompt.input_new_location");
+        std::string newLocation = getInput("admin.dorm.update.building.prompt.input_new_location", true);
 
-        std::string newDormCountStr = getDigitInput("admin.dorm.update.building.prompt.input_new_dorm_count", 1, 999);
+        std::string newDormCountStr = getDigitInput("admin.dorm.update.building.prompt.input_new_dorm_count", 0, 999);
 
-        std::string newBedCountStr = getDigitInput("admin.dorm.update.building.prompt.input_new_bed_count", 1, 8);
+        std::string newBedCountStr = getDigitInput("admin.dorm.update.building.prompt.input_new_bed_count", 0, 8);
         bool hasChange = false;
-        if (!newName.empty()) hasChange = true;
-        if (!newLocation.empty()) hasChange = true;
-        if (!newDormCountStr.empty()) hasChange = true;
-        if (!newBedCountStr.empty()) hasChange = true;
+        if (!newName.empty())
+            hasChange = true;
+        if (!newLocation.empty())
+            hasChange = true;
+        if (!newDormCountStr.empty())
+            hasChange = true;
+        if (!newBedCountStr.empty())
+            hasChange = true;
 
         if (!hasChange) {
             showPrompt("admin.dorm.update.prompt.no_change");
@@ -323,10 +322,14 @@ void AdminDormitoryManagement::updateDormitoryBuilding() {
             pause();
             return;
         }
-        if (!newName.empty()) (*buildingIt)["building_name"] = newName;
-        if (!newLocation.empty()) (*buildingIt)["building_location"] = newLocation;
-        if (!newDormCountStr.empty()) (*buildingIt)["dormitories_count"] = newDormCountStr; // 新增
-        if (!newBedCountStr.empty()) (*buildingIt)["bed_count"] = newBedCountStr;           // 新增
+        if (!newName.empty())
+            (*buildingIt)["building_name"] = newName;
+        if (!newLocation.empty())
+            (*buildingIt)["building_location"] = newLocation;
+        if (!newDormCountStr.empty())
+            (*buildingIt)["dormitories_count"] = newDormCountStr; // 新增
+        if (!newBedCountStr.empty())
+            (*buildingIt)["bed_count"] = newBedCountStr; // 新增
         nlohmann::json accRootData = Accommodations::readFromJson();
         accRootData["dormitory_building"] = allBuildings;
         if (Accommodations::writeInFile(accRootData)) {
@@ -335,7 +338,7 @@ void AdminDormitoryManagement::updateDormitoryBuilding() {
             showError(Text("admin.dorm.error.write_failed").getContent());
         }
 
-    } catch (const std::exception& e) {
+    } catch (const std::exception &e) {
         Text errorTip("admin.dorm.error.update_failed");
         showError(errorTip.getContent() + e.what());
     }
@@ -352,18 +355,13 @@ void AdminDormitoryManagement::updateDormitory() {
         showDormCurrentInfo();
 
         clearScreen();
-        std::string targetBuildingNum = getDigitInput(
-            "admin.dorm.update.dorm.prompt.input_building_num_update",
-            1, 3
-        );
-        std::string targetRoomNum = getDigitInput(
-            "admin.dorm.update.dorm.prompt.input_room_num_update",
-            3, 4
-        );
+        std::string targetBuildingNum = getDigitInput("admin.dorm.update.dorm.prompt.input_building_num_update", 0, 3);
+        std::string targetRoomNum = getDigitInput("admin.dorm.update.dorm.prompt.input_room_num_update", 0, 4);
 
         nlohmann::json allBuildings = DataHelper::getDormitoryBuildingList();
-        auto buildingIt = std::find_if(allBuildings.begin(), allBuildings.end(),
-            [&](const nlohmann::json& b) { return b["building_number"] == targetBuildingNum; });
+        auto buildingIt = std::find_if(allBuildings.begin(), allBuildings.end(), [&](const nlohmann::json &b) {
+            return b["building_number"] == targetBuildingNum;
+        });
 
         if (buildingIt == allBuildings.end()) {
             showError(Text("admin.dorm.error.building_not_found").getContent());
@@ -371,23 +369,25 @@ void AdminDormitoryManagement::updateDormitory() {
             return;
         }
 
-        nlohmann::json& dormList = (*buildingIt)["dormitories"];
+        nlohmann::json &dormList = (*buildingIt)["dormitories"];
         auto dormIt = std::find_if(dormList.begin(), dormList.end(),
-            [&](const nlohmann::json& d) { return d["room_number"] == targetRoomNum; });
+                                   [&](const nlohmann::json &d) { return d["room_number"] == targetRoomNum; });
 
         if (dormIt == dormList.end()) {
             showError(Text("admin.dorm.error.dorm_not_found").getContent());
             pause();
             return;
         }
-
-        std::string newTotalBedStr = getDigitInput("admin.dorm.update.dorm.prompt.input_new_total_bed", 1, 8);
-        int maxVacant = newTotalBedStr.empty() ? (*dormIt)["total_bed"].get<int>() : std::stoi(newTotalBedStr);
-        std::string newVacantBedStr = getDigitInput("admin.dorm.update.dorm.prompt.input_new_vacant_bed", 0, maxVacant);
-
+        std::string value = getDigitInput("admin.dorm.update.dorm.prompt.input_new_total_bed", 0, 8);
+        std::string newTotalBedStr = value.empty() ? static_cast<std::string>((*dormIt)["bed_count"]) : value;
+        int maxVacant = newTotalBedStr.empty() ? (*dormIt)["bed_count"].get<int>() : std::stoi(newTotalBedStr);
+        value = getDigitInput("admin.dorm.update.dorm.prompt.input_new_vacant_bed", 0, maxVacant);
+        std::string newVacantBedStr = value.empty() ? nlohmann::to_string((*dormIt)["vacant_bed"]) : value;
         bool hasChange = false;
-        if (!newTotalBedStr.empty()) hasChange = true;
-        if (!newVacantBedStr.empty()) hasChange = true;
+        if (!newTotalBedStr.empty())
+            hasChange = true;
+        if (!newVacantBedStr.empty())
+            hasChange = true;
         if (!hasChange) {
             showPrompt("admin.dorm.update.prompt.no_change");
             pause();
@@ -400,8 +400,10 @@ void AdminDormitoryManagement::updateDormitory() {
             return;
         }
 
-        if (!newTotalBedStr.empty()) (*dormIt)["total_bed"] = std::stoi(newTotalBedStr);
-        if (!newVacantBedStr.empty()) (*dormIt)["vacant_bed"] = std::stoi(newVacantBedStr);
+        if (!newTotalBedStr.empty())
+            (*dormIt)["bed_count"] = newTotalBedStr;
+        if (!newVacantBedStr.empty())
+            (*dormIt)["vacant_bed"] = std::stoi(newVacantBedStr);
 
         nlohmann::json accRootData = Accommodations::readFromJson();
         accRootData["dormitory_building"] = allBuildings;
@@ -411,7 +413,7 @@ void AdminDormitoryManagement::updateDormitory() {
             showError(Text("admin.dorm.error.write_failed").getContent());
         }
 
-    } catch (const std::exception& e) {
+    } catch (const std::exception &e) {
         Text errorTip("admin.dorm.error.update_failed");
         showError(errorTip.getContent() + e.what());
     }

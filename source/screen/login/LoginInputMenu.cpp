@@ -13,7 +13,7 @@ bool LoginInputMenu::login(std::string &key, std::string &prompt) {
         std::string id = getDigitInput(prompt, 12, 12 // 假设学号是8位，限制长度8-8
         );
 
-        std::string pwd = getNonEmptyInput("screen.login.LoginScreen.login.password");
+        std::string pwd = getInput("screen.login.LoginScreen.login.password");
 
         if (Logout::checkEscKey()) {
             clearScreen();

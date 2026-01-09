@@ -9,9 +9,9 @@
             "dormitories_count": "123"
         },
         {
-            "bed_count": "123",
-            "building_location": "loa",
-            "building_name": "nam",
+            "bed_count": "1",
+            "building_location": "loa1",
+            "building_name": "num1",
             "building_number": "11",
             "dormitories": [
                 {
@@ -118,7 +118,6 @@
                         }
                     ],
                     "room_number": "312",
-                    "total_bed": "4",
                     "vacant_bed": 0
                 },
                 {
@@ -140,7 +139,7 @@
                     "vacant_bed": 4
                 }
             ],
-            "dormitories_count": "114514"
+            "dormitories_count": "11"
         }
     ]
 }

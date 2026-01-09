@@ -80,15 +80,19 @@ void InputMenu::pause() {
 }
 
 
-std::string InputMenu::getNonEmptyInput(const std::string &prompt) {
+std::string InputMenu::getInput(const std::string &prompt, bool allowEmpty) {
     SetConsoleCP(CP_UTF8);
     std::string input;
     while (true) {
         showPrompt(prompt);
         getline(std::cin, input);
+        if (allowEmpty) {
+            return input;
+        }
         if (!input.empty()) {
             return input;
         }
+
         Text t("screen.InputMenu.getNonEmptyInput");
         Message message(t.getContent());
         message.printContent();
@@ -108,7 +112,13 @@ std::string InputMenu::getDigitInput(const std::string &prompt, int minLen, int 
     SetConsoleCP(CP_UTF8);
     std::string input;
     while (true) {
-        input = getNonEmptyInput(prompt);
+        input = getInput(prompt, minLen == 0);
+
+        // 如果允许空输入且输入为空，直接返回
+        if (minLen == 0 && input.empty()) {
+            return input;
+        }
+
         // 校验是否为纯数字
         if (!isAllDigit(input)) {
             Text t("screen.InputMenu.getDigitInput.!isAllDigit");

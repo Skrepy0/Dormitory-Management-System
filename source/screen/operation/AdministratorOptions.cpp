@@ -60,7 +60,7 @@ std::string AdminOptions::getDormNumInput() {
     std::string dormNum;
     std::regex pattern(R"(\d+号楼\d+室)"); // 正则匹配"X号楼XXX室"格式
     while (true) {
-        dormNum = getNonEmptyInput("请输入宿舍号（格式：X号楼XXX室）：");
+        dormNum = getInput("请输入宿舍号（格式：X号楼XXX室）：");
         if (regex_match(dormNum, pattern))
             return dormNum;
         showError("宿舍号格式错误！示例：1号楼201室");
@@ -71,7 +71,7 @@ std::string AdminOptions::getDormNumInput() {
 std::string AdminOptions::getAuditOpinionInput() {
     std::string opinion;
     while (true) {
-        opinion = getNonEmptyInput("请输入审核意见（最多30字）：");
+        opinion = getInput("请输入审核意见（最多30字）：");
         if (opinion.length() <= 30)
             return opinion;
         showError("意见长度不能超过30字！");
