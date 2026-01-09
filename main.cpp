@@ -24,7 +24,8 @@
 #include "header/screen/registry/UserRegisterInputMenu.h"
 
 int main() {
-    AdminAccommodationReview t;
-    t.inputReviewApplications();
+    system("cls");
+    LoginSelectMenu menu;
+    menu.loop();
     return 0;
 }

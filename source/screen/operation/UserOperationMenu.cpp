@@ -3,6 +3,7 @@
 #include "../../../header/screen/operation/operations/ChangePassword.h"
 #include "../../../header/screen/operation/operations/SelectLanguage.h"
 #include "../../../header/screen/operation/operations/user/DormitoryInfoScreen.h"
+#include "../../../header/screen/operation/operations/user/UserApplication.h"
 #include "../../../header/screen/operation/operations/user/UserMaintenanceSelectMenu.h"
 
 void UserOperationMenu::jumpSelectLanguageMenu() {
@@ -30,13 +31,32 @@ void UserOperationMenu::changePassword() {
 
 void UserOperationMenu::jumpDormitoryInfoScreen() { DormitoryInfoScreen screen; }
 
+void UserOperationMenu::jumpInputCheckInApplication() {
+    system("cls");
+    showCursor();
+    UserApplication menu;
+    menu.inputCheckInApplication();
+    hideCursor();
+    system("pause>nul");
+}
+
+void UserOperationMenu::jumpInputCheckOutApplication() {
+    system("cls");
+    showCursor();
+    UserApplication menu;
+    menu.inputCheckOutApplication();
+    hideCursor();
+    system("pause>nul");
+}
+
 UserOperationMenu::UserOperationMenu() :
     SelectMenu(Text("operation.user.title"),
                {
                        Option(Text("operation.user.option.change_password"), "a", changePassword),
                        Option(Text("operation.user.option.apply_for_repairs"), "d", jumpMaintenanceMenu),
                        Option(Text("operation.user.option.dormitory_info"), "p", jumpDormitoryInfoScreen),
-                       Option(Text("operation.user.option.application"), "y"),
+                       Option(Text("operation.user.option.application.check_in"), "b",jumpInputCheckInApplication),
+                       Option(Text("operation.user.option.application.check_out"), "y",jumpInputCheckOutApplication),
                        Option(Text("operation.user.option.language"), "g", jumpSelectLanguageMenu),
                        Option(Text("operation.user.option.exit"), "p", exitSystem),
                },

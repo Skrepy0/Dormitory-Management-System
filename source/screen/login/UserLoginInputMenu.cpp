@@ -22,7 +22,7 @@ bool UserLoginInputMenu::verifyCredentials(const std::string &studentId, const s
         const auto &user = allUserData["user"][userIndex];
 
 
-        return user["password"] == HashHelper::getHash(password);
+        return user["password"] == HashHelper::simpleHashString(password);
 
     } catch (const std::exception &e) {
 

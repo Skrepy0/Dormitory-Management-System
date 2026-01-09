@@ -7,6 +7,8 @@ private:
     void static jumpMaintenanceMenu();
     void static changePassword();
     void static jumpDormitoryInfoScreen();
+    void static jumpInputCheckInApplication();
+    void static jumpInputCheckOutApplication();
 
 public:
     UserOperationMenu();

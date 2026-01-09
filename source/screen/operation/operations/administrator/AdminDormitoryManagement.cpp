@@ -56,7 +56,10 @@ void AdminDormitoryManagement::inputAddDormRoom() {
     std::string vacantBed = getNonEmptyInput("operation.administrator.dorm.manage.prompt.vacant_bed");
 
     nlohmann::json newDormJson;
+    newDormJson["building_number"] = buildingNumber;
+    newDormJson["building_name"] = buildingJson["building_name"];
     newDormJson["room_number"] = roomNum;
+    newDormJson["bed_count"] = buildingJson["bed_count"];
     newDormJson["floor"] = floor;
     newDormJson["vacant_bed"] = std::stoi(vacantBed);
     newDormJson["maintenances"] = nlohmann::json::array();

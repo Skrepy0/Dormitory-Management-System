@@ -3,7 +3,7 @@
         {
             "dormitory": {
                 "bed_number": "4",
-                "building_name": "B",
+                "building_name": "nam",
                 "building_number": "11",
                 "reason": "入学",
                 "room_number": "312"
@@ -11,12 +11,13 @@
             "handler": "123",
             "hash": "fd3647bb4d16f5ed",
             "initiator": "456",
+            "status": "pending",
             "time": null
         },
         {
             "dormitory": {
                 "bed_number": "4",
-                "building_name": "B",
+                "building_name": "nam",
                 "building_number": "11",
                 "reason": "入学",
                 "room_number": "312"
@@ -24,6 +25,7 @@
             "handler": "123",
             "hash": "7f35121b80656fbf",
             "initiator": "456",
+            "status": "pending",
             "time": null
         },
         {
@@ -41,26 +43,39 @@
             "status": "pending"
         },
         {
-            "apply_id": "202508010611_20260109222816_",
+            "apply_id": "202508010613_20260109212821_",
+            "apply_time": {
+                "day": 9,
+                "hour": 21,
+                "minute": 28,
+                "month": 1,
+                "second": 21,
+                "year": 2026
+            },
+            "hash": "448572ed057b768a",
+            "reason": "hahaha",
+            "status": "pending"
+        },
+        {
+            "apply_id": "202508010613_20260109224642_",
             "apply_time": {
                 "day": 9,
                 "hour": 22,
-                "minute": 28,
+                "minute": 46,
                 "month": 1,
-                "second": 16,
+                "second": 42,
                 "year": 2026
             },
-            "hash": "a9c904299cfc730",
-            "reason": "入学",
-            "status": "pending",
-            "type": "check-in"
+            "hash": "3d503f2cb4e9909c",
+            "reason": "hh",
+            "status": "pending"
         }
     ],
     "check-out": [
         {
             "dormitory": {
                 "bed_number": "4",
-                "building_name": "B",
+                "building_name": "nam",
                 "building_number": "11",
                 "reason": "入学",
                 "room_number": "312"
@@ -68,6 +83,7 @@
             "handler": "123",
             "hash": "15c3ed2f5a74ced9",
             "initiator": "456",
+            "status": "pending",
             "time": null
         },
         {
@@ -96,6 +112,20 @@
             },
             "hash": "d8c1d43fa67e1692",
             "reason": "不爽",
+            "status": "pending"
+        },
+        {
+            "apply_id": "123_20260109212925_",
+            "apply_time": {
+                "day": 9,
+                "hour": 21,
+                "minute": 29,
+                "month": 1,
+                "second": 25,
+                "year": 2026
+            },
+            "hash": "c6f23daef891ac6c",
+            "reason": "1",
             "status": "pending"
         }
     ]
