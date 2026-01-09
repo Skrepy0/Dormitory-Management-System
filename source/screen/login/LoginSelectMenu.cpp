@@ -4,6 +4,7 @@
 
 #include "../../../header/screen/login/LoginSelectMenu.h"
 
+#include "../../../header/screen/Login/AdministratorLoginInputMenu.h"
 #include "../../../header/screen/Login/UserLogInInputMenu.h"
 #include "../../../header/screen/operation/AdministratorOperationMenu.h"
 #include "../../../header/screen/operation/UserOperationMenu.h"
@@ -36,6 +37,14 @@ void LoginSelectMenu::jumpUserLogInInput() {
     showCursor();
     UserLoginInputMenu menu;
     menu.showUserLogin();
+    hideCursor();
+}
+
+void LoginSelectMenu::jumpAdminLogInInput() {
+    system("cls");
+    showCursor();
+    AdministratorLoginInputMenu menu;
+    menu.showAdministratorLoginUI();
     hideCursor();
 }
 

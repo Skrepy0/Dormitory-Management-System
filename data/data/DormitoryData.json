@@ -1,6 +1,22 @@
 {
     "dormitory_building": [
         {
+            "bed_count": "4",
+            "building_location": "1",
+            "building_name": "123",
+            "building_number": "2",
+            "dormitories": [],
+            "dormitories_count": "150"
+        },
+        {
+            "bed_count": "410",
+            "building_location": "152",
+            "building_name": "114514",
+            "building_number": "3",
+            "dormitories": [],
+            "dormitories_count": "123"
+        },
+        {
             "bed_count": "123",
             "building_location": "loa",
             "building_name": "nam",

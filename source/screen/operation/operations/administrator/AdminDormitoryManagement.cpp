@@ -3,6 +3,8 @@
 #include <stdexcept>
 #include "../../../../../header/data/Accommodations.h"
 #include "../../../../../header/data/BuildingData.h"
+#include "../../../../../header/data/DataHelper.h"
+
 Accommodations &AdminDormitoryManagement::getAccommodations() {
     static Accommodations instance; // 单例模式的实例
     return instance;
@@ -58,9 +60,12 @@ void AdminDormitoryManagement::inputAddDormRoom() {
     newDormJson["floor"] = floor;
     newDormJson["vacant_bed"] = std::stoi(vacantBed);
     newDormJson["maintenances"] = nlohmann::json::array();
-    targetBuilding.addDormitories(newDormJson); // 调用BuildingData的addDormitories
-
-    acc.getBuildingJson(static_cast<int>(buildingIndex)) = targetBuilding.getBuildingData();
+    nlohmann::json dormList;
+    dormList.push_back(newDormJson);
+    targetBuilding.addDormitories(dormList);
+    // 调用BuildingData的addDormitories
+    acc.eraseBuilding(static_cast<int>(buildingIndex));
+    acc.addBuildings(targetBuilding.getBuildingData());
     if (acc.writeInFile()) {
         showSuccess("operation.administrator.dorm.manage.add_dorm.success");
     } else {
@@ -123,25 +128,28 @@ void AdminDormitoryManagement::inputDeleteDormRoom() {
 
     nlohmann::json buildingJson = acc.getBuildingJson(static_cast<int>(buildingIndex));
     BuildingData targetBuilding(buildingJson);
-    nlohmann::json dorms = targetBuilding.getDormitoriesJson();
+    nlohmann::json dorms = buildingJson["dormitories"];
 
 
     std::string roomNum = getNonEmptyInput("operation.administrator.dorm.manage.prompt.select_dorm");
-    auto dormIt = std::remove_if(dorms.begin(), dorms.end(), [&](const nlohmann::json &dorm) {
-        // 显式类型（C++11兼容）
-        return dorm["room_number"] == roomNum;
-    });
+    bool flag = false;
+    for (auto it = dorms.begin(); it != dorms.end(); ++it) {
+        if ((*it)["room_number"].get<std::string>() == roomNum) {
+            dorms.erase(it);
+            flag = true;
+            break;
+        }
+    }
 
-    if (dormIt == dorms.end()) {
+    if (!flag) {
         showError("operation.administrator.dorm.manage.error.dorm_not_found");
         pause();
         return;
     }
 
-    dorms.erase(dormIt, dorms.end());
     targetBuilding.setDormitories(dorms);
-    acc.getBuildingJson(static_cast<int>(buildingIndex)) = targetBuilding.getBuildingData();
-
+    acc.eraseBuilding(static_cast<int>(buildingIndex));
+    acc.addBuildings(targetBuilding.getBuildingData());
     if (acc.writeInFile()) {
         showSuccess("operation.administrator.dorm.manage.delete_dorm.success");
     } else {

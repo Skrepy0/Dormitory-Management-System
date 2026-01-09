@@ -1,8 +1,10 @@
 ﻿#include "../../../header/screen/Login/AdministratorLoginInputMenu.h"
 #include <fstream>
 #include "../../../header/data/AdminData.h"
+#include "../../../header/data/DataHelper.h"
 #include "../../../header/data/HashHelper.h"
 #include "../../../header/screen/InputMenu.h"
+#include "../../../header/screen/operation/AdministratorOperationMenu.h"
 
 bool AdministratorLoginInputMenu::verifyCredentials(const std::string &adminId, const std::string &password) {
     try {
@@ -17,14 +19,7 @@ bool AdministratorLoginInputMenu::verifyCredentials(const std::string &adminId, 
 
         size_t hashedInputPassword = HashHelper::getHash(password);
 
-
-        const auto &adminArray = allAdminData["administrator"];
-
-        const auto &admin = adminArray[adminIndex];
-        int storedHashedPwdStr = admin["password"];
-
-        bool isPasswordMatch = (hashedInputPassword == storedHashedPwdStr);
-        return isPasswordMatch;
+        return allAdminData["admin"][adminIndex]["password"] == hashedInputPassword;
 
     } catch (const std::exception &e) {
         std::cerr << "验证失败: " << e.what() << std::endl;
@@ -45,7 +40,15 @@ void AdministratorLoginInputMenu::showAdministratorLoginUI() {
 
     if (loginSuccess) {
         showSuccess("screen.login.administrator.success"); // 管理员登录成功键
+        nlohmann::json data;
+        data["type"] = "admin";
+        data["id"] = adminId;
+        DataHelper::writeTempFromJson(data);
         pause();
+        system("cls");
+        AdministratorOperationMenu menu;
+        menu.loop();
+        SelectMenu::hideCursor();
 
     } else {
         showError("screen.login.administrator.fail"); // 管理员登录失败键

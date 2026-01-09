@@ -2,7 +2,11 @@
 #include <direct.h>
 #include <fstream>
 #include <iostream>
+
+#include "../../../header/data/DataHelper.h"
+#include "../../../header/data/HashHelper.h"
 #include "../../../header/data/UserData.h"
+#include "../../../header/screen/operation/UserOperationMenu.h"
 
 bool UserLoginInputMenu::verifyCredentials(const std::string &studentId, const std::string &password) {
     try {
@@ -18,7 +22,7 @@ bool UserLoginInputMenu::verifyCredentials(const std::string &studentId, const s
         const auto &user = allUserData["user"][userIndex];
 
 
-        return user["password"] == password;
+        return user["password"] == HashHelper::getHash(password);
 
     } catch (const std::exception &e) {
 
@@ -38,15 +42,21 @@ void UserLoginInputMenu::showUserLogin() {
     clearScreen();
     if (loginSuccess) {
         showSuccess("screen.login.student.success");
+        nlohmann::json user;
+        user["id"] = studentId;
+        user["type"] = "user";
+        DataHelper::writeTempFromJson(user);
         pause();
+        system("cls");
+        UserOperationMenu menu;
+        menu.loop();
     } else {
         showError("screen.login.student.fail");
         pause();
         bool backToSelect = confirmOperation("screen.login.student.back.select");
         if (backToSelect) {
             return;
-        } else {
-            this->showUserLogin();
         }
+        this->showUserLogin();
     }
 }

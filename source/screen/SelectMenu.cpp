@@ -4,6 +4,8 @@
 #include <iostream>
 #include <utility>
 #include <windows.h>
+
+#include "../../header/data/DataHelper.h"
 #include "../../header/data/info/Message.h"
 
 std::string SelectMenu::getSpaces(int count) {
@@ -153,4 +155,10 @@ void SelectMenu::showCursor() {
 void SelectMenu::onSelection() { optionList[pointer].executeSelectedFunction(); }
 
 // 退出系统
-void SelectMenu::exitSystem() { exit(0); }
+void SelectMenu::exitSystem() {
+    nlohmann::json emptyData;
+    emptyData["type"] = "";
+    emptyData["id"] = "";
+    DataHelper::writeTempFromJson(emptyData);
+    exit(0);
+}

@@ -50,8 +50,8 @@ private:
 
 public:
     DormitoryInfoScreen() {
-        nlohmann::json dormitory = DataHelper::getDormitory(DataHelper::getUser("202508010613")); // TODO 换成user-id
-        user_name = DataHelper::getUser("202508010613")["name"];
+        nlohmann::json dormitory = DataHelper::getDormitory(DataHelper::getUser(DataHelper::readTempFromJson()["id"]));
+        user_name = DataHelper::getUser(DataHelper::readTempFromJson()["id"])["name"];
         floor = dormitory["floor"];
         building_name = dormitory["building_name"];
         building_number = dormitory["building_number"];

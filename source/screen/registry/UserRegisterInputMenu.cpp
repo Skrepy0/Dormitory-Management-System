@@ -1,7 +1,5 @@
 #include "../../../header/screen/registry/UserRegisterInputMenu.h"
-// 假设UserData.h位于header/data目录下，根据你的项目路径修改
 #include <fstream>
-#include <iomanip>
 #include <iostream>
 #include "../../../header/data/UserData.h"
 
@@ -12,23 +10,7 @@ bool UserRegisterInputMenu::isIdExists(const std::string &userId) {
 bool UserRegisterInputMenu::saveNewUser(const std::string &userId, const std::string &name, const std::string &email,
                                         const std::string &password) {
     try {
-        nlohmann::json newUserJson;
-        newUserJson["id"] = userId;
-        newUserJson["name"] = name;
-        newUserJson["email"] = email;
-        newUserJson["password"] = password;
-
-        nlohmann::json dormitoryJson;
-        dormitoryJson["bed_number"] = 0;
-        dormitoryJson["building_name"] = "";
-        dormitoryJson["building_number"] = "";
-        dormitoryJson["floor"] = "";
-        dormitoryJson["room_number"] = "";
-        dormitoryJson["vacant_bed"] = 0;
-        newUserJson["dormitory"] = dormitoryJson;
-
-
-        UserData::addFromJson(newUserJson);
+        UserData(name, userId, password, email, Dormitory("", "", "", "", -1, -1));
 
         nlohmann::json allUserData = UserData::readJson();
         UserData userInstance("", "", "", "", Dormitory("", "", "", "", 0, 0));

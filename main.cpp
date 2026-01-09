@@ -23,9 +23,8 @@
 #include "header/screen/operation/operations/user/UserMaintenance.h"
 #include "header/screen/registry/UserRegisterInputMenu.h"
 
-
 int main() {
-    AdminAccommodationReview adminReview;
-    adminReview.inputReviewApplications();
+    LoginSelectMenu menu;
+    menu.loop();
     return 0;
 }

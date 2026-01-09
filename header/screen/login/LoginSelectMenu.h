@@ -10,6 +10,7 @@ private:
     static void jumpUserRegisterInput();
     static void jumpAdminOperationMenu();
     static void jumpUserLogInInput();
+    static void jumpAdminLogInInput();
 
 public:
     LoginSelectMenu();

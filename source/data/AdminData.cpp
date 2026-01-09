@@ -95,8 +95,8 @@ int AdminData::findAdminById(std::string id) {
     try {
         if (adminIdToIndex.empty()) {
             data = getAdminJsonData();
-            for (int i = 0; i < data["administrator"].size(); i++) {
-                adminIdToIndex[data["administrator"][i]["id"]] = i;
+            for (int i = 0; i < data["admin"].size(); i++) {
+                adminIdToIndex[data["admin"][i]["id"]] = i;
             }
         }
 
