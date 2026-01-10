@@ -17,7 +17,7 @@ bool AdministratorLoginInputMenu::verifyCredentials(const std::string &adminId, 
         nlohmann::json allAdminData = AdminData::getAdminJsonData();
 
 
-        size_t hashedInputPassword = HashHelper::getHash(password);
+        std::string hashedInputPassword = HashHelper::simpleHashString(password);
 
         return allAdminData["admin"][adminIndex]["password"] == hashedInputPassword;
 

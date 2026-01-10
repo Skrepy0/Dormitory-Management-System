@@ -60,31 +60,35 @@ private:
 
 public:
     DormitoryInfoScreen() {
-        nlohmann::json dormitory = DataHelper::getDormitory(DataHelper::getUser(DataHelper::readTempFromJson()["id"]));
-        user_name = DataHelper::getUser(DataHelper::readTempFromJson()["id"])["name"];
-        floor = dormitory["floor"];
-        building_name = dormitory["building_name"];
-        building_number = dormitory["building_number"];
-        bed_count = dormitory["bed_count"];
-        room_number = dormitory["room_number"];
-        vacant_bed = dormitory["vacant_bed"];
-        stay_log_count = 0;
-        nlohmann::json stayLogData = StayLog::readJson();
-        std::cout << stayLogData.dump(2);
-        for (auto i: stayLogData["check-in"]) {
-            if (i["dormitory"]["building_number"] == building_number &&
-                i["dormitory"]["building_name"] == building_name && i["dormitory"]["room_number"] == room_number) {
-                stay_log_count++;
+        try {
+            nlohmann::json dormitory = DataHelper::getDormitory(DataHelper::getUser(DataHelper::readTempFromJson()["id"]));
+            user_name = DataHelper::getUser(DataHelper::readTempFromJson()["id"])["name"];
+            floor = dormitory["floor"];
+            building_name = dormitory["building_name"];
+            building_number = dormitory["building_number"];
+            bed_count = dormitory["bed_count"];
+            room_number = dormitory["room_number"];
+            vacant_bed = dormitory["vacant_bed"];
+            stay_log_count = 0;
+            nlohmann::json stayLogData = StayLog::readJson();
+            for (auto i: stayLogData["check-in"]) {
+                if (i["dormitory"]["building_number"] == building_number &&
+                    i["dormitory"]["building_name"] == building_name && i["dormitory"]["room_number"] == room_number) {
+                    stay_log_count++;
+                    }
             }
-        }
-        for (auto i: stayLogData["check-out"]) {
-            if (i["dormitory"]["building_number"] == building_number &&
-                i["dormitory"]["building_name"] == building_name && i["dormitory"]["room_number"] == room_number) {
-                stay_log_count++;
+            for (auto i: stayLogData["check-out"]) {
+                if (i["dormitory"]["building_number"] == building_number &&
+                    i["dormitory"]["building_name"] == building_name && i["dormitory"]["room_number"] == room_number) {
+                    stay_log_count++;
+                    }
             }
+            maintenance_count = static_cast<int>(dormitory["maintenances"].size());
+            show();
+            system("pause>nul");
+        }catch (...) {
+            Message(Text::of("operation.user.dormitory_info.error")).printContent();
+            system("pause>nul");
         }
-        maintenance_count = static_cast<int>(dormitory["maintenances"].size());
-        show();
-        system("pause>nul");
     }
 };

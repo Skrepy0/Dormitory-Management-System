@@ -20,7 +20,7 @@
             "hash": "52a7b51e7238f69b",
             "initiator": "123",
             "reason": "asd",
-            "status": "approved",
+            "status": "pending",
             "time": {
                 "day": 10,
                 "hour": 11,
@@ -30,7 +30,114 @@
                 "year": 2026
             },
             "type": "check-in"
+        },
+        {
+            "apply_id": "202508010613",
+            "apply_time": {
+                "day": 10,
+                "hour": 14,
+                "minute": 2,
+                "month": 1,
+                "second": 16,
+                "year": 2026
+            },
+            "dormitory": {
+                "bed_number": "1",
+                "building_name": "nam",
+                "building_number": "11",
+                "room_number": "313"
+            },
+            "handler": "admin",
+            "hash": "bb751009b5645c50",
+            "initiator": "lxk",
+            "reason": "456",
+            "status": "approved",
+            "time": {
+                "day": 10,
+                "hour": 14,
+                "minute": 15,
+                "month": 1,
+                "second": 40,
+                "year": 2026
+            },
+            "type": "check-in"
+        },
+        {
+            "apply_id": "202508010613",
+            "apply_time": {
+                "day": 10,
+                "hour": 14,
+                "minute": 17,
+                "month": 1,
+                "second": 3,
+                "year": 2026
+            },
+            "dormitory": {
+                "bed_number": "1",
+                "building_name": "nam",
+                "building_number": "11",
+                "room_number": "312"
+            },
+            "handler": "admin",
+            "hash": "38afbfab3752d43d",
+            "initiator": "lxk",
+            "reason": "asd",
+            "status": "approved",
+            "time": {
+                "day": 10,
+                "hour": 14,
+                "minute": 17,
+                "month": 1,
+                "second": 22,
+                "year": 2026
+            },
+            "type": "check-in"
         }
     ],
-    "check-out": []
+    "check-out": [
+        {
+            "apply_id": "202508010613",
+            "apply_time": {
+                "day": 10,
+                "hour": 14,
+                "minute": 2,
+                "month": 1,
+                "second": 37,
+                "year": 2026
+            },
+            "dormitory": {
+                "bed_number": "1",
+                "building_name": "1s",
+                "building_number": "12",
+                "room_number": "123"
+            },
+            "hash": "6ec0e44914f0d9fc",
+            "initiator": "12",
+            "reason": "sfd",
+            "status": "pending",
+            "type": "check_out"
+        },
+        {
+            "apply_id": "202508010613",
+            "apply_time": {
+                "day": 10,
+                "hour": 17,
+                "minute": 55,
+                "month": 1,
+                "second": 46,
+                "year": 2026
+            },
+            "dormitory": {
+                "bed_number": "1",
+                "building_name": "nam",
+                "building_number": "11",
+                "room_number": "312"
+            },
+            "hash": "371cda2788ac2d2d",
+            "initiator": "lxk",
+            "reason": "asd",
+            "status": "pending",
+            "type": "check_out"
+        }
+    ]
 }

@@ -4,7 +4,7 @@
 #pragma once
 #include "../../../InputMenu.h"
 
-class AdminMaintenanceReview : public InputMenu{
+class AdminMaintenanceReview : public InputMenu {
 public:
     AdminMaintenanceReview() = default;
     static void show();

@@ -68,7 +68,7 @@ void AdminMaintenanceReview::show() {
         return;
     }
     auto maintenance = pendingMaintenance[choice-1];
-    maintenance["status"] = true;
+    maintenance["state"] = true;
 
     maintenance["repairer"] = getInput("admin.maintenances.label.repairer");
     maintenance["repair_time"] = Time::getCurrentTime().getTime();

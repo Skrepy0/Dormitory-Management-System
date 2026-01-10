@@ -50,12 +50,8 @@ void UserApplication::inputCheckInApplication() {
 
         Text typeText("screen.operation.operations.UserApplication.user.accommodation.type.checkin");
         StayLog checkInLog(typeText.getContent(), applyTime, userId, userName, dormInfo);
-        json checkInRecord = {{"type", "check-in"},
-                              {"apply_id", userId},
-                              {"apply_time", applyTime.getTime()},
-                              {"reason", reason},
-                              {"status", "pending"},
-                              {"initiator", userName},
+        json checkInRecord = {{"type", "check-in"},   {"apply_id", userId},  {"apply_time", applyTime.getTime()},
+                              {"reason", reason},     {"status", "pending"}, {"initiator", userName},
                               {"dormitory", dormInfo}};
 
 
@@ -101,13 +97,10 @@ void UserApplication::inputCheckOutApplication() {
         Text typeText("screen.operation.operations.UserApplication.user.accommodation.type.checkout");
         StayLog checkOutLog(typeText.getContent(), applyTime, userId, userName, dormInfo);
 
-        json checkOutRecord = {{"type", "check_out"},
-                               {"apply_id_checkout", userId},
-                               {"apply_time", applyTime.getTime()},
-                               {"reason", reason},
-                               {"status", "pending"},
-                               {"initiator", userName},
-                               {"dormitory", dormInfo}};
+        json checkOutRecord = {
+                {"type", "check_out"},  {"apply_id", userId}, {"apply_time", applyTime.getTime()},
+                {"reason", reason},     {"status", "pending"},         {"initiator", userName},
+                {"dormitory", dormInfo}};
 
         checkOutLog.addCheckOutRecords(checkOutRecord);
         if (checkOutLog.writeToFile()) {
@@ -142,14 +135,14 @@ json UserApplication::collectDormInfo(const std::string &applyTypeKey) {
         buildingNameKey = "screen.operation.operations.UserApplication.user.accommodation.prompt.current_building_name";
     }
 
-
+    dormInfo["building_name"] = getInput(buildingNameKey);
     dormInfo["building_number"] = getDigitInput(buildingNumKey, 1, 3);
 
     dormInfo["room_number"] = getDigitInput(roomNumKey, 3, 4);
 
     dormInfo["bed_number"] = getDigitInput(bedNumKey, 1, 2);
 
-    dormInfo["building_name"] = getInput(buildingNameKey);
+
 
     return dormInfo;
 }

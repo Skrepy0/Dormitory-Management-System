@@ -2,6 +2,20 @@
     "user": [
         {
             "dormitory": {
+                "bed_number": -1,
+                "building_name": "",
+                "building_number": "",
+                "floor": "",
+                "room_number": "",
+                "vacant_bed": -1
+            },
+            "email": "asd@qq.com",
+            "id": "202508010612",
+            "name": "zlm",
+            "password": "942b0c273781c4d2"
+        },
+        {
+            "dormitory": {
                 "bed_number": 4,
                 "building_name": "aaa",
                 "building_number": "11",
@@ -12,7 +26,7 @@
             "email": "123456@qq.com",
             "id": "202508010613",
             "name": "刘兴康",
-            "password": "1296b327897937be"
+            "password": "942b0c273781c4d2"
         }
     ]
 }

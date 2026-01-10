@@ -27,5 +27,6 @@
 int main() {
     LoginSelectMenu t;
     t.mainLoop();
+
     return 0;
 }

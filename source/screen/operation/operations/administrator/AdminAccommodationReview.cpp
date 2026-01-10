@@ -87,7 +87,7 @@ json AdminAccommodationReview::selectPendingApplication(const json &pendingApps,
 
     // 选择序号（用InputMenu的getIntInput）
     int choice = std::stoi(getDigitInput("admin.accommodation.review.prompt.input_choice", 1, pendingApps.size()));
-    if (choice<=0||choice>pendingApps.size()) {
+    if (choice <= 0 || choice > pendingApps.size()) {
         showError("admin.accommodation.review.error.invalid_choice");
     }
     return pendingApps[choice - 1];
@@ -109,7 +109,7 @@ void AdminAccommodationReview::showApplicationDetail(const json &app, const std:
     std::cout << std::endl;
     showContent("admin.accommodation.label.reason");
     showContent(app["reason"]);
-     std::cout << std::endl;
+    std::cout << std::endl;
     // 申请时间（格式化）
     if (app.contains("apply_time")) {
         const json &time = app["apply_time"];
@@ -154,7 +154,7 @@ void AdminAccommodationReview::handleApprovedApplication(json &app, const std::s
     Time currentTime = Time::getCurrentTime();
     allRecords[recordIndex]["time"] = currentTime.getTime();
     allRecords[recordIndex]["status"] = "approved";
-    StayLog::delStayLog(recordIndex,type);
+    StayLog::delStayLog(recordIndex, type);
     StayLog::addCheckInRecords(allRecords[recordIndex]);
 
     // 4. 更新宿舍空闲床位（用DataHelper的getDormitoryBuildingList）
@@ -182,7 +182,7 @@ void AdminAccommodationReview::updateDormVacantBed(const json &app, bool isCheck
         UserData::eraseUserById(app["apply_id"]);
         UserData::addFromJson(user);
         int res = 0;
-        for (int i = 0 ;i < building["dormitories"]; i++) {
+        for (int i = 0; i < building["dormitories"]; i++) {
             if (building["dormitories"][i]["room_number"] == roomNum) {
                 res = i;
                 break;
@@ -193,18 +193,18 @@ void AdminAccommodationReview::updateDormVacantBed(const json &app, bool isCheck
         Accommodations acc;
         acc.eraseBuilding(Accommodations::findBuildingByNumber(buildingNumber));
         acc.addBuildings(building);
-    }else {
+    } else {
         nlohmann::json user = DataHelper::getUser(app["apply_id"]);
         std::string buildingNumber = user["dormitory"]["building_number"];
         json building = DataHelper::getDormitoryBuildingList()[Accommodations::findBuildingByNumber(buildingNumber)];
         json dormitory;
-        for (int i = 0 ;i < building["dormitories"].size(); i++) {
+        for (int i = 0; i < building["dormitories"].size(); i++) {
             if (building["dormitories"][i]["room_number"] == roomNum) {
                 dormitory = building["dormitories"][i];
                 break;
             }
         }
-        dormitory["vacant_bed"] = dormitory["vacant_bed"].get<int>() -1;
+        dormitory["vacant_bed"] = dormitory["vacant_bed"].get<int>() - 1;
         user["dormitory"]["bed_number"] = std::stoi(dormitory["bed_count"].get<std::string>());
         user["dormitory"]["building_name"] = dormitory["building_name"];
         user["dormitory"]["building_number"] = dormitory["building_number"];
@@ -214,7 +214,7 @@ void AdminAccommodationReview::updateDormVacantBed(const json &app, bool isCheck
         UserData::eraseUserById(app["apply_id"]);
         UserData::addFromJson(user);
         int res = 0;
-        for (int i = 0 ;i < building["dormitories"]; i++) {
+        for (int i = 0; i < building["dormitories"]; i++) {
             if (building["dormitories"][i]["room_number"] == roomNum) {
                 res = i;
                 break;

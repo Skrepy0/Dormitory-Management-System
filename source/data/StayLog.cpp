@@ -108,7 +108,7 @@ void StayLog::setName(std::string name) { this->name = name; }
 
 long long StayLog::findStayLogByHash(std::string hash, std::string stayLogType) {
     init();
-    for (int i = 0;i < data[stayLogType].size();i++) {
+    for (int i = 0; i < data[stayLogType].size(); i++) {
         if (data[stayLogType][i]["hash"] == hash) {
             return i;
         }

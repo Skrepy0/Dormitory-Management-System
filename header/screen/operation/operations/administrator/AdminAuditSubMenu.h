@@ -7,6 +7,7 @@
 class AdminAuditSubMenu : public SelectMenu {
 private:
     static void jumpToAdminAudit();
+    static void jumpMaintenanceAudit();
 public:
     AdminAuditSubMenu();
     void loop();
