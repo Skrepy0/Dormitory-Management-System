@@ -106,6 +106,27 @@ void StayLog::setId(std::string id) { this->id = id; }
 
 void StayLog::setName(std::string name) { this->name = name; }
 
+long long StayLog::findStayLogByHash(std::string hash, std::string stayLogType) {
+    init();
+    for (int i = 0;i < data[stayLogType].size();i++) {
+        if (data[stayLogType][i]["hash"] == hash) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+void StayLog::delStayLog(long long index, std::string stayLogType) {
+    init();
+    data[stayLogType].erase(index);
+    std::ofstream out_file(FILE_PATH);
+    if (!out_file.is_open()) {
+        throw("Error opening file");
+    }
+    out_file << data.dump(4);
+    out_file.close();
+}
+
 void StayLog::setDormitoryData(nlohmann::json dormitoryData) { this->dormitoryData = dormitoryData; }
 
 void StayLog::addCheckInRecords(nlohmann::json checkInRecord) {

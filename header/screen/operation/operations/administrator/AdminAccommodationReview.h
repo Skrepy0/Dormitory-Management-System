@@ -27,6 +27,6 @@ private:
     void handleApprovedApplication(json &app, const std::string &type, const std::string &adminName);
 
     // 更新宿舍空闲床位（入住减1/退宿加1）
-    void updateDormVacantBed(const json &dormInfo, bool isCheckIn);
+    void updateDormVacantBed(const json &app, bool isCheckIn);
 };
 #endif // ADMINACCOMMODATIONREVIEW_H

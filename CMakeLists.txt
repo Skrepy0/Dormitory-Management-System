@@ -49,4 +49,6 @@ add_executable(hnu_dms main.cpp
         header/screen/operation/operations/administrator/AdminAccommodationReview.h
         source/screen/operation/operations/administrator/AdminAccommodationReview.cpp
         source/screen/login/AdministratorLoginInputMenu.cpp
+        source/screen/operation/operations/administrator/AdminMaintenanceReview.cpp
+        header/screen/operation/operations/administrator/AdminMaintenanceReview.h
 )

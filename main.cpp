@@ -19,15 +19,13 @@
 #include "header/screen/login/LoginSelectMenu.h"
 #include "header/screen/operation/operations/administrator/AdminAccommodationReview.h"
 #include "header/screen/operation/operations/administrator/AdminDormitoryManagement.h"
+#include "header/screen/operation/operations/administrator/AdminMaintenanceReview.h"
 #include "header/screen/operation/operations/user/UserApplication.h"
 #include "header/screen/operation/operations/user/UserMaintenance.h"
 #include "header/screen/registry/UserRegisterInputMenu.h"
 
 int main() {
-    system("cls");
-    LoginSelectMenu menu;
-    menu.loop();
-    // AdminAccommodationReview m;
-    // m.inputReviewApplications();
+    AdminMaintenanceReview::show();
+    system("pause");
     return 0;
 }

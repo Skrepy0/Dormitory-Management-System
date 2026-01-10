@@ -5,6 +5,8 @@
 #include "../../../SelectMenu.h"
 
 class AdminAuditSubMenu : public SelectMenu {
+private:
+    static void jumpToAdminAudit();
 public:
     AdminAuditSubMenu();
     void loop();

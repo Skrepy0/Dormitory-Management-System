@@ -44,6 +44,8 @@ public:
     void setDormitoryData(nlohmann::json dormitoryData); // 设置宿舍信息
     static void addCheckInRecords(nlohmann::json checkInRecord); // 添加入宿记录
     static void addCheckOutRecords(nlohmann::json checkOutRecord); // 添加退宿记录
+    static long long findStayLogByHash(std::string hash, std::string stayLogType); // 根据hash查找记录
+    static void delStayLog(long long index, std::string stayLogType);
 };
 
 /*

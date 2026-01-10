@@ -86,7 +86,10 @@ json AdminAccommodationReview::selectPendingApplication(const json &pendingApps,
     }
 
     // 选择序号（用InputMenu的getIntInput）
-    int choice = std::stoi(getDigitInput("admin.accommodation.review.prompt.input_choice", 1, pendingApps.size())) - 1;
+    int choice = std::stoi(getDigitInput("admin.accommodation.review.prompt.input_choice", 1, pendingApps.size()));
+    if (choice<=0||choice>pendingApps.size()) {
+        showError("admin.accommodation.review.error.invalid_choice");
+    }
     return pendingApps[choice - 1];
 }
 
@@ -100,10 +103,12 @@ void AdminAccommodationReview::showApplicationDetail(const json &app, const std:
     showContent(type == "check-in" ? "入住申请" : "退宿申请");
 
     showContent("admin.accommodation.label.apply_id");
-    showContent(app["apply_id"].get<std::string>());
+    showContent(app["apply_id"]);
 
     showContent("admin.accommodation.label.applicant");
-    showContent(app["initiator"].get<std::string>());
+    showContent(app["initiator"]);
+    showContent("admin.accommodation.label.reason");
+    showContent(app["reason"]);
 
     // 申请时间（格式化）
     if (app.contains("apply_time")) {
@@ -127,9 +132,6 @@ void AdminAccommodationReview::showApplicationDetail(const json &app, const std:
 
         showContent("admin.accommodation.label.bed");
         showContent(dorm["bed_number"].get<std::string>());
-
-        showContent("admin.accommodation.label.reason");
-        showContent(dorm["reason"].get<std::string>());
     }
 
     showContent("----------------------------------------");
@@ -148,44 +150,80 @@ void AdminAccommodationReview::handleApprovedApplication(json &app, const std::s
     // 2. 更新记录的审核信息
     json allRecords = (type == "check-in") ? StayLog::getCheckInRecords() : StayLog::getCheckOutRecords();
     allRecords[recordIndex]["handler"] = adminName;
-    Time currentTime;
+    Time currentTime = Time::getCurrentTime();
     allRecords[recordIndex]["time"] = currentTime.getTime();
-
-    // // 3. 写回StayLog（用DataHelper关联的StayLog方法）
-    // if (type == "check-in") {
-    //     StayLog::
-    // } else {
-    //     StayLog::setCheckOutRecords(allRecords);
-    // }
-    // StayLog::writeToFile();
+    allRecords[recordIndex]["status"] = "approved";
+    StayLog::delStayLog(recordIndex,type);
+    StayLog::addCheckInRecords(allRecords[recordIndex]);
 
     // 4. 更新宿舍空闲床位（用DataHelper的getDormitoryBuildingList）
-    updateDormVacantBed(app["dormitory"], type == "check-in");
+    updateDormVacantBed(app, type == "check-in");
 }
 
 // 更新宿舍空闲床位（用DataHelper的getDormitoryBuildingList）
-void AdminAccommodationReview::updateDormVacantBed(const json &dormInfo, bool isCheckIn) {
+void AdminAccommodationReview::updateDormVacantBed(const json &app, bool isCheckIn) {
     // 1. 用DataHelper获取宿舍楼列表
     json buildings = DataHelper::getDormitoryBuildingList();
-    std::string buildingNum = dormInfo["building_number"].get<std::string>();
-    std::string roomNum = dormInfo["room_number"].get<std::string>();
-
-    // 2. 找到对应宿舍并更新床位
-    for (auto &building: buildings) {
-        if (building["building_number"].get<std::string>() == buildingNum) {
-            for (auto &dorm: building["dormitories"]) {
-                if (dorm["room_number"].get<std::string>() == roomNum) {
-                    int currentVacant = std::stoi(dorm["vacant_bed"].get<std::string>());
-                    dorm["vacant_bed"] = std::to_string(isCheckIn ? currentVacant - 1 : currentVacant + 1);
-                    break;
-                }
+    std::string buildingNum = app["dormitory"]["building_number"].get<std::string>();
+    std::string roomNum = app["dormitory"]["room_number"].get<std::string>();
+    if (!isCheckIn) {
+        nlohmann::json user = DataHelper::getUser(app["apply_id"]);
+        nlohmann::json dormitory = DataHelper::getDormitory(user);
+        std::string buildingNumber = user["dormitory"]["building_number"];
+        json building = DataHelper::getDormitoryBuildingList()[Accommodations::findBuildingByNumber(buildingNum)];
+        dormitory["vacant_bed"] += 1;
+        user["dormitory"]["bed_number"] = -1;
+        user["dormitory"]["building_name"] = "";
+        user["dormitory"]["building_number"] = "";
+        user["dormitory"]["floor"] = "";
+        user["dormitory"]["room_number"] = "";
+        user["dormitory"]["vacant_bed"] = -1;
+        UserData::eraseUserById(app["apply_id"]);
+        UserData::addFromJson(user);
+        int res = 0;
+        for (int i = 0 ;i < building["dormitories"]; i++) {
+            if (building["dormitories"][i]["room_number"] == roomNum) {
+                res = i;
+                break;
             }
-            break;
         }
+        building["dormitories"].erase(building["dormitories"].begin() + res);
+        building["dormitories"].push_back(dormitory);
+        Accommodations acc;
+        acc.eraseBuilding(Accommodations::findBuildingByNumber(buildingNumber));
+        acc.addBuildings(building);
+    }else {
+        nlohmann::json user = DataHelper::getUser(app["apply_id"]);
+        std::string buildingNumber = user["dormitory"]["building_number"];
+        json building = DataHelper::getDormitoryBuildingList()[Accommodations::findBuildingByNumber(buildingNumber)];
+        json dormitory;
+        for (int i = 0 ;i < building["dormitories"].size(); i++) {
+            if (building["dormitories"][i]["room_number"] == roomNum) {
+                dormitory = building["dormitories"][i];
+                break;
+            }
+        }
+        dormitory["vacant_bed"] = dormitory["vacant_bed"].get<int>() -1;
+        user["dormitory"]["bed_number"] = std::stoi(dormitory["bed_count"].get<std::string>());
+        user["dormitory"]["building_name"] = dormitory["building_name"];
+        user["dormitory"]["building_number"] = dormitory["building_number"];
+        user["dormitory"]["floor"] = dormitory["floor"];
+        user["dormitory"]["room_number"] = dormitory["room_number"];
+        user["dormitory"]["vacant_bed"] = dormitory["vacant_bed"].get<int>();
+        UserData::eraseUserById(app["apply_id"]);
+        UserData::addFromJson(user);
+        int res = 0;
+        for (int i = 0 ;i < building["dormitories"]; i++) {
+            if (building["dormitories"][i]["room_number"] == roomNum) {
+                res = i;
+                break;
+            }
+        }
+        building["dormitories"].erase(building["dormitories"].begin() + res);
+        building["dormitories"].push_back(dormitory);
+        Accommodations acc;
+        acc.eraseBuilding(Accommodations::findBuildingByNumber(buildingNumber));
+        acc.addBuildings(building);
+        acc.writeInFile();
     }
-
-    // 3. 写回Accommodations（用DataHelper关联的Accommodations方法）
-    json accData = Accommodations::readFromJson();
-    accData["dormitory_building"] = buildings;
-    Accommodations::writeInFile(accData);
 }

@@ -9,95 +9,23 @@
             "dormitories_count": "123"
         },
         {
-            "bed_count": "1",
-            "building_location": "loa1",
-            "building_name": "num1",
+            "bed_count": "4",
+            "building_location": "aaa",
+            "building_name": "aaa",
             "building_number": "11",
             "dormitories": [
                 {
                     "bed_count": "4",
-                    "building_name": "nam",
+                    "building_name": "aaa",
                     "building_number": "11",
                     "floor": "3",
                     "maintenances": [
                         {
-                            "description": "空调坏了",
-                            "id": "c040618e64691d64",
+                            "description": "1111",
+                            "id": "9699156f284ebce1",
                             "repair_time": {
-                                "day": 1,
-                                "hour": 0,
-                                "minute": 53,
-                                "month": 0,
-                                "second": 0,
-                                "year": 0
-                            },
-                            "repairer": "",
-                            "report_time": {
-                                "day": 6,
-                                "hour": 23,
-                                "minute": 8,
-                                "month": 1,
-                                "second": 52,
-                                "year": 2026
-                            },
-                            "sponsor": "刘兴康",
-                            "state": false,
-                            "valuation": ""
-                        },
-                        {
-                            "description": "sdfsdf",
-                            "id": "985ea8cf47506204",
-                            "repair_time": {
-                                "day": 1,
-                                "hour": 0,
-                                "minute": 53,
-                                "month": 0,
-                                "second": 0,
-                                "year": 0
-                            },
-                            "repairer": "",
-                            "report_time": {
-                                "day": 6,
-                                "hour": 23,
-                                "minute": 36,
-                                "month": 1,
-                                "second": 19,
-                                "year": 2026
-                            },
-                            "sponsor": "刘兴康",
-                            "state": false,
-                            "valuation": ""
-                        },
-                        {
-                            "description": "这是这个",
-                            "id": "ad47d42ebb3adfd6",
-                            "repair_time": {
-                                "day": 1,
-                                "hour": 0,
-                                "minute": 53,
-                                "month": 0,
-                                "second": 0,
-                                "year": 0
-                            },
-                            "repairer": "",
-                            "report_time": {
-                                "day": 7,
-                                "hour": 10,
-                                "minute": 23,
-                                "month": 1,
-                                "second": 2,
-                                "year": 2026
-                            },
-                            "sponsor": "这是这个",
-                            "state": false,
-                            "valuation": ""
-                        },
-                        {
-                            "description": "12",
-                            "id": "8a7c09837d9b6099",
-                            "repair_time": {
-                                "day": 404746880,
-                                "hour": 38,
+                                "day": -1967132848,
+                                "hour": 58,
                                 "minute": 48,
                                 "month": 0,
                                 "second": 0,
@@ -105,41 +33,91 @@
                             },
                             "repairer": "",
                             "report_time": {
-                                "day": 9,
-                                "hour": 21,
-                                "minute": 4,
+                                "day": 10,
+                                "hour": 11,
+                                "minute": 11,
                                 "month": 1,
-                                "second": 27,
+                                "second": 18,
                                 "year": 2026
                             },
-                            "sponsor": "123456",
+                            "sponsor": "123",
                             "state": false,
                             "valuation": ""
                         }
                     ],
                     "room_number": "312",
-                    "vacant_bed": 0
+                    "vacant_bed": 1
                 },
                 {
                     "bed_count": "4",
-                    "building_name": "nam",
+                    "building_name": "aaa",
                     "building_number": "11",
                     "floor": "3",
-                    "maintenances": [],
-                    "room_number": "313",
-                    "vacant_bed": 0
+                    "maintenances": [
+                        {
+                            "description": "1111",
+                            "id": "9699156f284ebce1",
+                            "repair_time": {
+                                "day": -1967132848,
+                                "hour": 58,
+                                "minute": 48,
+                                "month": 0,
+                                "second": 0,
+                                "year": 5242902
+                            },
+                            "repairer": "",
+                            "report_time": {
+                                "day": 10,
+                                "hour": 11,
+                                "minute": 11,
+                                "month": 1,
+                                "second": 18,
+                                "year": 2026
+                            },
+                            "sponsor": "123",
+                            "state": false,
+                            "valuation": ""
+                        }
+                    ],
+                    "room_number": "312",
+                    "vacant_bed": 1
                 },
                 {
                     "bed_count": "4",
-                    "building_name": "nam",
+                    "building_name": "aaa",
                     "building_number": "11",
                     "floor": "3",
-                    "maintenances": [],
-                    "room_number": "313",
-                    "vacant_bed": 4
+                    "maintenances": [
+                        {
+                            "description": "1111",
+                            "id": "9699156f284ebce1",
+                            "repair_time": {
+                                "day": -1967132848,
+                                "hour": 58,
+                                "minute": 48,
+                                "month": 0,
+                                "second": 0,
+                                "year": 5242902
+                            },
+                            "repairer": "",
+                            "report_time": {
+                                "day": 10,
+                                "hour": 11,
+                                "minute": 11,
+                                "month": 1,
+                                "second": 18,
+                                "year": 2026
+                            },
+                            "sponsor": "123",
+                            "state": false,
+                            "valuation": ""
+                        }
+                    ],
+                    "room_number": "312",
+                    "vacant_bed": 1
                 }
             ],
-            "dormitories_count": "11"
+            "dormitories_count": "15"
         }
     ]
 }

@@ -13,8 +13,7 @@
   "operation.administrator.option.language": "\uD83C\uDF89语言\n$r",
   "operation.administrator.option.exit": "⬇\uFE0F退出系统\n$r",
   "operation.administrator.audit.title": "\t$y$l申请审核\n\n$r",
-  "operation.administrator.audit.option.check_in_application": "\uD83D\uDD16入住申请\n$r",
-  "operation.administrator.audit.option.check_out_application": "\uD83D\uDC9A退宿申请\n$r",
+  "operation.administrator.audit.option.stay_log_application": "\uD83D\uDC9A入住退宿申请\n$r",
   "operation.administrator.audit.option.maintenance": "\uD83D\uDD27报修申请\n$r",
   "operation.user.title": "\t$y$l学生操作页面\n\n$r",
   "operation.user.option.change_password": "\uD83D\uDD10更改密码\n$r",
@@ -272,5 +271,6 @@
   "admin.accommodation.label.reason": "$D📝 申请原因：$r",
 
   "admin.accommodation.review.success.approved": "$D✅ 申请审核通过，已更新记录$r",
-  "admin.accommodation.review.error": "$D❌ 审核过程出错：$r"
+  "admin.accommodation.review.error": "$D❌ 审核过程出错：$r",
+  "admin.accommodation.review.error.invalid_choice": "$D❌ 无效的选择$r"
 }
