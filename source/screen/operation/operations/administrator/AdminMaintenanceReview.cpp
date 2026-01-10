@@ -81,7 +81,10 @@ void AdminMaintenanceReview::show() {
     acc.eraseBuilding(maintenanceMap[choice-1].first.first);
     acc.addBuildings(buildingList[maintenanceMap[choice-1].first.first]);
     if (acc.writeInFile()) {
-        //TODO 成功
+        showSuccess("admin.maintenances.label.repairer.success");
+    }
+    else{
+       showError("admin.maintenances.label.repairer.success");
     }
     pause();
 }

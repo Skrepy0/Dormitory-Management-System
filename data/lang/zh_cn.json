@@ -296,5 +296,8 @@
   "admin.maintenances.label.sponsor": "$k🧑 发起人：$r",
   "admin.maintenances.label.description": "$y📝 维修描述：$r",
   "admin.maintenances.label.id": "$d🆔 维修申请ID：$r",
-  "admin.maintenances.label.choice": "$D🔍 请输入你的选择：$r"
+  "admin.maintenances.label.choice": "$D🔍 请输入你的选择：$r",
+  "admin.maintenances.label.repairer": "$k🧑‍🔧 维修人员：$r",
+  "admin.maintenances.label.repairer.success": "$a 已完成更新$r",
+  "admin.maintenances.label.repairer.error": "$8 更新失败$r"
 }

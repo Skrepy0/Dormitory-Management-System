@@ -25,7 +25,7 @@
 #include "header/screen/registry/UserRegisterInputMenu.h"
 
 int main() {
-    AdminMaintenanceReview t;
-    t.show();
+    LoginSelectMenu t;
+    t.mainLoop();
     return 0;
 }

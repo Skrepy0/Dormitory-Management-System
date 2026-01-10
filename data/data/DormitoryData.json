@@ -26,12 +26,12 @@
                             "repair_time": {
                                 "day": 10,
                                 "hour": 12,
-                                "minute": 21,
+                                "minute": 59,
                                 "month": 1,
-                                "second": 47,
+                                "second": 52,
                                 "year": 2026
                             },
-                            "repairer": "1",
+                            "repairer": "嘟嘟",
                             "report_time": {
                                 "day": 10,
                                 "hour": 11,
