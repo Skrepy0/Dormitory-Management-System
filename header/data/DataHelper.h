@@ -184,16 +184,16 @@ public:
                 list.push_back(i);
             }
         }
-        return checkInList;
+        return list;
     }
     static nlohmann::json getCheckOutApplicationToBeReviewedList() {             //获取退宿的申请记录
-        nlohmann::json checkInList = StayLog::readJson()["check-out"];
+        nlohmann::json checkOutList = StayLog::readJson()["check-out"];
         nlohmann::json list = nlohmann::json::array();
-        for (auto i: checkInList) {
+        for (auto i: checkOutList) {
             if (i["status"] == "pending") {
                 list.push_back(i);
             }
         }
-        return checkInList;
+        return list;
     }
 };

@@ -13,11 +13,16 @@ void AdminMaintenanceReview::show() {
     showTitle("admin.maintenances.review.title");
     nlohmann::json buildingList = DataHelper::getDormitoryBuildingList();
     std::vector<nlohmann::json> pendingMaintenance;
-    for (nlohmann::json &building: buildingList) {
-        for (nlohmann::json &room: building["dormitories"]) {
-            for (nlohmann::json &maintenance: room["maintenances"]) {
+    std::vector<std::pair<std::pair<int, int>, int>> maintenanceMap;
+    for (int i = 0;i < buildingList.size();i++) {
+        nlohmann::json building = buildingList[i];
+        for (int j = 0;j < building["dormitories"].size();j++) {
+            nlohmann::json room = building["dormitories"][j];
+            for (int k = 0;k < room["maintenances"].size();k++) {
+                json maintenance = room["maintenances"][k];
                 if (!maintenance["state"].get<bool>()) {
                     pendingMaintenance.push_back(maintenance);
+                    maintenanceMap.push_back({{i, j},k});
                 }
             }
         }
@@ -58,4 +63,25 @@ void AdminMaintenanceReview::show() {
         Message(Text::of("$s------------------------------------------------------------------\n$r")).printContent();
     }
     int choice = stoi(getInput("admin.maintenances.label.choice"));
+    if (choice<=0||choice>pendingMaintenance.size()) {
+        showContent("admin.maintenances.review.error.invalid_choice");
+        return;
+    }
+    auto maintenance = pendingMaintenance[choice-1];
+    maintenance["status"] = true;
+
+    maintenance["repairer"] = getInput("admin.maintenances.label.repairer");
+    maintenance["repair_time"] = Time::getCurrentTime().getTime();
+    json& maintenanceList = buildingList[maintenanceMap[choice-1].first.first]["dormitories"]
+    [maintenanceMap[choice-1].first.second]
+    ["maintenances"];
+    maintenanceList.erase(maintenanceList.begin()+maintenanceMap[choice-1].second);
+    maintenanceList.push_back(maintenance);
+    Accommodations acc;
+    acc.eraseBuilding(maintenanceMap[choice-1].first.first);
+    acc.addBuildings(buildingList[maintenanceMap[choice-1].first.first]);
+    if (acc.writeInFile()) {
+        //TODO 成功
+    }
+    pause();
 }

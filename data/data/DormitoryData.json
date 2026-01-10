@@ -24,14 +24,14 @@
                             "description": "1111",
                             "id": "9699156f284ebce1",
                             "repair_time": {
-                                "day": -1967132848,
-                                "hour": 58,
-                                "minute": 48,
-                                "month": 0,
-                                "second": 0,
-                                "year": 5242902
+                                "day": 10,
+                                "hour": 12,
+                                "minute": 21,
+                                "month": 1,
+                                "second": 47,
+                                "year": 2026
                             },
-                            "repairer": "",
+                            "repairer": "1",
                             "report_time": {
                                 "day": 10,
                                 "hour": 11,
@@ -42,6 +42,7 @@
                             },
                             "sponsor": "123",
                             "state": false,
+                            "status": true,
                             "valuation": ""
                         }
                     ],
