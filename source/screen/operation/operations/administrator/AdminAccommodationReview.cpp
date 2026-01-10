@@ -101,15 +101,15 @@ void AdminAccommodationReview::showApplicationDetail(const json &app, const std:
     // 申请基础信息
     showContent("admin.accommodation.label.type");
     showContent(type == "check-in" ? "入住申请" : "退宿申请");
-
     showContent("admin.accommodation.label.apply_id");
     showContent(app["apply_id"]);
-
+    std::cout << std::endl;
     showContent("admin.accommodation.label.applicant");
     showContent(app["initiator"]);
+    std::cout << std::endl;
     showContent("admin.accommodation.label.reason");
     showContent(app["reason"]);
-
+     std::cout << std::endl;
     // 申请时间（格式化）
     if (app.contains("apply_time")) {
         const json &time = app["apply_time"];
@@ -126,12 +126,13 @@ void AdminAccommodationReview::showApplicationDetail(const json &app, const std:
         const json &dorm = app["dormitory"];
         showContent("admin.accommodation.label.building");
         showContent(dorm["building_name"].get<std::string>() + "(" + dorm["building_number"].get<std::string>() + ")");
-
+        std::cout << std::endl;
         showContent("admin.accommodation.label.room");
         showContent(dorm["room_number"].get<std::string>());
-
+        std::cout << std::endl;
         showContent("admin.accommodation.label.bed");
         showContent(dorm["bed_number"].get<std::string>());
+        std::cout << std::endl;
     }
 
     showContent("----------------------------------------");

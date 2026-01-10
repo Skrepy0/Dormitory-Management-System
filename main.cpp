@@ -25,7 +25,7 @@
 #include "header/screen/registry/UserRegisterInputMenu.h"
 
 int main() {
-    AdminMaintenanceReview::show();
-    system("pause");
+    AdminMaintenanceReview t;
+    t.show();
     return 0;
 }

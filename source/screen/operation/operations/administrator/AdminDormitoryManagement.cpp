@@ -420,3 +420,174 @@ void AdminDormitoryManagement::updateDormitory() {
 
     pause();
 }
+void AdminDormitoryManagement::showStudentCheckInRecord() {
+    clearScreen();
+    showTitle("admin.dorm.review.title.student_checkin_record");
+    std::cout <<  std::endl;
+    try {
+        std::string studentId = getInput("admin.dorm.prompt.input_student_id");
+
+        nlohmann::json checkInRecords = DataHelper::getCheckInApplicationToBeReviewedList();
+        std::vector<nlohmann::json> studentCheckInRecords;
+
+        for (const auto& record : checkInRecords) {
+            if ( record["apply_id"].get<std::string>() == studentId) {
+                studentCheckInRecords.push_back(record);
+            }
+        }
+
+        if (studentCheckInRecords.empty()) {
+            showPrompt("admin.dorm.prompt.no_student_checkin_record");
+            pause();
+            return;
+        }
+
+        showTitle("admin.dorm.review.title.student_checkin_list");
+        std::cout << std::endl;
+        for (size_t i = 0; i < studentCheckInRecords.size(); ++i) {
+            const auto& record = studentCheckInRecords[i];
+        }
+
+        for (const auto& record : studentCheckInRecords) {
+            showContent("admin.dorm.label.apply_id");
+            std::cout << record["apply_id"].get<std::string>()<< std::endl;
+
+            showContent("admin.dorm.label.student_name");
+           std::cout<< record["initiator"].get<std::string>() << std::endl;
+            showContent("admin.dorm.label.operate_time");
+            if (record.contains("apply_time") && !record["apply_time"].is_null()) {
+                const nlohmann::json& applyTime = record["apply_time"];
+                showContent("admin.dorm.label.operate_time.year");
+                showContent(std::to_string(applyTime["year"].get<int>()));
+                std::cout << std::endl;
+                showContent("admin.dorm.label.operate_time.month");
+                showContent(std::to_string(applyTime["month"].get<int>()));
+                std::cout << std::endl;
+                showContent("admin.dorm.label.operate_time.day");
+                showContent(std::to_string(applyTime["day"].get<int>()));
+                std::cout << std::endl;
+                showContent("admin.dorm.label.operate_time.hour");
+                showContent(std::to_string(applyTime["hour"].get<int>()));
+                std::cout << std::endl;
+                showContent("admin.dorm.label.operate_time.minute");
+                showContent(std::to_string(applyTime["minute"].get<int>()));
+                std::cout << std::endl;
+                showContent("admin.dorm.label.operate_time.second");
+                showContent(std::to_string(applyTime["second"].get<int>()));
+                std::cout << std::endl;
+            }
+            if (record.contains("dormitory")) {
+                const nlohmann::json& dorm = record["dormitory"];
+                showContent("admin.dorm.label.building_name");
+                showContent(dorm["building_name"].get<std::string>() );
+                std::cout << std::endl;
+                showContent("admin.dorm.label.building_num");
+                showContent(dorm["building_number"].get<std::string>());
+                std::cout << std::endl;
+                showContent("admin.dorm.label.room_num");
+                showContent(dorm["room_number"].get<std::string>());
+                std::cout << std::endl;
+                showContent("admin.dorm.label.bed_count");
+                showContent(dorm["bed_number"].get<std::string>());
+                std::cout << std::endl;
+            }
+            showContent("admin.dorm.label.status");
+            showContent(record["status"].get<std::string>());
+            std::cout << std::endl;
+            showContent("----------------------------------------");
+        }
+
+    } catch (const std::exception& e) {
+        showError("admin.dorm.error.load_record");
+    }
+
+    pause();
+}
+void AdminDormitoryManagement::showStudentCheckOutRecord() {
+    clearScreen();
+    showTitle("admin.dorm.review.title.student_checkout_record");
+    std::cout <<  std::endl;
+    try {
+        std::string studentId = getInput("admin.dorm.prompt.input_student_id");
+
+        nlohmann::json checkOutRecords = DataHelper::getCheckOutApplicationToBeReviewedList();
+        std::vector<nlohmann::json> studentCheckOutRecords;
+
+
+        for (const auto& record : checkOutRecords) {
+            if ( record["apply_id"].get<std::string>() == studentId) {
+                studentCheckOutRecords.push_back(record);
+            }
+        }
+
+
+        if (studentCheckOutRecords.empty()) {
+            showPrompt("admin.dorm.prompt.no_student_checkout_record");
+            pause();
+            return;
+        }
+
+
+        showTitle("admin.dorm.review.title.student_checkout_list");
+        std::cout << std::endl;
+        for (size_t i = 0; i < studentCheckOutRecords.size(); ++i) {
+            const auto& record = studentCheckOutRecords[i];
+        }
+
+        for (const auto& record : studentCheckOutRecords) {
+            showContent("admin.dorm.label.apply_id");
+            std::cout << record["apply_id"].get<std::string>()<< std::endl;
+
+            showContent("admin.dorm.label.student_name");
+           std::cout<< record["initiator"].get<std::string>() << std::endl;
+            showContent("admin.dorm.label.operate_time");
+            if (record.contains("apply_time") && !record["apply_time"].is_null()) {
+                const nlohmann::json& applyTime = record["apply_time"];
+                showContent("admin.dorm.label.operate_time.year");
+                showContent(std::to_string(applyTime["year"].get<int>()));
+                std::cout << std::endl;
+                showContent("admin.dorm.label.operate_time.month");
+                showContent(std::to_string(applyTime["month"].get<int>()));
+                std::cout << std::endl;
+                showContent("admin.dorm.label.operate_time.day");
+                showContent(std::to_string(applyTime["day"].get<int>()));
+                std::cout << std::endl;
+                showContent("admin.dorm.label.operate_time.hour");
+                showContent(std::to_string(applyTime["hour"].get<int>()));
+                std::cout << std::endl;
+                showContent("admin.dorm.label.operate_time.minute");
+                showContent(std::to_string(applyTime["minute"].get<int>()));
+                std::cout << std::endl;
+                showContent("admin.dorm.label.operate_time.second");
+                showContent(std::to_string(applyTime["second"].get<int>()));
+                std::cout << std::endl;
+            }
+
+            if (record.contains("dormitory")) {
+                const nlohmann::json& dorm = record["dormitory"];
+                showContent("admin.dorm.label.building_name");
+                showContent(dorm["building_name"].get<std::string>() );
+                std::cout << std::endl;
+                showContent("admin.dorm.label.building_num");
+                showContent(dorm["building_number"].get<std::string>());
+                std::cout << std::endl;
+                showContent("admin.dorm.label.room_num");
+                showContent(dorm["room_number"].get<std::string>());
+                std::cout << std::endl;
+                showContent("admin.dorm.label.bed_count");
+                showContent(dorm["bed_number"].get<std::string>());
+                std::cout << std::endl;
+            }
+
+            showContent("admin.dorm.label.status");
+            showContent(record["status"].get<std::string>());
+            std::cout << std::endl;
+            showContent("----------------------------------------");
+        }
+
+    } catch (const std::exception& e) {
+        showError("admin.dorm.error.load_record");
+    }
+
+    pause();
+}

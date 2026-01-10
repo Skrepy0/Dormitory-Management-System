@@ -51,7 +51,7 @@ void UserApplication::inputCheckInApplication() {
         Text typeText("screen.operation.operations.UserApplication.user.accommodation.type.checkin");
         StayLog checkInLog(typeText.getContent(), applyTime, userId, userName, dormInfo);
         json checkInRecord = {{"type", "check-in"},
-                              {"apply_id", generateApplyId(userId)},
+                              {"apply_id", userId},
                               {"apply_time", applyTime.getTime()},
                               {"reason", reason},
                               {"status", "pending"},
@@ -102,7 +102,7 @@ void UserApplication::inputCheckOutApplication() {
         StayLog checkOutLog(typeText.getContent(), applyTime, userId, userName, dormInfo);
 
         json checkOutRecord = {{"type", "check_out"},
-                               {"apply_id_checkout", generateApplyId(userId)},
+                               {"apply_id_checkout", userId},
                                {"apply_time", applyTime.getTime()},
                                {"reason", reason},
                                {"status", "pending"},

@@ -176,7 +176,7 @@ public:
         in_file.close();
         return newData;
     }
-    static nlohmann::json getCheckInApplicationToBeReviewedList() {
+    static nlohmann::json getCheckInApplicationToBeReviewedList() {        //获取入宿的申请记录
         nlohmann::json checkInList = StayLog::readJson()["check-in"];
         nlohmann::json list = nlohmann::json::array();
         for (auto i: checkInList) {
@@ -186,7 +186,7 @@ public:
         }
         return checkInList;
     }
-    static nlohmann::json getCheckOutApplicationToBeReviewedList() {
+    static nlohmann::json getCheckOutApplicationToBeReviewedList() {             //获取退宿的申请记录
         nlohmann::json checkInList = StayLog::readJson()["check-out"];
         nlohmann::json list = nlohmann::json::array();
         for (auto i: checkInList) {

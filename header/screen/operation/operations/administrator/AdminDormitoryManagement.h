@@ -28,4 +28,8 @@ public:
     static void updateDormitoryBuilding();
     // 8. 更新宿舍房间信息
     static void updateDormitory();
+    // 9. 展示学生入宿记录
+    static void showStudentCheckInRecord();
+    // 10. 展示学生退宿记录
+    static void showStudentCheckOutRecord();
 };

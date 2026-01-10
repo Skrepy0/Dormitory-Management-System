@@ -6,10 +6,10 @@ using json = nlohmann::json;
 
 class UserApplication : public InputMenu {
 public:
-    void inputCheckInApplication();
+    static void inputCheckInApplication();
 
     // 退宿申请主流程
-    void inputCheckOutApplication();
+    static void inputCheckOutApplication();
 
 
     static std::string getDormApplyReason(); // 获取申请理由（退宿/调宿）

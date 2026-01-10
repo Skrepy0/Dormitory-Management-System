@@ -29,7 +29,7 @@ void AdminMaintenanceReview::show() {
         return;
     }
     clearScreen();
-    showTitle("admin.maintenances.review.title.detail");
+    showTitle("admin.maintenances.review.title");
     int index = 0;
     for (const auto &i: pendingMaintenance) {
         index++;
@@ -57,5 +57,5 @@ void AdminMaintenanceReview::show() {
 
         Message(Text::of("$s------------------------------------------------------------------\n$r")).printContent();
     }
-
+    int choice = stoi(getInput("admin.maintenances.label.choice"));
 }
