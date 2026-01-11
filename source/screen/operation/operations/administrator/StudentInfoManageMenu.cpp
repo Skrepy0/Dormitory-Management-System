@@ -9,18 +9,20 @@
 StudentInfoManageMenu::StudentInfoManageMenu() :
     SelectMenu(Text("operator.administrator.studentInfoManageMenu.title"),
                {
-                       Option(Text("operator.administrator.studentInfoManageMenu.option.check-in"), "H",[]()->void {
-                           system("cls");
-                           showCursor();
-                           AdminDormitoryManagement::showStudentCheckInRecord();
-                           hideCursor();
-                       }),
-                   Option(Text("operator.administrator.studentInfoManageMenu.option.check-out"), "B",[]()->void {
-                       system("cls");
-                       showCursor();
-                       AdminDormitoryManagement::showStudentCheckOutRecord();
-                       hideCursor();
-                   }),
+                       Option(Text("operator.administrator.studentInfoManageMenu.option.check-in"), "H",
+                              []() -> void {
+                                  system("cls");
+                                  showCursor();
+                                  AdminDormitoryManagement::showStudentCheckInRecord();
+                                  hideCursor();
+                              }),
+                       Option(Text("operator.administrator.studentInfoManageMenu.option.check-out"), "B",
+                              []() -> void {
+                                  system("cls");
+                                  showCursor();
+                                  AdminDormitoryManagement::showStudentCheckOutRecord();
+                                  hideCursor();
+                              }),
                },
                "F") {}
 

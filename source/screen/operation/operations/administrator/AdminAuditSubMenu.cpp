@@ -25,7 +25,7 @@ AdminAuditSubMenu::AdminAuditSubMenu() :
     SelectMenu(Text("operation.administrator.audit.title"),
                {
                        Option(Text("operation.administrator.audit.option.stay_log_application"), "y", jumpToAdminAudit),
-                       Option(Text("operation.administrator.audit.option.maintenance"), "d",jumpMaintenanceAudit),
+                       Option(Text("operation.administrator.audit.option.maintenance"), "d", jumpMaintenanceAudit),
                },
                "w") {}
 

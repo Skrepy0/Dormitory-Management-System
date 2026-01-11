@@ -23,7 +23,7 @@ void UserMaintenanceSelectMenu::jumpValuation() {
 UserMaintenanceSelectMenu::UserMaintenanceSelectMenu() :
     SelectMenu(Text("operation.user.maintenance.title"),
                {Option(Text("operation.user.maintenance.option.maintenance"), "a", jumpAddMaintenanceMenu),
-                Option(Text("operation.user.maintenance.option.maintenance_valuation"), "m",jumpValuation)},
+                Option(Text("operation.user.maintenance.option.maintenance_valuation"), "m", jumpValuation)},
                "A", 6) {}
 
 void UserMaintenanceSelectMenu::loop() { mainLoop(); }

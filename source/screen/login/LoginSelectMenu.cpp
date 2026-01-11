@@ -51,8 +51,7 @@ void LoginSelectMenu::jumpAdminLogInInput() {
 
 LoginSelectMenu::LoginSelectMenu() :
     SelectMenu(Text("login.title"),
-               {Option(Text("login.option.user"), "a",
-                       jumpUserLogInInput),
+               {Option(Text("login.option.user"), "a", jumpUserLogInInput),
                 Option(Text("login.option.registry"), "p", jumpUserRegisterInput),
                 Option(Text("login.option.administrator"), "d", jumpAdminLogInInput),
                 Option(Text("login.option.set_language"), "A", jumpSelectLanguageMenu),

@@ -8,6 +8,7 @@ class UserMaintenanceSelectMenu : public SelectMenu {
 private:
     static void jumpAddMaintenanceMenu();
     static void jumpValuation();
+
 public:
     UserMaintenanceSelectMenu();
     void loop();

@@ -102,30 +102,31 @@ void UserMaintenance::submitValuation() {
             nlohmann::json room = building["dormitories"][j];
             for (int k = 0; k < room["maintenances"].size(); k++) {
                 nlohmann::json maintenance = room["maintenances"][k];
-                if (maintenance["state"].get<bool>() &&
-                    maintenance["valuation"].get<std::string>().empty()) {
+                if (maintenance["state"].get<bool>() && maintenance["valuation"].get<std::string>().empty()) {
                     approvedMaintenance.push_back(maintenance);
-                    maintenanceMap.push_back({{i, j}, {k,maintenance["report_time"]}});
+                    maintenanceMap.push_back({{i, j}, {k, maintenance["report_time"]}});
                 }
             }
         }
     }
 
-    std::sort(maintenanceMap.begin(), maintenanceMap.end(), [](std::pair<std::pair<int, int>, std::pair<int, json>> &a, std::pair<std::pair<int, int>, std::pair<int, json>> &b) {
-                const auto &aTime = a.second.second;
-                const auto &bTime = b.second.second;
-                if (aTime["year"] != bTime["year"])
-                    return aTime["year"] > bTime["year"];
-                if (aTime["month"] != bTime["month"])
-                    return aTime["month"] > bTime["month"];
-                if (aTime["day"] != bTime["day"])
-                    return aTime["day"] > bTime["day"];
-                if (aTime["hour"] != bTime["hour"])
-                    return aTime["hour"] > bTime["hour"];
-                if (aTime["minute"] != bTime["minute"])
-                    return aTime["minute"] > bTime["minute"];
-                return aTime["second"] > bTime["second"];
-            });
+    std::sort(maintenanceMap.begin(), maintenanceMap.end(),
+              [](std::pair<std::pair<int, int>, std::pair<int, json>> &a,
+                 std::pair<std::pair<int, int>, std::pair<int, json>> &b) {
+                  const auto &aTime = a.second.second;
+                  const auto &bTime = b.second.second;
+                  if (aTime["year"] != bTime["year"])
+                      return aTime["year"] > bTime["year"];
+                  if (aTime["month"] != bTime["month"])
+                      return aTime["month"] > bTime["month"];
+                  if (aTime["day"] != bTime["day"])
+                      return aTime["day"] > bTime["day"];
+                  if (aTime["hour"] != bTime["hour"])
+                      return aTime["hour"] > bTime["hour"];
+                  if (aTime["minute"] != bTime["minute"])
+                      return aTime["minute"] > bTime["minute"];
+                  return aTime["second"] > bTime["second"];
+              });
     if (approvedMaintenance.empty()) {
         showError("screen.operation.operations.UserMaintenance.valuation.already.submitted");
         pause();
@@ -141,10 +142,10 @@ void UserMaintenance::submitValuation() {
     json dor = approvedMaintenance[0];
     showContent("admin.maintenances.label.report_time");
     const json &time = dor["report_time"];
-    std::string reportTime =
-            std::to_string(time["year"].get<int>()) + "年" + std::to_string(time["month"].get<int>()) + "月" +
-            std::to_string(time["day"].get<int>()) + "日 " + std::to_string(time["hour"].get<int>()) + ":" +
-            std::to_string(time["minute"].get<int>()) + ":" + std::to_string(time["second"].get<int>());
+    std::string reportTime = std::to_string(time["year"].get<int>()) + "年" + std::to_string(time["month"].get<int>()) +
+                             "月" + std::to_string(time["day"].get<int>()) + "日 " +
+                             std::to_string(time["hour"].get<int>()) + ":" + std::to_string(time["minute"].get<int>()) +
+                             ":" + std::to_string(time["second"].get<int>());
     showContent(reportTime);
     showContent("\n");
 
@@ -171,7 +172,7 @@ void UserMaintenance::submitValuation() {
         auto maintenance = approvedMaintenance[0];
         maintenance["valuation"] = valuation;
         json &maintenanceList = buildingList[maintenanceMap[0].first.first]["dormitories"]
-                                        [maintenanceMap[0].first.second]["maintenances"];
+                                            [maintenanceMap[0].first.second]["maintenances"];
         maintenanceList.erase(maintenanceList.begin() + maintenanceMap[0].second.first);
         maintenanceList.push_back(maintenance);
         Accommodations acc;

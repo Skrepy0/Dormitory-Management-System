@@ -55,7 +55,7 @@ void AdminDormitoryManagement::inputAddDormRoom() {
     std::string floor = getInput("operation.administrator.dorm.manage.prompt.floor");
     std::string vacantBed = getInput("operation.administrator.dorm.manage.prompt.vacant_bed");
 
-    for (auto i : buildingJson["dormitories"]) {
+    for (auto i: buildingJson["dormitories"]) {
         if (roomNum == i["room_number"]) {
             showError("operation.administrator.dorm.manage.error.room_number_exists");
             pause();
@@ -513,15 +513,15 @@ void AdminDormitoryManagement::showStudentCheckInRecord() {
 void AdminDormitoryManagement::showStudentCheckOutRecord() {
     clearScreen();
     showTitle("admin.dorm.review.title.student_checkout_record");
-    std::cout <<  std::endl;
+    std::cout << std::endl;
     try {
         std::string studentId = getInput("admin.dorm.prompt.input_student_id");
         std::cout << std::endl;
         nlohmann::json checkOutRecords = StayLog::getCheckOutRecords();
         std::vector<nlohmann::json> studentCheckOutRecords;
 
-        for (const auto& record : checkOutRecords) {
-            if ( record["apply_id"].get<std::string>() == studentId) {
+        for (const auto &record: checkOutRecords) {
+            if (record["apply_id"].get<std::string>() == studentId) {
                 studentCheckOutRecords.push_back(record);
             }
         }
@@ -537,18 +537,18 @@ void AdminDormitoryManagement::showStudentCheckOutRecord() {
         showTitle("admin.dorm.review.title.student_checkout_list");
         std::cout << std::endl;
         for (size_t i = 0; i < studentCheckOutRecords.size(); ++i) {
-            const auto& record = studentCheckOutRecords[i];
+            const auto &record = studentCheckOutRecords[i];
         }
 
-        for (const auto& record : studentCheckOutRecords) {
+        for (const auto &record: studentCheckOutRecords) {
             showContent("admin.dorm.label.apply_id");
-            std::cout << record["apply_id"].get<std::string>()<< std::endl;
+            std::cout << record["apply_id"].get<std::string>() << std::endl;
 
             showContent("admin.dorm.label.student_name");
-           std::cout<< record["initiator"].get<std::string>() << std::endl;
+            std::cout << record["initiator"].get<std::string>() << std::endl;
             showContent("admin.dorm.label.operate_time");
             if (record.contains("apply_time") && !record["apply_time"].is_null()) {
-                const nlohmann::json& applyTime = record["apply_time"];
+                const nlohmann::json &applyTime = record["apply_time"];
                 showContent("admin.dorm.label.operate_time.year");
                 showContent(std::to_string(applyTime["year"].get<int>()));
                 std::cout << std::endl;
@@ -570,9 +570,9 @@ void AdminDormitoryManagement::showStudentCheckOutRecord() {
             }
 
             if (record.contains("dormitory")) {
-                const nlohmann::json& dorm = record["dormitory"];
+                const nlohmann::json &dorm = record["dormitory"];
                 showContent("admin.dorm.label.building_name");
-                showContent(dorm["building_name"].get<std::string>() );
+                showContent(dorm["building_name"].get<std::string>());
                 std::cout << std::endl;
                 showContent("admin.dorm.label.building_num");
                 showContent(dorm["building_number"].get<std::string>());
@@ -591,7 +591,7 @@ void AdminDormitoryManagement::showStudentCheckOutRecord() {
             showContent("----------------------------------------\n");
         }
 
-    } catch (const std::exception& e) {
+    } catch (const std::exception &e) {
         showError("admin.dorm.error.load_record");
     }
 

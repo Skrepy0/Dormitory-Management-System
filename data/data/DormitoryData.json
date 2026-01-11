@@ -11,15 +11,6 @@
                     "building_name": "aaa",
                     "building_number": "11",
                     "floor": "3",
-                    "maintenances": [],
-                    "room_number": "313",
-                    "vacant_bed": 3
-                },
-                {
-                    "bed_count": "4",
-                    "building_name": "aaa",
-                    "building_number": "11",
-                    "floor": "3",
                     "maintenances": [
                         {
                             "description": "",
@@ -92,10 +83,43 @@
                             "sponsor": "123",
                             "state": false,
                             "valuation": ""
+                        },
+                        {
+                            "description": "hl",
+                            "id": "db8c2f69fc494bd8",
+                            "repair_time": {
+                                "day": -941625712,
+                                "hour": 36,
+                                "minute": 48,
+                                "month": 0,
+                                "second": 0,
+                                "year": 5242902
+                            },
+                            "repairer": "",
+                            "report_time": {
+                                "day": 10,
+                                "hour": 18,
+                                "minute": 23,
+                                "month": 1,
+                                "second": 30,
+                                "year": 2026
+                            },
+                            "sponsor": "lxk",
+                            "state": false,
+                            "valuation": ""
                         }
                     ],
                     "room_number": "312",
-                    "vacant_bed": 0
+                    "vacant_bed": -1
+                },
+                {
+                    "bed_count": "4",
+                    "building_name": "aaa",
+                    "building_number": "11",
+                    "floor": "3",
+                    "maintenances": [],
+                    "room_number": "313",
+                    "vacant_bed": 2
                 }
             ],
             "dormitories_count": "15"

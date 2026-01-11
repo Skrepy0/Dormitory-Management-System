@@ -61,7 +61,8 @@ private:
 public:
     DormitoryInfoScreen() {
         try {
-            nlohmann::json dormitory = DataHelper::getDormitory(DataHelper::getUser(DataHelper::readTempFromJson()["id"]));
+            nlohmann::json dormitory =
+                    DataHelper::getDormitory(DataHelper::getUser(DataHelper::readTempFromJson()["id"]));
             user_name = DataHelper::getUser(DataHelper::readTempFromJson()["id"])["name"];
             floor = dormitory["floor"];
             building_name = dormitory["building_name"];
@@ -75,18 +76,18 @@ public:
                 if (i["dormitory"]["building_number"] == building_number &&
                     i["dormitory"]["building_name"] == building_name && i["dormitory"]["room_number"] == room_number) {
                     stay_log_count++;
-                    }
+                }
             }
             for (auto i: stayLogData["check-out"]) {
                 if (i["dormitory"]["building_number"] == building_number &&
                     i["dormitory"]["building_name"] == building_name && i["dormitory"]["room_number"] == room_number) {
                     stay_log_count++;
-                    }
+                }
             }
             maintenance_count = static_cast<int>(dormitory["maintenances"].size());
             show();
             system("pause>nul");
-        }catch (...) {
+        } catch (...) {
             Message(Text::of("operation.user.dormitory_info.error")).printContent();
             system("pause>nul");
         }

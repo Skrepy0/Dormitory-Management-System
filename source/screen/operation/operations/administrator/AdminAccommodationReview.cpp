@@ -43,7 +43,10 @@ void AdminAccommodationReview::inputReviewApplications() {
 
         // 3. 选择具体申请（用InputMenu的getIntInput选序号）
         json selectedApp = selectPendingApplication(targetPending, type);
-
+        if (selectedApp.is_null()) {
+            pause();
+            return;
+        }
         // 4. 显示申请详情
         showApplicationDetail(selectedApp, type);
 
@@ -89,6 +92,7 @@ json AdminAccommodationReview::selectPendingApplication(const json &pendingApps,
     int choice = std::stoi(getDigitInput("admin.accommodation.review.prompt.input_choice", 1, pendingApps.size()));
     if (choice <= 0 || choice > pendingApps.size()) {
         showError("admin.accommodation.review.error.invalid_choice");
+        return NULL;
     }
     return pendingApps[choice - 1];
 }

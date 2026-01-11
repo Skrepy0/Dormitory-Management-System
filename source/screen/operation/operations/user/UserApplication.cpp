@@ -97,10 +97,9 @@ void UserApplication::inputCheckOutApplication() {
         Text typeText("screen.operation.operations.UserApplication.user.accommodation.type.checkout");
         StayLog checkOutLog(typeText.getContent(), applyTime, userId, userName, dormInfo);
 
-        json checkOutRecord = {
-                {"type", "check_out"},  {"apply_id", userId}, {"apply_time", applyTime.getTime()},
-                {"reason", reason},     {"status", "pending"},         {"initiator", userName},
-                {"dormitory", dormInfo}};
+        json checkOutRecord = {{"type", "check_out"},  {"apply_id", userId},  {"apply_time", applyTime.getTime()},
+                               {"reason", reason},     {"status", "pending"}, {"initiator", userName},
+                               {"dormitory", dormInfo}};
 
         checkOutLog.addCheckOutRecords(checkOutRecord);
         if (checkOutLog.writeToFile()) {
@@ -141,7 +140,6 @@ json UserApplication::collectDormInfo(const std::string &applyTypeKey) {
     dormInfo["room_number"] = getDigitInput(roomNumKey, 3, 4);
 
     dormInfo["bed_number"] = getDigitInput(bedNumKey, 1, 2);
-
 
 
     return dormInfo;

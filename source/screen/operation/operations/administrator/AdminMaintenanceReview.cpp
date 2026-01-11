@@ -14,15 +14,15 @@ void AdminMaintenanceReview::show() {
     nlohmann::json buildingList = DataHelper::getDormitoryBuildingList();
     std::vector<nlohmann::json> pendingMaintenance;
     std::vector<std::pair<std::pair<int, int>, int>> maintenanceMap;
-    for (int i = 0;i < buildingList.size();i++) {
+    for (int i = 0; i < buildingList.size(); i++) {
         nlohmann::json building = buildingList[i];
-        for (int j = 0;j < building["dormitories"].size();j++) {
+        for (int j = 0; j < building["dormitories"].size(); j++) {
             nlohmann::json room = building["dormitories"][j];
-            for (int k = 0;k < room["maintenances"].size();k++) {
+            for (int k = 0; k < room["maintenances"].size(); k++) {
                 json maintenance = room["maintenances"][k];
                 if (!maintenance["state"].get<bool>()) {
                     pendingMaintenance.push_back(maintenance);
-                    maintenanceMap.push_back({{i, j},k});
+                    maintenanceMap.push_back({{i, j}, k});
                 }
             }
         }
@@ -38,7 +38,7 @@ void AdminMaintenanceReview::show() {
     int index = 0;
     for (const auto &i: pendingMaintenance) {
         index++;
-        Message(Text::of("$l"+ std::to_string(index)+".$r\n")).printContent();
+        Message(Text::of("$l" + std::to_string(index) + ".$r\n")).printContent();
         showContent("admin.maintenances.label.report_time");
         const json &time = i["report_time"];
         std::string reportTime =
@@ -63,28 +63,26 @@ void AdminMaintenanceReview::show() {
         Message(Text::of("$s------------------------------------------------------------------\n$r")).printContent();
     }
     int choice = stoi(getInput("admin.maintenances.label.choice"));
-    if (choice<=0||choice>pendingMaintenance.size()) {
+    if (choice <= 0 || choice > pendingMaintenance.size()) {
         showContent("admin.maintenances.review.error.invalid_choice");
         return;
     }
-    auto maintenance = pendingMaintenance[choice-1];
+    auto maintenance = pendingMaintenance[choice - 1];
     maintenance["state"] = true;
 
     maintenance["repairer"] = getInput("admin.maintenances.label.repairer");
     maintenance["repair_time"] = Time::getCurrentTime().getTime();
-    json& maintenanceList = buildingList[maintenanceMap[choice-1].first.first]["dormitories"]
-    [maintenanceMap[choice-1].first.second]
-    ["maintenances"];
-    maintenanceList.erase(maintenanceList.begin()+maintenanceMap[choice-1].second);
+    json &maintenanceList = buildingList[maintenanceMap[choice - 1].first.first]["dormitories"]
+                                        [maintenanceMap[choice - 1].first.second]["maintenances"];
+    maintenanceList.erase(maintenanceList.begin() + maintenanceMap[choice - 1].second);
     maintenanceList.push_back(maintenance);
     Accommodations acc;
-    acc.eraseBuilding(maintenanceMap[choice-1].first.first);
-    acc.addBuildings(buildingList[maintenanceMap[choice-1].first.first]);
+    acc.eraseBuilding(maintenanceMap[choice - 1].first.first);
+    acc.addBuildings(buildingList[maintenanceMap[choice - 1].first.first]);
     if (acc.writeInFile()) {
         showSuccess("admin.maintenances.label.repairer.success");
-    }
-    else{
-       showError("admin.maintenances.label.repairer.success");
+    } else {
+        showError("admin.maintenances.label.repairer.success");
     }
     pause();
 }
