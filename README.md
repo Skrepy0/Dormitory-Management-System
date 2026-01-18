@@ -1,5 +1,5 @@
 # 湖南大学宿舍管理系统
-
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Skrepy0/Dormitory-Management-System)
 ## 项目简介
 
 本项目是湖南大学大一程序设计期末作业 - 宿舍管理系统（Dormitory Management System）。这是一个基于 C++ 开发的控制台应用程序，旨在通过数字化管理优化宿舍资源配置，提升管理效率和服务质量，为学生提供便捷的住宿服务体验。
@@ -356,10 +356,10 @@ newData["password"] = HashHelper::simpleHashString(password);
 系统使用 `COLOR_MAP` 将单字符代码映射到 ANSI 转义序列： 
 
 ```cpp  
-const std::unordered_map<char, std::string> COLOR_MAP = {  
+[const std::unordered_map<char, std::string> COLOR_MAP = {  
     {'c', "\033[31m"},  // 红色  
     {'a', "\033[32m"},  // 绿色  
-    {'l', "\03
+    {'l', "\03](https://app.devin.ai/wiki/Skrepy0/Dormitory-Management-System)
 ```
 #### 解析处理流程
 
@@ -379,7 +379,10 @@ const std::unordered_map<char, std::string> COLOR_MAP = {
 void enableWindowsAnsiSupport() {  
     HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);  
     DWORD mode = 0;  
-    GetCons
+    GetConsoleMode(hOut, &mode);  
+    SetConsoleMode(hOut, mode | ENABLE_VIRTUAL_TERMINAL_PROCESSING);  
+}  
+#endif
 ```
 
 ### 最佳实践
@@ -431,6 +434,6 @@ void enableWindowsAnsiSupport() {
 
 **开发者**：[Skrepy2233](https://github.com/Skrepy0), [Bully-NK](https://github.com/Bully-NK)
 
-**项目结构解析**：https://app.devin.ai/wiki/Skrepy0/Dormitory-Management-System
+**项目结构解析**:[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Skrepy0/Dormitory-Management-System)
 
 ---
