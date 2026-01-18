@@ -431,4 +431,6 @@ void enableWindowsAnsiSupport() {
 
 **开发者**：[Skrepy2233](https://github.com/Skrepy0), [Bully-NK](https://github.com/Bully-NK)
 
+**项目结构解析**：https://app.devin.ai/wiki/Skrepy0/Dormitory-Management-System
+
 ---
