@@ -21,10 +21,7 @@ public:
 
     Text(std::string path);
 
-    static Text
-    of(std::string content); // 不通过json直接显示content内容
-                             // 用法：Text::of("刘兴康大帅比");可以获得content为"刘兴康大帅比"的Text对象，不通过path转化
-
+    static Text of(std::string content); // 不通过json直接显示content内容
     std::string getPath(); // 获取path
     std::string getContent(); // 获取content
     void setPath(std::string path); // 设置path的值
