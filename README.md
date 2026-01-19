@@ -164,7 +164,9 @@ Dormitory-Management-System/
 ## 具体功能
 
 ### 👤 用户功能
-![img.png](imgs/user_hub.png)
+
+<img src="imgs/user_hub.png" width="300">
+
 #### 基础功能
 - **登录注册**：学生可以通过学号和密码登录系统，支持新用户注册
 - **密码管理**：安全的密码修改功能，需要验证原密码
@@ -194,7 +196,10 @@ Dormitory-Management-System/
 #### 学生管理
 - **信息查询**：查询学生基本信息和住宿记录
 - **数据统计**：统计宿舍使用率和入住情况
-![img.png](imgs/admin_hub.png)
+<div><img src="imgs/admin_hub.png" width="300"></div>
+
+
+
 ### 🔧 系统功能
 
 #### 多语言支持
@@ -282,7 +287,10 @@ newData["password"] = HashHelper::simpleHashString(password);
 "login.title": "\t$cH$AN$DU$y$l学生宿舍管理系统\n\n$r"
 ```
 ##### 渲染界面：
-![img.png](imgs/hub.png)
+<div style="text-align: center">
+<img src="imgs/hub.png" width="400">
+</div>
+
 支持的颜色包括：
 - 文本颜色：红、绿、蓝、黄、紫、青等
 - 文本样式：加粗、下划线、删除线、斜体、闪烁等
@@ -290,12 +298,16 @@ newData["password"] = HashHelper::simpleHashString(password);
 
 详细颜色代码参考 `INSTRUCTION.html` 文档。
 - *部分格式化代码*：
-![img.png](imgs/img.png)
+<div style="text-align: center">
+<img src="imgs/img.png" width="1800">
+</div>
 
 #### 多语言渲染
 通过 `Text` 类和 `Message` 类实现多语言文本的动态加载和渲染  。
 - *参考图*
-![img.png](imgs\multiple_lang.png)
+<div>
+<img src="imgs/multiple_lang.png" width="300">
+</div>
 ### 🔧 核心算法
 
 #### 登录认证流程
