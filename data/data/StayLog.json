@@ -1,196 +1,98 @@
 {
     "check-in": [
         {
-            "apply_id": "202508010613",
+            "apply_id": "123456789123",
             "apply_time": {
-                "day": 10,
-                "hour": 14,
-                "minute": 2,
+                "day": 19,
+                "hour": 12,
+                "minute": 52,
                 "month": 1,
-                "second": 16,
+                "second": 49,
                 "year": 2026
             },
             "dormitory": {
                 "bed_number": "1",
-                "building_name": "nam",
-                "building_number": "11",
-                "room_number": "313"
+                "building_name": "hahaha",
+                "building_number": "15",
+                "room_number": "101"
             },
             "handler": "admin",
-            "hash": "bb751009b5645c50",
-            "initiator": "lxk",
-            "reason": "456",
-            "status": "approved",
+            "hash": "797f856c54e04b48",
+            "initiator": "123456",
+            "reason": "ha",
+            "status": "pending",
             "time": {
-                "day": 10,
-                "hour": 14,
-                "minute": 15,
-                "month": 1,
-                "second": 40,
-                "year": 2026
-            },
-            "type": "check-in"
-        },
-        {
-            "apply_id": "202508010613",
-            "apply_time": {
-                "day": 10,
-                "hour": 14,
-                "minute": 17,
-                "month": 1,
-                "second": 3,
-                "year": 2026
-            },
-            "dormitory": {
-                "bed_number": "1",
-                "building_name": "nam",
-                "building_number": "11",
-                "room_number": "312"
-            },
-            "handler": "admin",
-            "hash": "38afbfab3752d43d",
-            "initiator": "lxk",
-            "reason": "asd",
-            "status": "approved",
-            "time": {
-                "day": 10,
-                "hour": 14,
-                "minute": 17,
-                "month": 1,
-                "second": 22,
-                "year": 2026
-            },
-            "type": "check-in"
-        },
-        {
-            "apply_id": "202508010613",
-            "apply_time": {
-                "day": 10,
-                "hour": 10,
-                "minute": 30,
-                "month": 1,
-                "second": 35,
-                "year": 2026
-            },
-            "dormitory": {
-                "bed_number": "1",
-                "building_name": "namp",
-                "building_number": "11",
-                "room_number": "312"
-            },
-            "handler": "admin",
-            "hash": "7d331235abfeb3c0",
-            "initiator": "123",
-            "reason": "asd",
-            "status": "approved",
-            "time": {
-                "day": 10,
-                "hour": 19,
-                "minute": 4,
-                "month": 1,
-                "second": 8,
-                "year": 2026
-            },
-            "type": "check-in"
-        },
-        {
-            "apply_id": "202508010613",
-            "apply_time": {
-                "day": 10,
-                "hour": 19,
-                "minute": 3,
-                "month": 1,
-                "second": 32,
-                "year": 2026
-            },
-            "dormitory": {
-                "bed_number": "1",
-                "building_name": "11",
-                "building_number": "11",
-                "room_number": "313"
-            },
-            "handler": "admin",
-            "hash": "7bb855157446a266",
-            "initiator": "lxk",
-            "reason": "lll",
-            "status": "approved",
-            "time": {
-                "day": 10,
-                "hour": 19,
-                "minute": 4,
-                "month": 1,
-                "second": 34,
-                "year": 2026
-            },
-            "type": "check-in"
-        }
-    ],
-    "check-out": [
-        {
-            "apply_id": "202508010613",
-            "apply_time": {
-                "day": 10,
-                "hour": 14,
-                "minute": 2,
+                "day": 19,
+                "hour": 13,
+                "minute": 9,
                 "month": 1,
                 "second": 37,
                 "year": 2026
             },
-            "dormitory": {
-                "bed_number": "1",
-                "building_name": "1s",
-                "building_number": "12",
-                "room_number": "123"
-            },
-            "hash": "6ec0e44914f0d9fc",
-            "initiator": "12",
-            "reason": "sfd",
-            "status": "pending",
-            "type": "check_out"
+            "type": "check-in"
         },
         {
-            "apply_id": "202508010613",
+            "apply_id": "123456789123",
             "apply_time": {
-                "day": 10,
-                "hour": 17,
-                "minute": 55,
+                "day": 19,
+                "hour": 13,
+                "minute": 11,
                 "month": 1,
-                "second": 46,
+                "second": 50,
                 "year": 2026
             },
             "dormitory": {
                 "bed_number": "1",
-                "building_name": "nam",
-                "building_number": "11",
-                "room_number": "312"
+                "building_name": "lalala",
+                "building_number": "15",
+                "room_number": "101"
             },
-            "hash": "371cda2788ac2d2d",
-            "initiator": "lxk",
-            "reason": "asd",
-            "status": "pending",
+            "handler": "admin",
+            "hash": "522e1f707caa8c7c",
+            "initiator": "123",
+            "reason": "123",
+            "status": "approved",
+            "time": {
+                "day": 19,
+                "hour": 13,
+                "minute": 13,
+                "month": 1,
+                "second": 17,
+                "year": 2026
+            },
             "type": "check_out"
         },
         {
-            "apply_id": "202508010613",
+            "apply_id": "123456789123",
             "apply_time": {
-                "day": 10,
-                "hour": 19,
-                "minute": 6,
+                "day": 19,
+                "hour": 13,
+                "minute": 14,
                 "month": 1,
-                "second": 6,
+                "second": 17,
                 "year": 2026
             },
             "dormitory": {
                 "bed_number": "1",
-                "building_name": "11",
-                "building_number": "11",
-                "room_number": "313"
+                "building_name": "lalala",
+                "building_number": "15",
+                "room_number": "101"
             },
-            "hash": "b33eaf2353fbd0c",
-            "initiator": "lxk",
-            "reason": "ll",
-            "status": "pending",
+            "handler": "admin",
+            "hash": "815055595e9d785d",
+            "initiator": "123",
+            "reason": "123",
+            "status": "approved",
+            "time": {
+                "day": 19,
+                "hour": 13,
+                "minute": 14,
+                "month": 1,
+                "second": 40,
+                "year": 2026
+            },
             "type": "check_out"
         }
-    ]
+    ],
+    "check-out": []
 }

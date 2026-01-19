@@ -66,6 +66,9 @@
 4. **运行程序**
     - 在 CLion 中点击 "Run" 或使用快捷键 Shift+F10
     - 或者直接运行生成的可执行文件 `hnu_dms.exe`
+    - 首次运行用户账号密码分别是123456789123，123456（也可再注册一个新用户）
+    - 管理员账号密码分别是123456789123，123456
+    - 注意：在运行程序之前，请确保 `data/data/` 目录存在，并且有相应的数据文件。
 
 5. **格式化代码**
     - pnpm配置
@@ -154,13 +157,14 @@ Dormitory-Management-System/
 │       ├── en_us.json         # 英文
 │       └── zh_tw.json         # 繁体中文
 └── scripts/                   # 工具脚本
-    └── format-cpp.js          # 代码格式化脚本
+    ├── format-cpp.js          # 代码格式化脚本
+    └── analysis.py            # 代码量统计
 ```
 
 ## 具体功能
 
 ### 👤 用户功能
-
+![img.png](imgs/user_hub.png)
 #### 基础功能
 - **登录注册**：学生可以通过学号和密码登录系统，支持新用户注册
 - **密码管理**：安全的密码修改功能，需要验证原密码
@@ -190,7 +194,7 @@ Dormitory-Management-System/
 #### 学生管理
 - **信息查询**：查询学生基本信息和住宿记录
 - **数据统计**：统计宿舍使用率和入住情况
-
+![img.png](imgs/admin_hub.png)
 ### 🔧 系统功能
 
 #### 多语言支持
@@ -202,6 +206,11 @@ Dormitory-Management-System/
 - **数据备份**：支持手动备份和恢复数据
 - **会话管理**：使用临时文件管理用户会话状态
 
+### 🔖按键操作优化
+
+- **确认键**：`Enter`
+- **返回键**：`Esc`
+- **移动选择指针**：`Up, Down`
 ## 技术实现
 
 ### 🏗️ 系统架构
@@ -272,17 +281,21 @@ newData["password"] = HashHelper::simpleHashString(password);
 // 颜色代码示例
 "login.title": "\t$cH$AN$DU$y$l学生宿舍管理系统\n\n$r"
 ```
-
+##### 渲染界面：
+![img.png](imgs/hub.png)
 支持的颜色包括：
 - 文本颜色：红、绿、蓝、黄、紫、青等
 - 文本样式：加粗、下划线、删除线、斜体、闪烁等
 - 背景颜色：多种背景色选择
 
 详细颜色代码参考 `INSTRUCTION.html` 文档。
+- *部分格式化代码*：
+![img.png](imgs/img.png)
 
 #### 多语言渲染
 通过 `Text` 类和 `Message` 类实现多语言文本的动态加载和渲染  。
-
+- *参考图*
+![img.png](imgs\multiple_lang.png)
 ### 🔧 核心算法
 
 #### 登录认证流程
@@ -356,10 +369,13 @@ newData["password"] = HashHelper::simpleHashString(password);
 系统使用 `COLOR_MAP` 将单字符代码映射到 ANSI 转义序列： 
 
 ```cpp  
-[const std::unordered_map<char, std::string> COLOR_MAP = {  
+const std::unordered_map<char, std::string> COLOR_MAP = {  
     {'c', "\033[31m"},  // 红色  
     {'a', "\033[32m"},  // 绿色  
-    {'l', "\03](https://app.devin.ai/wiki/Skrepy0/Dormitory-Management-System)
+    {'l', "\033[1m"},   // 加粗  
+    {'r', "\033[0m"},   // 重置  
+    // ... 更多映射  
+};
 ```
 #### 解析处理流程
 
@@ -426,8 +442,12 @@ void enableWindowsAnsiSupport() {
 
 ### 代码行数统计
 - 使用 `scripts/analysis.py` 统计代码行数
-- 目前项目行数**6809行**（.json, .cpp, .h）
+- 目前项目行数:**7207行**（.json, .cpp, .h, .py, .js, .html）
 
+### 项目待完善
+由于开发周期短，只能做这些了~ (￣▽￣*)ゞ
+- **功能bug**：有待修复的bug，如审核退宿信息，某些错误提示未完成（未分配宿舍楼，学生可以对不存在的宿舍楼或宿舍发出入住申请，管理员审核的时候会崩溃），还有一堆其他bug(╯°□°）╯︵ ┻━┻
+- **待实现功能**：模糊搜索用户、用户列表（分页显示）、空床位判断宿舍是否已满等。
 ---
 
 **项目地址**：https://github.com/Skrepy0/Dormitory-Management-System

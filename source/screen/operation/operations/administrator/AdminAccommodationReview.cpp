@@ -200,7 +200,10 @@ void AdminAccommodationReview::updateDormVacantBed(const json &app, bool isCheck
     } else {
         nlohmann::json user = DataHelper::getUser(app["apply_id"]);
         std::string buildingNumber = user["dormitory"]["building_number"];
-        json building = DataHelper::getDormitoryBuildingList()[Accommodations::findBuildingByNumber(buildingNumber)];
+        std::string oldRoomNumber = user["dormitory"]["room_number"];
+
+        // 获取申请中的宿舍楼信息
+        json building = DataHelper::getDormitoryBuildingList()[Accommodations::findBuildingByNumber(buildingNum)];
         json dormitory;
         for (int i = 0; i < building["dormitories"].size(); i++) {
             if (building["dormitories"][i]["room_number"] == roomNum) {
@@ -208,7 +211,8 @@ void AdminAccommodationReview::updateDormVacantBed(const json &app, bool isCheck
                 break;
             }
         }
-        dormitory["vacant_bed"] = dormitory["vacant_bed"].get<int>() - 1;
+
+        // 先给用户分配宿舍（不修改vacant_bed）
         user["dormitory"]["bed_number"] = std::stoi(dormitory["bed_count"].get<std::string>());
         user["dormitory"]["building_name"] = dormitory["building_name"];
         user["dormitory"]["building_number"] = dormitory["building_number"];
@@ -217,8 +221,39 @@ void AdminAccommodationReview::updateDormVacantBed(const json &app, bool isCheck
         user["dormitory"]["vacant_bed"] = dormitory["vacant_bed"].get<int>();
         UserData::eraseUserById(app["apply_id"]);
         UserData::addFromJson(user);
+
+        // 如果用户原来的buildingNumber不为空，才更新原宿舍楼的床位信息
+        if (!buildingNumber.empty()) {
+            json oldBuilding =
+                    DataHelper::getDormitoryBuildingList()[Accommodations::findBuildingByNumber(buildingNumber)];
+            json oldDormitory;
+            for (int i = 0; i < oldBuilding["dormitories"].size(); i++) {
+                if (oldBuilding["dormitories"][i]["room_number"] == oldRoomNumber) {
+                    oldDormitory = oldBuilding["dormitories"][i];
+                    break;
+                }
+            }
+            // 原宿舍空床位+1
+            oldDormitory["vacant_bed"] = oldDormitory["vacant_bed"].get<int>() + 1;
+            int res = 0;
+            for (int i = 0; i < oldBuilding["dormitories"].size(); i++) {
+                if (oldBuilding["dormitories"][i]["room_number"] == oldRoomNumber) {
+                    res = i;
+                    break;
+                }
+            }
+            oldBuilding["dormitories"].erase(oldBuilding["dormitories"].begin() + res);
+            oldBuilding["dormitories"].push_back(oldDormitory);
+            Accommodations acc;
+            acc.eraseBuilding(Accommodations::findBuildingByNumber(buildingNumber));
+            acc.addBuildings(oldBuilding);
+            acc.writeInFile();
+        }
+
+        // 更新新宿舍楼的床位信息（空床位-1）
+        dormitory["vacant_bed"] = dormitory["vacant_bed"].get<int>() - 1;
         int res = 0;
-        for (int i = 0; i < building["dormitories"]; i++) {
+        for (int i = 0; i < building["dormitories"].size(); i++) {
             if (building["dormitories"][i]["room_number"] == roomNum) {
                 res = i;
                 break;
@@ -227,7 +262,7 @@ void AdminAccommodationReview::updateDormVacantBed(const json &app, bool isCheck
         building["dormitories"].erase(building["dormitories"].begin() + res);
         building["dormitories"].push_back(dormitory);
         Accommodations acc;
-        acc.eraseBuilding(Accommodations::findBuildingByNumber(buildingNumber));
+        acc.eraseBuilding(Accommodations::findBuildingByNumber(buildingNum));
         acc.addBuildings(building);
         acc.writeInFile();
     }

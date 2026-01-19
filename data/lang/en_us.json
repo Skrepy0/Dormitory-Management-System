@@ -253,7 +253,6 @@
   "screen.operation.operations.UserMaintenance.repair.confirmation": "$ADo you confirm the repair request$r",
   "screen.operation.operations.UserMaintenance.repair.success": "$kRepair request successful$r",
   "screen.operation.operations.UserMaintenance.repair.error": "$mRepair request failed$r",
-  "password": "202508010613",
   "operation.user.dormitory_info.title.begin": "$j$D$l============ $r",
   "operation.user.dormitory_info.title": "$y$lDormitory Information$r",
   "operation.user.dormitory_info.title.end": "$j$D$l ============$r\n",

@@ -253,7 +253,6 @@
   "screen.operation.operations.UserMaintenance.repair.confirmation": "$A您是否確認報修$r",
   "screen.operation.operations.UserMaintenance.repair.success": "$k報修成功$r",
   "screen.operation.operations.UserMaintenance.repair.error": "$m報修失敗$r",
-  "password": "202508010613",
   "operation.user.dormitory_info.title.begin": "$j$D$l============ $r",
   "operation.user.dormitory_info.title": "$y$l宿舍資訊$r",
   "operation.user.dormitory_info.title.end": "$j$D$l ============$r\n",

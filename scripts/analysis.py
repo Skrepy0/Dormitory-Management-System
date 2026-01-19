@@ -21,6 +21,6 @@ def count_lines(directory, extensions):
     return total_lines
 
 # 配置要统计的文件类型
-extensions = ['.cpp', '.h','.json']
+extensions = ['.cpp', '.h','.json','.html','.js','.py']
 lines = count_lines('..\\', extensions)
 print(f"总代码行数: {lines}")

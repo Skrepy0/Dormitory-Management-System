@@ -1,153 +1,40 @@
 {
     "dormitory_building": [
         {
-            "bed_count": "4",
-            "building_location": "aaa",
-            "building_name": "aaa",
-            "building_number": "11",
+            "bed_count": "1919810",
+            "building_location": "location",
+            "building_name": "lalala",
+            "building_number": "123",
             "dormitories": [
                 {
-                    "bed_count": "4",
-                    "building_name": "aaa",
-                    "building_number": "11",
+                    "bed_count": "1919810",
+                    "building_name": "lalala",
+                    "building_number": "123",
                     "floor": "3",
-                    "maintenances": [
-                        {
-                            "description": "",
-                            "id": "a455b454f530a60bc",
-                            "repair_time": {
-                                "day": 1663039031,
-                                "hour": 227,
-                                "minute": -1603715320,
-                                "month": 32759,
-                                "second": 32759,
-                                "year": -1604441592
-                            },
-                            "repairer": "",
-                            "report_time": {
-                                "day": 1,
-                                "hour": 0,
-                                "minute": 1663039040,
-                                "month": 0,
-                                "second": 227,
-                                "year": 53
-                            },
-                            "sponsor": "",
-                            "state": true,
-                            "valuation": "123"
-                        },
-                        {
-                            "description": "",
-                            "id": "4c765442530a60bc",
-                            "repair_time": {
-                                "day": 10,
-                                "hour": 14,
-                                "minute": 21,
-                                "month": 1,
-                                "second": 8,
-                                "year": 2026
-                            },
-                            "repairer": "lxk",
-                            "report_time": {
-                                "day": 1,
-                                "hour": 0,
-                                "minute": 1663039040,
-                                "month": 0,
-                                "second": 227,
-                                "year": 53
-                            },
-                            "sponsor": "",
-                            "state": true,
-                            "valuation": "123"
-                        },
-                        {
-                            "description": "hl",
-                            "id": "db8c2f69fc494bd8",
-                            "repair_time": {
-                                "day": -941625712,
-                                "hour": 36,
-                                "minute": 48,
-                                "month": 0,
-                                "second": 0,
-                                "year": 5242902
-                            },
-                            "repairer": "",
-                            "report_time": {
-                                "day": 10,
-                                "hour": 18,
-                                "minute": 23,
-                                "month": 1,
-                                "second": 30,
-                                "year": 2026
-                            },
-                            "sponsor": "lxk",
-                            "state": false,
-                            "valuation": ""
-                        },
-                        {
-                            "description": "hahaha",
-                            "id": "4fbe4af2abbb3bd5",
-                            "repair_time": {
-                                "day": 11,
-                                "hour": 22,
-                                "minute": 12,
-                                "month": 1,
-                                "second": 38,
-                                "year": 2026
-                            },
-                            "repairer": "repairer",
-                            "report_time": {
-                                "day": 10,
-                                "hour": 18,
-                                "minute": 12,
-                                "month": 1,
-                                "second": 17,
-                                "year": 2026
-                            },
-                            "sponsor": "123",
-                            "state": true,
-                            "valuation": "0"
-                        }
-                    ],
-                    "room_number": "312",
-                    "vacant_bed": -1
-                },
-                {
-                    "bed_count": "4",
-                    "building_name": "aaa",
-                    "building_number": "11",
-                    "floor": "3",
-                    "maintenances": [
-                        {
-                            "description": "ashd",
-                            "id": "c36c1dac6afa4acc",
-                            "repair_time": {
-                                "day": 1136651920,
-                                "hour": 144,
-                                "minute": 48,
-                                "month": 0,
-                                "second": 0,
-                                "year": 5242902
-                            },
-                            "repairer": "",
-                            "report_time": {
-                                "day": 11,
-                                "hour": 22,
-                                "minute": 13,
-                                "month": 1,
-                                "second": 39,
-                                "year": 2026
-                            },
-                            "sponsor": "lk=xk",
-                            "state": false,
-                            "valuation": ""
-                        }
-                    ],
+                    "maintenances": [],
                     "room_number": "313",
-                    "vacant_bed": 2
+                    "vacant_bed": 4
                 }
             ],
-            "dormitories_count": "15"
+            "dormitories_count": "114514"
+        },
+        {
+            "bed_count": "4451",
+            "building_location": "location",
+            "building_name": "hahaha",
+            "building_number": "15",
+            "dormitories": [
+                {
+                    "bed_count": "4451",
+                    "building_name": "hahaha",
+                    "building_number": "15",
+                    "floor": "1",
+                    "maintenances": [],
+                    "room_number": "101",
+                    "vacant_bed": 1
+                }
+            ],
+            "dormitories_count": "1145"
         }
     ]
 }

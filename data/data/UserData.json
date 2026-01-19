@@ -2,44 +2,16 @@
     "user": [
         {
             "dormitory": {
-                "bed_number": -1,
-                "building_name": "",
-                "building_number": "",
-                "floor": "",
-                "room_number": "",
-                "vacant_bed": -1
-            },
-            "email": "asd@qq.com",
-            "id": "202508010612",
-            "name": "zlm",
-            "password": "942b0c273781c4d2"
-        },
-        {
-            "dormitory": {
-                "bed_number": -1,
-                "building_name": "",
-                "building_number": "",
-                "floor": "",
-                "room_number": "",
-                "vacant_bed": -1
-            },
-            "email": "123@123.como",
-            "id": "000000000000",
-            "name": "lxk",
-            "password": "942b0c273781c4d2"
-        },
-        {
-            "dormitory": {
-                "bed_number": 4,
-                "building_name": "aaa",
-                "building_number": "11",
-                "floor": "3",
-                "room_number": "313",
+                "bed_number": 4451,
+                "building_name": "hahaha",
+                "building_number": "15",
+                "floor": "1",
+                "room_number": "101",
                 "vacant_bed": 2
             },
-            "email": "123456@qq.com",
-            "id": "202508010613",
-            "name": "刘兴康",
+            "email": "123@qq.com",
+            "id": "123456789123",
+            "name": "123",
             "password": "942b0c273781c4d2"
         }
     ]

@@ -39,24 +39,3 @@ public:
 
     static Text intToText(int num);
 };
-
-/*  使用参考：
-        Text t("test.test");//
-   以后写Text的内容时务必写路径，路径（理论上内容随便写）书写要符合规范，
-        // 如 用户操作界面/设置/语言设置 处 在写”语言设置“
-   的路径时,可以为"screen.operation.option.language_setting"
-        // 这样写有层次感~~
-        //注意：
-   写一个文本时，将路径和内容写在“资源文件/lang/”的两个json文件里面~~
-
-                千万不要在这两个文件里面写注释！
-                千万不要在这两个文件里面写注释！
-                千万不要在这两个文件里面写注释！
-
-        std::cout << t << std::endl;// 输出内容
-        Text::setLanguage("zh_cn");// 设置语言是中文"en_us"
-        std::cout << t.getContent() << std::endl;//
-   虽然这样写可以不乱码，尽量减少这样写，因为这样写的文本不受语言的影响，中英文都是"刘兴康大帅比"
-        t.setPath("test.test01");
-        std::cout << t <<std::endl;
-*/
