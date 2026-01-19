@@ -308,6 +308,7 @@ newData["password"] = HashHelper::simpleHashString(password);
 <div>
 <img src="imgs/multiple_lang.png" width="300">
 </div>
+
 ### 🔧 核心算法
 
 #### 登录认证流程
